@@ -1,5 +1,5 @@
 import React from 'react'
-import { SectionTitle } from '../../utils/SectionTitle'
+import { SectionTitle } from '../utils/SectionTitle'
 import { Item } from './integrate/Item'
 
 interface Props {

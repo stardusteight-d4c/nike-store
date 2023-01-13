@@ -5,6 +5,7 @@ import {
   topRateSales,
   highlight,
   sneaker,
+  story,
 } from '../mockData/data'
 
 interface Props {}
@@ -18,7 +19,7 @@ export const Home = (props: Props) => {
         <MainSection data={highlight} reverse />
         <Sales sales={topRateSales} />
         <MainSection data={sneaker} />
-        <Stories />
+        <Stories story={story} />
       </main>
     </div>
   )
