@@ -48,7 +48,7 @@
   .iconStyle {
     @apply h-6 w-6 sm:h-5 sm:w-5 text-slate-100 cursor-pointer transition-all duration-100 active:scale-110 leading-tight;
   }
-  .text-gradient {
+  .textGradient {
     @apply text-transparent bg-clip-text bg-gradient-to-tr from-blue-500 to-sky-500;
   }
   .rounded-theme {

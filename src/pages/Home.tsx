@@ -1,5 +1,11 @@
-import { Hero, Sales } from '../components'
-import { heroApi, popularSales, topRateSales } from '../mockData/data'
+import { MainSection, Hero, Sales, Stories } from '../components'
+import {
+  heroApi,
+  popularSales,
+  topRateSales,
+  highlight,
+  sneaker,
+} from '../mockData/data'
 
 interface Props {}
 
@@ -8,8 +14,11 @@ export const Home = (props: Props) => {
     <div>
       <main className="flex flex-col gap-16 relative">
         <Hero heroApi={heroApi} />
-        <Sales sales={popularSales} />
+        <Sales sales={popularSales} isFeaturedItem />
+        <MainSection data={highlight} reverse />
         <Sales sales={topRateSales} />
+        <MainSection data={sneaker} />
+        <Stories />
       </main>
     </div>
   )

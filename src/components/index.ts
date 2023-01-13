@@ -1,2 +1,4 @@
-export { Hero } from './Hero'
-export { Sales } from './Sales'
+export { Hero } from './home'
+export { MainSection } from './home'
+export { Sales } from './home'
+export { Stories } from './home'

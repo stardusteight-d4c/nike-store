@@ -1,9 +1,11 @@
-import React from 'react'
 import { StarIcon, ShoppingBagIcon } from '@heroicons/react/24/solid'
 
-type Props = ItemSale
+interface Props extends ItemSale {
+  isFeaturedItem: boolean
+}
 
 export const Item = ({
+  isFeaturedItem,
   id,
   color,
   shadow,
@@ -16,9 +18,15 @@ export const Item = ({
 }: Props) => {
   return (
     <div
-      className={`relative rounded-xl py-4 px-5 transition-all duration-700 ease-in-out w-full bg-gradient-to-b ${color} ${shadow} grid items-center justify-items-center hover:scale-105`}
+      className={`${color} ${shadow} ${
+        isFeaturedItem ? 'justify-items-start' : 'justify-items-center'
+      } relative rounded-xl py-4 px-5 transition-all duration-700 ease-in-out w-full bg-gradient-to-b grid items-center hover:scale-105`}
     >
-      <div className="grid items-center justify-items-center">
+      <div
+        className={`${
+          isFeaturedItem ? 'justify-items-start' : 'justify-items-center'
+        } grid items-center`}
+      >
         <h1 className="text-slate-200 text-xl lg:text-lg md:text-base font-medium filter drop-shadow">
           {title}
         </h1>
@@ -53,11 +61,19 @@ export const Item = ({
           </button>
         </div>
       </div>
-      <div className="flex items-center">
+      <div
+        className={`${
+          isFeaturedItem ? 'absolute top-5 right-1' : 'justify-center'
+        } flex items-center`}
+      >
         <img
           src={img}
-          alt="product/img"
-          className="transitionTheme w-64 h-36 hover:-rotate-12"
+          alt={`product-${id}/img`}
+          className={`${
+            isFeaturedItem
+              ? 'h-auto w-64 lg:w-56 md:w-48 -rotate-[35deg]'
+              : 'w-64 h-36'
+          } transitionTheme hover:-rotate-12`}
         />
       </div>
     </div>

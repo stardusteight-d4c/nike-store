@@ -1,1 +1,0 @@
-export { Sales } from './Sales'
