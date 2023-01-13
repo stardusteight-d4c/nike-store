@@ -7,3 +7,19 @@ interface HeroApi {
   sociallinks: { icon: string }[]
 }
 
+interface Sale {
+  title: string
+  items: ItemSale[]
+}
+
+interface ItemSale {
+  id: string
+  title: string
+  text: string
+  rating: string
+  btn: string
+  img: string
+  price: string
+  color: string
+  shadow: string
+}

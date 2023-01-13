@@ -31,7 +31,7 @@ import twitter from '../assets/twitter.svg'
 import youtube from '../assets/youtube.svg'
 import messenger from '../assets/messenger.svg'
 
-const heroapi = {
+const heroApi = {
   title: 'Play With Electric Nike',
   subtitle: 'Adapt 2.0 Sneakers',
   img: heroimg,
@@ -50,7 +50,7 @@ const heroapi = {
   ],
 }
 
-const popularsales = {
+const popularSales = {
   title: 'Popular Sales',
   items: [
     {
@@ -107,7 +107,7 @@ const sneaker = {
   img: sneakershoe,
 }
 
-const toprateslaes = {
+const topRateSales = {
   title: 'Top Rated Sales',
   items: [
     {
@@ -376,11 +376,11 @@ const footerAPI = {
 }
 
 export {
-  heroapi,
+  heroApi,
   footerAPI,
   story,
   sneaker,
   highlight,
-  toprateslaes,
-  popularsales,
+  topRateSales,
+  popularSales,
 }

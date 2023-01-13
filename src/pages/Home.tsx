@@ -1,14 +1,15 @@
-import React from 'react'
-import { Hero } from '../components'
-import { heroapi } from '../mockData/data'
+import { Hero, Sales } from '../components'
+import { heroApi, popularSales, topRateSales } from '../mockData/data'
 
 interface Props {}
 
 export const Home = (props: Props) => {
   return (
     <div>
-      <main>
-        <Hero heroApi={heroapi} />
+      <main className="flex flex-col gap-16 relative">
+        <Hero heroApi={heroApi} />
+        <Sales sales={popularSales} />
+        <Sales sales={topRateSales} />
       </main>
     </div>
   )
