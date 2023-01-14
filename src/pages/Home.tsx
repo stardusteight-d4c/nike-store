@@ -5,6 +5,7 @@ import {
   Stories,
   Footer,
   Navbar,
+  Cart,
 } from '../components'
 import {
   heroApi,
@@ -22,6 +23,7 @@ export const Home = (props: Props) => {
   return (
     <div>
       <Navbar />
+      <Cart />
       <main className="flex flex-col gap-16 relative">
         <Hero heroApi={heroApi} />
         <Sales sales={popularSales} isFeaturedItem />
