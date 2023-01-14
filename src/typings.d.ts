@@ -46,3 +46,8 @@ interface Story {
     btn: string
   }[]
 }
+
+interface Footer {
+  titles: { title: string }[]
+  links: { link: string }[][]
+}
