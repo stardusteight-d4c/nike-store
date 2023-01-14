@@ -3,9 +3,15 @@ import { ChevronDoubleLeftIcon, XMarkIcon } from '@heroicons/react/24/solid'
 
 interface Props {
   onCartToggle: () => void
+  onRemoveCartItem: () => void
+  totalQuantity: any
 }
 
-export const CartCount = ({ onCartToggle }: Props) => {
+export const CartCount = ({
+  onCartToggle,
+  onRemoveCartItem,
+  totalQuantity,
+}: Props) => {
   return (
     <div className="bg-white h-11 flex items-center justify-between px-3 sticky top-0 inset-x-0 w-full">
       <div className="flex items-center gap-3">
@@ -19,7 +25,7 @@ export const CartCount = ({ onCartToggle }: Props) => {
           <h1 className="text-base font-medium text-slate-900">
             Your Cart{' '}
             <span className="bgThemeCart rounded px-1 py-0.5 text-slate-100 font-normal text-xs">
-              (Items)
+              ({totalQuantity} Items)
             </span>
           </h1>
         </div>
@@ -28,6 +34,7 @@ export const CartCount = ({ onCartToggle }: Props) => {
         <button
           type="button"
           className="bgThemeCart rounded active:scale-90 p-0.5"
+          onClick={onRemoveCartItem}
         >
           <XMarkIcon className="w-5 h-5 text-white stoke-[2]" />
         </button>

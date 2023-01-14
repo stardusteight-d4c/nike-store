@@ -51,3 +51,14 @@ interface Footer {
   titles: { title: string }[]
   links: { link: string }[][]
 }
+
+interface CartItem {
+  cartQuantity: number
+  color: string
+  id: string
+  img: string
+  price: string
+  shadow: string
+  text: string
+  title: string
+}

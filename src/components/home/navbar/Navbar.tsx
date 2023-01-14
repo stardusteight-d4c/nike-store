@@ -5,14 +5,18 @@ import {
 } from '@heroicons/react/24/outline'
 import { useEffect, useState } from 'react'
 import logo from '../../../assets/logo.png'
-import { useAppDispatch } from '../../../store/hooks'
-import { openCart } from '../../../store/slices/CartSlice'
+import { useAppDispatch, useAppSelector } from '../../../store/hooks'
+import {
+  openCart,
+  selectCartTotalQuantity,
+} from '../../../store/slices/CartSlice'
 
 interface Props {}
 
 export const Navbar = (props: Props) => {
   const [scrollingPage, setScrollingPage] = useState(false)
   const dispatch = useAppDispatch()
+  const totalQuantity = useAppSelector(selectCartTotalQuantity)
 
   const onCartToggle = () => {
     dispatch(openCart())
@@ -83,7 +87,7 @@ export const Navbar = (props: Props) => {
                     : 'bg-white text-slate-900 shadow shadow-slate-100'
                 } absolute top-4 right-0 w-4 h-4 text-[0.65rem] leading-tight font-medium rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-all duration-300`}
               >
-                0
+                {totalQuantity}
               </div>
             </button>
           </li>

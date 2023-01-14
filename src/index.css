@@ -12,8 +12,12 @@
   .nikeContainer {
     @apply w-11/12 m-auto;
   }
-  .scroll-hidden::-webkit-scrollbar {
-    display: none;
+  .scrollHiddenCSO::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+  .scrollHideenIEF {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
   .scroll-style::-webkit-scrollbar {
     scroll-behavior: smooth;
@@ -51,7 +55,7 @@
   .textGradient {
     @apply text-transparent bg-clip-text bg-gradient-to-tr from-blue-500 to-sky-500;
   }
-  .rounded-theme {
+  .roundedTheme {
     border-radius: 5% 100% 10% 5%;
   }
   .buttonTheme {

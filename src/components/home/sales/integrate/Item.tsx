@@ -1,4 +1,6 @@
 import { StarIcon, ShoppingBagIcon } from '@heroicons/react/24/solid'
+import { useAppDispatch } from '../../../../store/hooks'
+import { addItemToCart, openCart } from '../../../../store/slices/CartSlice'
 
 interface Props extends ItemSale {
   isFeaturedItem: boolean
@@ -16,6 +18,13 @@ export const Item = ({
   rating,
   price,
 }: Props) => {
+  const dispatch = useAppDispatch()
+
+  const onAddToCart = () => {
+    const item = { id, title, text, img, color, shadow, price }
+    dispatch(addItemToCart(item))
+  }
+
   return (
     <div
       className={`${color} ${shadow} ${
@@ -50,13 +59,18 @@ export const Item = ({
           <button
             type="button"
             className="blurEffectTheme buttonTheme bg-white/90 p-0.5 shadow shadow-slate-200"
+            onClick={() => onAddToCart()}
           >
             <ShoppingBagIcon className="iconStyle text-slate-900" />
           </button>
           <button
             type="button"
             className="blurEffectTheme buttonTheme bg-white/90 py-1 px-2 shadow shadow-slate-200 text-sm text-black"
-          >
+            onClick={() => {
+              onAddToCart()
+              dispatch(openCart())
+            }}
+         >
             {btn}
           </button>
         </div>
