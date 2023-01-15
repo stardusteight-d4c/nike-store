@@ -30,8 +30,13 @@ export const Cart = (props: Props) => {
     dispatch(closeCart())
   }
 
-  const  onRemoveCartItem = () => {
+  const onRemoveCartItem = () => {
     dispatch(removeCartItem())
+  }
+
+  const createCheckoutSession = async () => {
+   
+    
   }
 
   return (
@@ -45,7 +50,11 @@ export const Cart = (props: Props) => {
       <div
         className={`blurEffectTheme h-screen max-w-xl w-full absolute right-0`}
       >
-        <CartCount onCartToggle={onCartToggle} onRemoveCartItem={onRemoveCartItem} totalQuantity={totalQuantity} />
+        <CartCount
+          onCartToggle={onCartToggle}
+          onRemoveCartItem={onRemoveCartItem}
+          totalQuantity={totalQuantity}
+        />
         {cartItems.length === 0 ? (
           <CartEmpty onCartToggle={onCartToggle} />
         ) : (
@@ -73,7 +82,7 @@ export const Cart = (props: Props) => {
               type="button"
               className="buttonTheme bgThemeCart text-white"
             >
-              Check Out
+              Checkout
             </button>
           </div>
         </div>
