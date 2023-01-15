@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import {
   MainSection,
   Hero,
@@ -16,10 +17,28 @@ import {
   story,
   footerData,
 } from '../mockData/data'
+import { fetchLineItems } from '../utils/fetchLineItems'
 
 interface Props {}
 
 export const Home = (props: Props) => {
+  const urlParams = new URLSearchParams(window.location.search)
+  const sessionId = urlParams.get('session_id')
+
+  useEffect(() => {
+    if (sessionId) {
+      ;(async () => {
+        const products = await fetchLineItems(sessionId)
+        if (products) {
+          alert('successful purchase')
+          // Mandar para o banco de dados nome - email - endereço - diminuir estoque dos produtos de
+          // acordo com o produto e quantidade do produto comprado 
+        }
+        console.log('products', products)
+      })()
+    }
+  }, [sessionId])
+
   return (
     <div>
       <Navbar />

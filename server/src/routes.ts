@@ -5,7 +5,7 @@ const checkoutController = new CheckoutController();
 
 async function checkoutRoutes(fastify: FastifyInstance) {
   fastify.post("/checkout", checkoutController.checkoutSession);
-  fastify.post("/getSession", checkoutController.getSession);
+  fastify.get("/getSession", checkoutController.getSession);
 }
 
 export { checkoutRoutes };

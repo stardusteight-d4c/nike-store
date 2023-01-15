@@ -2,8 +2,10 @@ import {
   MagnifyingGlassCircleIcon,
   HeartIcon,
   ShoppingBagIcon,
+  UserCircleIcon
 } from '@heroicons/react/24/outline'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import logo from '../../../assets/logo.png'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks'
 import {
@@ -69,6 +71,13 @@ export const Navbar = (props: Props) => {
               } iconStyle`}
             />
           </li>
+          <Link to='/login' className="grid items-center">
+            <UserCircleIcon
+              className={`${
+                scrollingPage && 'text-slate-900 transition-all duration-300'
+              } iconStyle`}
+            />
+          </Link>
           <li className="grid items-center">
             <button
               onClick={onCartToggle}

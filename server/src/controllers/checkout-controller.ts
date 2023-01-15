@@ -35,8 +35,7 @@ export class CheckoutController {
         line_items: transformedItems,
         payment_intent_data: {},
         mode: "payment",
-        // success_url: `${request.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
-        success_url: `${request.headers.origin}/`,
+        success_url: `${request.headers.origin}?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${request.headers.origin}/`,
         // metadata: {
         //   images: JSON.stringify(
@@ -44,8 +43,6 @@ export class CheckoutController {
         //   ),
         // },
       };
-
-      console.log("aaa");
 
       const checkoutSession: Stripe.Checkout.Session =
         await stripe.checkout.sessions.create(params);

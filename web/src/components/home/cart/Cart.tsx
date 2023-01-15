@@ -35,7 +35,9 @@ export const Cart = (props: Props) => {
     dispatch(removeCartItem())
   }
 
-  console.log(hostServer)
+  // ! o checkout não atualiza quando você adiciona mais items dentro do carrinho
+
+  const user = false
 
   // create Checkout Session
   const onCheckout = async () => {
@@ -93,13 +95,22 @@ export const Cart = (props: Props) => {
             <p className="text-sm font-medium text-center">
               Taxes and Shipping Will Calculate At Shipping
             </p>
-            <button
-              type="button"
-              className="buttonTheme bgThemeCart text-white"
-              onClick={onCheckout}
-            >
-              Checkout
-            </button>
+            {user ? (
+              <button
+                type="button"
+                className="buttonTheme bgThemeCart text-white"
+                onClick={onCheckout}
+              >
+                Checkout
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="buttonTheme bgThemeCart text-white"
+              >
+                Create an account and start shopping
+              </button>
+            )}
           </div>
         </div>
       </div>
