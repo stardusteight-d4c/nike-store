@@ -9,6 +9,9 @@ export class CheckoutController {
   ) {
     const items = request.body.items;
 
+    console.log("items", items);
+    console.log("headers-origin", request.headers.origin);
+
     // Product price information must be handled only by the application server
     // This is the shape in which stripe expects the data to be
     const transformedItems = items.map((item: any) => ({
@@ -16,16 +19,17 @@ export class CheckoutController {
         currency: "BRL",
         product_data: {
           name: item.title,
-          images: item.img,
+          // images: item.img,
         },
         unit_amount: item.price * 100,
       },
       quantity: 1,
     }));
 
+    console.log("transformedItems", transformedItems);
+
     try {
       // Create checkout sessions from body params
-     
       const params: Stripe.Checkout.SessionCreateParams = {
         payment_method_types: ["card"],
         line_items: transformedItems,
@@ -34,12 +38,14 @@ export class CheckoutController {
         // success_url: `${request.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
         success_url: `${request.headers.origin}/`,
         cancel_url: `${request.headers.origin}/`,
-        metadata: {
-          images: JSON.stringify(
-            items.map((item: any) => item.image),
-          ),
-        },
+        // metadata: {
+        //   images: JSON.stringify(
+        //     items.map((item: any) => item.image),
+        //   ),
+        // },
       };
+
+      console.log("aaa");
 
       const checkoutSession: Stripe.Checkout.Session =
         await stripe.checkout.sessions.create(params);
@@ -50,5 +56,16 @@ export class CheckoutController {
         err instanceof Error ? err.message : "Internal server error";
       reply.status(500).send({ statusCode: 500, message: errorMessage });
     }
+  }
+
+  async getSession(
+    request: FastifyRequest<{ Querystring: { session_id: string } }>,
+    reply: FastifyReply,
+  ) {
+    const sessionId = request.query.session_id;
+    const session = await stripe.checkout.sessions.listLineItems(sessionId);
+    reply.status(200).send({
+      session,
+    });
   }
 }

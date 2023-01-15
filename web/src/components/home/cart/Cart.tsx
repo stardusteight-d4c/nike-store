@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { hostServer } from '../../../App'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks'
 import {
   removeCartItem,
@@ -34,9 +35,23 @@ export const Cart = (props: Props) => {
     dispatch(removeCartItem())
   }
 
-  const createCheckoutSession = async () => {
-   
-    
+  console.log(hostServer)
+
+  // create Checkout Session
+  const onCheckout = async () => {
+    fetch(`${hostServer}/api/checkout`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify({ items: cartItems }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        window.open(data.url, '_blank')
+      })
+      .catch((error) => console.log(error))
   }
 
   return (
@@ -81,6 +96,7 @@ export const Cart = (props: Props) => {
             <button
               type="button"
               className="buttonTheme bgThemeCart text-white"
+              onClick={onCheckout}
             >
               Checkout
             </button>

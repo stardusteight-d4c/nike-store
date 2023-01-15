@@ -3,17 +3,20 @@ import cors from "@fastify/cors";
 import dotenv from "dotenv";
 import { checkoutRoutes } from "./routes";
 
+dotenv.config();
+const PORT = process.env.PORT;
+
 async function bootstrap() {
-  dotenv.config();
   const fastify = Fastify({
     logger: false,
   });
   fastify.register(cors, {
-    origin: true,
+    origin: process.env.ORIGIN,
   });
-  fastify.register(checkoutRoutes);
 
-  await fastify.listen({ port: 3333, host: "0.0.0.0" });
+  fastify.register(checkoutRoutes, { prefix: "/api" });
+
+  await fastify.listen({ port: Number(PORT) });
 }
 
 bootstrap();
