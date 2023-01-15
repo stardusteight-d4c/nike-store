@@ -6,6 +6,9 @@ interface Props {
 }
 
 export const SignUp = ({ setActiveLogin }: Props) => {
+  console.log(/^[0-9]{5}\-[0-9]{3}$/.test('80820-410'))
+  const onSubmit = async () => {}
+
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
@@ -32,19 +35,32 @@ export const SignUp = ({ setActiveLogin }: Props) => {
           autoComplete="false"
           className="mt-8 space-y-6"
           action="http://foo.com"
-          method="get"
+          method="POST"
         >
           <div className="-space-y-px rounded-md shadow-sm">
+            <div>
+              <label htmlFor="full-name" className="sr-only">
+                Full name
+              </label>
+              <input
+                id="full-name"
+                name="full-name"
+                type="text"
+                required
+                className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                placeholder="Full name"
+              />
+            </div>
             <div>
               <label htmlFor="email-address" className="sr-only">
                 Email address
               </label>
               <input
                 id="email-address"
-                name="email"
+                name="email-address"
                 type="email"
                 required
-                className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 placeholder="Email address"
               />
             </div>
@@ -62,12 +78,12 @@ export const SignUp = ({ setActiveLogin }: Props) => {
               />
             </div>
             <div>
-              <label htmlFor="confirmPassword" className="sr-only">
+              <label htmlFor="confirm-password" className="sr-only">
                 Confirm password
               </label>
               <input
-                id="confirmPassword"
-                name="confirmPassword"
+                id="confirm-password"
+                name="confirm-password"
                 type="password"
                 required
                 className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -75,16 +91,16 @@ export const SignUp = ({ setActiveLogin }: Props) => {
               />
             </div>
             <div>
-              <label htmlFor="zip-code" className="sr-only">
-                Zip code
+              <label htmlFor="cep" className="sr-only">
+                CEP
               </label>
               <input
-                id="zip-code"
-                name="zip-code"
+                id="cep"
+                name="cep"
                 type="text"
                 required
                 className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                placeholder="Zip code"
+                placeholder="CEP (00000-000)"
               />
             </div>
           </div>

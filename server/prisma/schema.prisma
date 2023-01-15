@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Consumer {
+  id        String     @id @default(uuid())
+  name      String
+  email     String     @unique
+  password  String
+  cep       String     @unique
+  address   Address?
+  purchases Purchase[]
+
+  @@map("consumers")
+}
+
+model Purchase {
+  id         String @id @default(uuid())
+  productId  String
+  quantity   String
+  consumerId String
+
+  consumer Consumer @relation(fields: [consumerId], references: [id])
+
+  @@map("purchases")
+}
+
+model Address {
+  id         String @id @default(uuid())
+  state      String
+  city       String
+  street     String
+  consumerId String @unique
+
+  consumer Consumer @relation(fields: consumerId, references: id)
+
+  @@map("adresses")
+}
