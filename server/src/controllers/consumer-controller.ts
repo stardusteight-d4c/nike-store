@@ -3,6 +3,10 @@ import { CreateConsumerRequest } from "../dtos";
 import { addressMapper, consumerMapper } from "../mappers";
 import { prisma } from "../prisma";
 import { TriggersError } from "../utils/TriggersError";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export class ConsumerController {
   async createConsumer(
@@ -25,10 +29,11 @@ export class ConsumerController {
         },
       });
 
+      const consumerMapped = await consumerMapper(consumer);
+
       if (cepAlreadyExist || emailAlreadyExist) {
         return reply.status(200).send({ status: "email or cep already exist" });
       } else {
-        const consumerMapped = consumerMapper(consumer);
         const prismaConsumer = await prisma.consumer.create({
           data: {
             ...consumerMapped,
@@ -42,7 +47,15 @@ export class ConsumerController {
         });
       }
 
-      return reply.status(201).send({ status: "created" });
+      const sessionToken = jwt.sign(
+        { name: consumerMapped.name, email: consumerMapped.email },
+        process.env.JWT_SECRET!,
+        {
+          expiresIn: "4d",
+        },
+      );
+
+      return reply.status(201).send({ session: sessionToken, consumer });
     } catch (error) {
       new TriggersError(error, reply);
     }

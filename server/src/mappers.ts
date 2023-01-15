@@ -1,10 +1,12 @@
 import { Address, Consumer } from "./dtos";
+import brcypt from 'bcrypt'
 
-export function consumerMapper(data: Consumer) {
+export async function consumerMapper(data: Consumer) {
+  const encryptedPassword = await brcypt.hash(data.password, 10)
   return {
     name: data.fullName,
     email: data.emailAddress,
-    password: data.password,
+    password: encryptedPassword,
     cep: data.cep
   }
 }
