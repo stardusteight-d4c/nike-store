@@ -20,7 +20,7 @@ model Consumer {
   email     String     @unique
   password  String
   cep       String     @unique
-  address   Address?
+  address   Address[]
   purchases Purchase[]
 
   @@map("consumers")
@@ -44,11 +44,11 @@ model Address {
   city         String
   neighborhood String
   street       String
-  number       Int
-  complement   String
-  consumerId   String @unique
+  number       Int?
+  complement   String?
+  consumerId   String  @unique
 
-  consumer Consumer @relation(fields: consumerId, references: id)
+  consumer Consumer @relation(fields: [consumerId], references: [id])
 
   @@map("addresses")
 }

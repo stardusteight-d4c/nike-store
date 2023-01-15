@@ -1,6 +1,9 @@
 import { LockClosedIcon } from '@heroicons/react/24/outline'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { hostServer } from '../../App'
 import nikeLogo from '../../assets/logo.png'
+import { confirmPassword } from '../../utils/confirmPassword'
 import { isValidEmailAddress } from '../../utils/isValidEmailAddress'
 import { isValidZipCode } from '../../utils/isValidZipCode'
 
@@ -9,8 +12,13 @@ interface Props {
 }
 
 export const SignUp = ({ setActiveLogin }: Props) => {
+  const navigate = useNavigate()
+  const [loading, setLoading] = useState<boolean>(false)
+
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
+    setLoading(true)
 
     const formData = new FormData(event.target as HTMLFormElement)
     const data = Object.fromEntries(formData)
@@ -20,8 +28,14 @@ export const SignUp = ({ setActiveLogin }: Props) => {
 
     const zipCode: ViaCepApiResponse = await isValidZipCode(CEP)
     const validEmailAddres = isValidEmailAddress(EMAIL)
+    const validPassword = confirmPassword(
+      data.password.toString(),
+      data.confirmPassword.toString()
+    )
 
-    if (zipCode && validEmailAddres) {
+    delete data.confirmPassword
+
+    if (zipCode && validEmailAddres && validPassword) {
       const address = {
         state: zipCode.uf,
         city: zipCode.localidade,
@@ -30,15 +44,20 @@ export const SignUp = ({ setActiveLogin }: Props) => {
         number: null,
         complement: null,
       }
-
-      fetch(`${hostServer}/api/createConsumer`, {
+      // 11724-110
+      fetch(`${hostServer}/api/consumer/createConsumer`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         referrerPolicy: 'no-referrer',
         body: JSON.stringify({ consumer: data, address }),
-      }).catch((error) => console.log(error))
+      })
+        .then(() => {
+          setLoading(false)
+          navigate('/')
+        })
+        .catch((error) => console.log(error))
     }
   }
 
@@ -148,7 +167,7 @@ export const SignUp = ({ setActiveLogin }: Props) => {
                   aria-hidden="true"
                 />
               </span>
-              Sign up
+              {loading ? 'Loading... ' : 'Sign up'}
             </button>
           </div>
         </form>

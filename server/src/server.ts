@@ -1,7 +1,7 @@
 import Fastify from "fastify";
 import cors from "@fastify/cors";
 import dotenv from "dotenv";
-import { checkoutRoutes } from "./routes";
+import { checkoutRoutes, consumerRoutes } from "./routes";
 
 dotenv.config();
 const PORT = process.env.PORT;
@@ -15,6 +15,7 @@ async function bootstrap() {
   });
 
   fastify.register(checkoutRoutes, { prefix: "/api" });
+  fastify.register(consumerRoutes, { prefix: "/api/consumer" });
 
   await fastify.listen({ port: Number(PORT) });
 }

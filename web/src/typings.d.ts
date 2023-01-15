@@ -74,4 +74,12 @@ interface ViaCepApiResponse {
   logradouro: string
   siafi: string
   uf: string
-} 
+}
+
+interface SignUpFormData {
+  fullName: string
+  emailAddress: string
+  password: string
+  confirmPassword: string
+  cep: string
+}
