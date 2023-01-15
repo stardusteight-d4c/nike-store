@@ -1,11 +1,53 @@
 import { LockClosedIcon } from '@heroicons/react/24/outline'
+import { useState } from 'react'
+import { toast } from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
+import { hostServer } from '../../App'
 import nikeLogo from '../../assets/logo.png'
+import { useAppDispatch } from '../../store/hooks'
+import { setConsumer } from '../../store/slices/ConsumerSlice'
 
 interface Props {
   setActiveLogin: React.Dispatch<React.SetStateAction<'sign-in' | 'sign-up'>>
 }
 
 export const SignIn = ({ setActiveLogin }: Props) => {
+  const [loading, setLoading] = useState<boolean>(false)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    setLoading(true)
+
+    const formData = new FormData(event.target as HTMLFormElement)
+    const data = Object.fromEntries(formData)
+
+    fetch(`${hostServer}/api/consumer/findConsumer`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify({ email: data.email, password: data.password }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('data', data);
+        
+        if (data.message) {
+          toast.error(data.message)
+        } else {
+          localStorage.setItem('session', data.sessionToken)
+          dispatch(setConsumer(data.consumer))
+          navigate('/')
+        }
+        setLoading(false)
+      })
+      .catch((error) => console.log(error))
+  }
+
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
@@ -28,15 +70,15 @@ export const SignIn = ({ setActiveLogin }: Props) => {
             </a>
           </p>
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
+        <form onSubmit={onSubmit} className="mt-8 space-y-6">
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="-space-y-px rounded-md shadow-sm">
             <div>
-              <label htmlFor="email-address" className="sr-only">
+              <label htmlFor="emailAddress" className="sr-only">
                 Email address
               </label>
               <input
-                id="email-address"
+                id="emailAddress"
                 name="email"
                 type="email"
                 autoComplete="email"

@@ -12,6 +12,7 @@ async function checkoutRoutes(fastify: FastifyInstance) {
 
 async function consumerRoutes(fastify: FastifyInstance) {
   fastify.post("/createConsumer", consumerController.createConsumer);
+  fastify.post("/findConsumer", consumerController.findConsumer);
 }
 
 export { checkoutRoutes, consumerRoutes };

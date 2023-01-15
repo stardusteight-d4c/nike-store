@@ -17,6 +17,8 @@ import {
   story,
   footerData,
 } from '../mockData/data'
+import { useAppSelector } from '../store/hooks'
+import { selectCurrentConsumer } from '../store/slices/ConsumerSlice'
 import { fetchLineItems } from '../utils/fetchLineItems'
 
 interface Props {}
@@ -24,6 +26,10 @@ interface Props {}
 export const Home = (props: Props) => {
   const urlParams = new URLSearchParams(window.location.search)
   const sessionId = urlParams.get('session_id')
+  const currentConsumer = useAppSelector(selectCurrentConsumer)
+
+  console.log('currentConsumer', currentConsumer);
+  
 
   useEffect(() => {
     if (sessionId) {
@@ -32,7 +38,7 @@ export const Home = (props: Props) => {
         if (products) {
           alert('successful purchase')
           // Mandar para o banco de dados nome - email - endereço - diminuir estoque dos produtos de
-          // acordo com o produto e quantidade do produto comprado 
+          // acordo com o produto e quantidade do produto comprado
         }
         console.log('products', products)
       })()

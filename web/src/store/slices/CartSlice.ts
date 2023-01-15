@@ -110,6 +110,9 @@ export const {
 } = cartSlice.actions
 export const selectCartState = (state: RootState) => state.cart.cartState
 export const selectCartItems = (state: RootState) => state.cart.cartItems
-export const selectCartTotalAmount = (state: RootState) => state.cart.cartTotalAmount
-export const selectCartTotalQuantity = (state: RootState) => state.cart.cartTotalQuantity
+export const selectCartTotalAmount = (state: RootState) =>
+  state.cart.cartTotalAmount
+export const selectCartTotalQuantity = (state: RootState) =>
+  state.cart.cartTotalQuantity
+
 export default cartSlice.reducer

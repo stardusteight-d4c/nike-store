@@ -59,10 +59,16 @@ export class CheckoutController {
     request: FastifyRequest<{ Querystring: { session_id: string } }>,
     reply: FastifyReply,
   ) {
-    const sessionId = request.query.session_id;
-    const session = await stripe.checkout.sessions.listLineItems(sessionId);
-    reply.status(200).send({
-      session,
-    });
+    try {
+      const sessionId = request.query.session_id;
+      const session = await stripe.checkout.sessions.listLineItems(sessionId);
+      reply.status(200).send({
+        session,
+      });
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Internal server error";
+      reply.status(500).send({ statusCode: 500, message: errorMessage });
+    }
   }
 }

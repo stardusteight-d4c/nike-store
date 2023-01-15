@@ -1,8 +1,11 @@
 import { LockClosedIcon } from '@heroicons/react/24/outline'
 import { useState } from 'react'
+import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { hostServer } from '../../App'
 import nikeLogo from '../../assets/logo.png'
+import { useAppDispatch } from '../../store/hooks'
+import { setConsumer } from '../../store/slices/ConsumerSlice'
 import { confirmPassword } from '../../utils/confirmPassword'
 import { isValidEmailAddress } from '../../utils/isValidEmailAddress'
 import { isValidZipCode } from '../../utils/isValidZipCode'
@@ -12,8 +15,9 @@ interface Props {
 }
 
 export const SignUp = ({ setActiveLogin }: Props) => {
-  const navigate = useNavigate()
   const [loading, setLoading] = useState<boolean>(false)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -53,9 +57,17 @@ export const SignUp = ({ setActiveLogin }: Props) => {
         referrerPolicy: 'no-referrer',
         body: JSON.stringify({ consumer: data, address }),
       })
-        .then(() => {
-          setLoading(false)
-          navigate('/')
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.message) {
+            toast.error(data.message)
+            setLoading(false)
+          } else {
+            localStorage.setItem('session', data.sessionToken)
+            setLoading(false)
+            dispatch(setConsumer(data.consumer))
+            navigate('/')
+          }
         })
         .catch((error) => console.log(error))
     }
