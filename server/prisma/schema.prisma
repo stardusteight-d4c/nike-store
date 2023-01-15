@@ -38,13 +38,17 @@ model Purchase {
 }
 
 model Address {
-  id         String @id @default(uuid())
-  state      String
-  city       String
-  street     String
-  consumerId String @unique
+  id String @id @default(uuid())
+
+  state        String
+  city         String
+  neighborhood String
+  street       String
+  number       Int
+  complement   String
+  consumerId   String @unique
 
   consumer Consumer @relation(fields: consumerId, references: id)
 
-  @@map("adresses")
+  @@map("addresses")
 }

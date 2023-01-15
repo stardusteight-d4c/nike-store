@@ -1,13 +1,46 @@
 import { LockClosedIcon } from '@heroicons/react/24/outline'
+import { hostServer } from '../../App'
 import nikeLogo from '../../assets/logo.png'
+import { isValidEmailAddress } from '../../utils/isValidEmailAddress'
+import { isValidZipCode } from '../../utils/isValidZipCode'
 
 interface Props {
   setActiveLogin: React.Dispatch<React.SetStateAction<'sign-in' | 'sign-up'>>
 }
 
 export const SignUp = ({ setActiveLogin }: Props) => {
-  console.log(/^[0-9]{5}\-[0-9]{3}$/.test('80820-410'))
-  const onSubmit = async () => {}
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    const formData = new FormData(event.target as HTMLFormElement)
+    const data = Object.fromEntries(formData)
+
+    const CEP = data.cep.toString()
+    const EMAIL = data.emailAddress.toString()
+
+    const zipCode: ViaCepApiResponse = await isValidZipCode(CEP)
+    const validEmailAddres = isValidEmailAddress(EMAIL)
+
+    if (zipCode && validEmailAddres) {
+      const address = {
+        state: zipCode.uf,
+        city: zipCode.localidade,
+        neighborhood: zipCode.bairro,
+        street: zipCode.logradouro,
+        number: null,
+        complement: null,
+      }
+
+      fetch(`${hostServer}/api/createConsumer`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        referrerPolicy: 'no-referrer',
+        body: JSON.stringify({ consumer: data, address }),
+      }).catch((error) => console.log(error))
+    }
+  }
 
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -34,17 +67,16 @@ export const SignUp = ({ setActiveLogin }: Props) => {
         <form
           autoComplete="false"
           className="mt-8 space-y-6"
-          action="http://foo.com"
-          method="POST"
+          onSubmit={(e) => onSubmit(e)}
         >
           <div className="-space-y-px rounded-md shadow-sm">
             <div>
-              <label htmlFor="full-name" className="sr-only">
+              <label htmlFor="fullName" className="sr-only">
                 Full name
               </label>
               <input
-                id="full-name"
-                name="full-name"
+                id="fullName"
+                name="fullName"
                 type="text"
                 required
                 className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -52,12 +84,12 @@ export const SignUp = ({ setActiveLogin }: Props) => {
               />
             </div>
             <div>
-              <label htmlFor="email-address" className="sr-only">
+              <label htmlFor="emailAddress" className="sr-only">
                 Email address
               </label>
               <input
-                id="email-address"
-                name="email-address"
+                id="emailAddress"
+                name="emailAddress"
                 type="email"
                 required
                 className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -78,12 +110,12 @@ export const SignUp = ({ setActiveLogin }: Props) => {
               />
             </div>
             <div>
-              <label htmlFor="confirm-password" className="sr-only">
+              <label htmlFor="confirmPassword" className="sr-only">
                 Confirm password
               </label>
               <input
-                id="confirm-password"
-                name="confirm-password"
+                id="confirmPassword"
+                name="confirmPassword"
                 type="password"
                 required
                 className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
