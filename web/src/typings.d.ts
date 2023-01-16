@@ -18,8 +18,9 @@ interface ItemSale {
   text: string
   rating: string
   btn: string
-  img: string
+  img: any
   price: string
+  stock: number
   color: string
   shadow: string
 }

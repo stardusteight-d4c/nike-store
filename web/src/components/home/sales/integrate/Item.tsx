@@ -14,14 +14,14 @@ export const Item = ({
   title,
   text,
   img,
-  btn,
+  stock,
   rating,
   price,
 }: Props) => {
   const dispatch = useAppDispatch()
 
   const onAddToCart = () => {
-    const item = { id, title, text, img, color, shadow, price }
+    const item = { id, title, text, stock, img, color, shadow, price }
     dispatch(addItemToCart(item))
   }
 
@@ -54,6 +54,7 @@ export const Item = ({
             <h1 className="md:text-sm font-normal text-slate-100">{rating}</h1>
           </div>
         </div>
+        <span className='text-sm font-light text-white'>Stock: {stock}</span>
 
         <div className="flex items-center gap-3">
           <button
@@ -72,7 +73,7 @@ export const Item = ({
               dispatch(openCart())
             }}
           >
-            {btn}
+            Buy Now
           </button>
         </div>
       </div>
@@ -82,7 +83,7 @@ export const Item = ({
         } flex items-center`}
       >
         <img
-          src={img}
+          src={img.url || img}
           alt={`product-${id}/img`}
           className={`${
             isFeaturedItem

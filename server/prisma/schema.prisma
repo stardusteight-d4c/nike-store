@@ -26,7 +26,7 @@ model Purchase {
   id         String @id @default(uuid())
   productId  String
   quantity   String
-  consumerId String
+  consumerId String 
 
   consumer Consumer @relation(fields: [consumerId], references: [id])
 

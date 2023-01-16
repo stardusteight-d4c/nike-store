@@ -1,0 +1,7 @@
+mutation updateProductById($stock: Int, $id: ID) {
+    updateProduct(where: {id:$id} data: {stock: $stock}) {
+    id
+    stock
+    title
+  }
+}

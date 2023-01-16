@@ -17,7 +17,9 @@ async function bootstrap() {
   fastify.register(checkoutRoutes, { prefix: "/api" });
   fastify.register(consumerRoutes, { prefix: "/api/consumer" });
 
-  await fastify.listen({ port: Number(PORT) });
+  await fastify.listen({ port: Number(PORT) }).then((url) => {
+    console.log(`🚀 Server ready at ${url}`);
+  });
 }
 
 bootstrap();

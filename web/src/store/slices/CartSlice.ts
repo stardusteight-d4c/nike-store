@@ -28,7 +28,15 @@ const cartSlice = createSlice({
       const itemIndex = state.cartItems.findIndex(
         (item: any) => item.id === action.payload.id
       )
+
+      console.log('action.payload.stock', action.payload.stock)
+
       if (itemIndex >= 0) {
+        if (state.cartItems[itemIndex].cartQuantity === action.payload.stock) {
+          toast.error('Limite de estoque atingindo')
+          return
+        }
+
         state.cartItems[itemIndex].cartQuantity++
         toast.success(
           `${action.payload.title} (${state.cartItems[itemIndex].cartQuantity}) added to Cart`
@@ -56,6 +64,11 @@ const cartSlice = createSlice({
         (item: any) => item.id === action.payload.id
       )
       if (itemIndex >= 0) {
+        if (state.cartItems[itemIndex].cartQuantity === action.payload.stock) {
+          toast.error('Limite de estoque atingindo')
+          return
+        }
+
         state.cartItems[itemIndex].cartQuantity++
         toast.success(`${action.payload.title} added to Cart`)
       }
