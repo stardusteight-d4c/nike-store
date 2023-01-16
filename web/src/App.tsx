@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Home } from './pages/Home'
 import { Login } from './pages/Login'
+import { useAppDispatch, useAppSelector } from './store/hooks'
+import {
+  selectCurrentConsumer,
+  setConsumer,
+} from './store/slices/ConsumerSlice'
 
 interface Props {}
 
@@ -11,6 +16,29 @@ interface Props {}
 export const hostServer = import.meta.env.VITE_SERVER
 
 export const App = (props: Props) => {
+  const session = localStorage.getItem('session')
+  const dispatch = useAppDispatch()
+  const currentConsumer = useAppSelector(selectCurrentConsumer)
+
+  useEffect(() => {
+    ;(async () => {
+      if (session && !currentConsumer) {
+        await fetch(`${hostServer}/api/consumer/verifySession`, {
+          method: 'POST',
+          headers: {
+            authorization: session,
+          },
+          referrerPolicy: 'no-referrer',
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            dispatch(setConsumer(data.consumer))
+          })
+          .catch((error) => console.log(error))
+      }
+    })()
+  }, [session, currentConsumer])
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />

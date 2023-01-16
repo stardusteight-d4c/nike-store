@@ -85,8 +85,6 @@ export class ConsumerController {
           password,
           consumer?.password,
         );
-        console.log(isValidPassword);
-
         if (isValidPassword) {
           const sessionToken = jwt.sign(
             { id: consumer.id, email: consumer.email },
@@ -95,7 +93,6 @@ export class ConsumerController {
               expiresIn: "4d",
             },
           );
-          console.log(consumer, sessionToken);
           return reply.status(200).send({ consumer, sessionToken });
         } else {
           return reply
@@ -109,6 +106,27 @@ export class ConsumerController {
       }
     } catch (error) {
       new TriggersError(error, reply);
+    }
+  }
+
+  async verifySession(
+    request: FastifyRequest<{ Headers: { authorization: string } }>,
+    reply: FastifyReply,
+  ) {
+    try {
+      const sessionToken = request.headers.authorization;
+
+      const decode: any = jwt.verify(sessionToken, process.env.JWT_SECRET!);
+
+      const consumer = await prisma.consumer.findFirst({
+        where: {
+          id: decode.id,
+        },
+      });
+
+      return reply.status(200).send({ session: decode, consumer });
+    } catch (error) {
+      return reply.send({ msg: "Expired or invalid token" });
     }
   }
 }

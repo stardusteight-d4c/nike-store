@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { hostServer } from '../../../App'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks'
 import {
@@ -10,6 +11,7 @@ import {
   selectCartTotalAmount,
   selectCartTotalQuantity,
 } from '../../../store/slices/CartSlice'
+import { selectCurrentConsumer } from '../../../store/slices/ConsumerSlice'
 import { CartCount } from './integrate/CartCount'
 import { CartEmpty } from './integrate/CartEmpty'
 import { CartItem } from './integrate/CartItem'
@@ -22,6 +24,7 @@ export const Cart = (props: Props) => {
   const cartItems = useAppSelector(selectCartItems)
   const totalAmount = useAppSelector(selectCartTotalAmount)
   const totalQuantity = useAppSelector(selectCartTotalQuantity)
+  const currentConsumer = useAppSelector(selectCurrentConsumer)
 
   useEffect(() => {
     dispatch(getTotals())
@@ -36,8 +39,6 @@ export const Cart = (props: Props) => {
   }
 
   // ! o checkout não atualiza quando você adiciona mais items dentro do carrinho
-
-  const user = false
 
   // create Checkout Session
   const onCheckout = async () => {
@@ -95,7 +96,7 @@ export const Cart = (props: Props) => {
             <p className="text-sm font-medium text-center">
               Taxes and Shipping Will Calculate At Shipping
             </p>
-            {user ? (
+            {currentConsumer ? (
               <button
                 type="button"
                 className="buttonTheme bgThemeCart text-white"
@@ -104,12 +105,9 @@ export const Cart = (props: Props) => {
                 Checkout
               </button>
             ) : (
-              <button
-                type="button"
-                className="buttonTheme bgThemeCart text-white"
-              >
-                Create an account and start shopping
-              </button>
+              <Link to="/login" className="buttonTheme bgThemeCart text-white text-center">
+                Create an account
+              </Link>
             )}
           </div>
         </div>

@@ -2,8 +2,9 @@ import {
   MagnifyingGlassCircleIcon,
   HeartIcon,
   ShoppingBagIcon,
-  UserCircleIcon
+  UserCircleIcon,
 } from '@heroicons/react/24/outline'
+import { UserCircleIcon as LoggedUser } from '@heroicons/react/24/solid'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../../../assets/logo.png'
@@ -12,6 +13,7 @@ import {
   openCart,
   selectCartTotalQuantity,
 } from '../../../store/slices/CartSlice'
+import { selectCurrentConsumer } from '../../../store/slices/ConsumerSlice'
 
 interface Props {}
 
@@ -19,6 +21,7 @@ export const Navbar = (props: Props) => {
   const [scrollingPage, setScrollingPage] = useState(false)
   const dispatch = useAppDispatch()
   const totalQuantity = useAppSelector(selectCartTotalQuantity)
+  const currentConsumer = useAppSelector(selectCurrentConsumer)
 
   const onCartToggle = () => {
     dispatch(openCart())
@@ -71,13 +74,23 @@ export const Navbar = (props: Props) => {
               } iconStyle`}
             />
           </li>
-          <Link to='/login' className="grid items-center">
-            <UserCircleIcon
-              className={`${
-                scrollingPage && 'text-slate-900 transition-all duration-300'
-              } iconStyle`}
-            />
-          </Link>
+          {currentConsumer ? (
+            <Link to="/" className="grid items-center">
+              <LoggedUser
+                className={`${
+                  scrollingPage && 'text-slate-900 transition-all duration-300'
+                } iconStyle`}
+              />
+            </Link>
+          ) : (
+            <Link to="/login" className="grid items-center">
+              <UserCircleIcon
+                className={`${
+                  scrollingPage && 'text-slate-900 transition-all duration-300'
+                } iconStyle`}
+              />
+            </Link>
+          )}
           <li className="grid items-center">
             <button
               onClick={onCartToggle}
