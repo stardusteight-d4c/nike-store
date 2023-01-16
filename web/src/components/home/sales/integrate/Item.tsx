@@ -68,9 +68,10 @@ export const Item = ({
             className="blurEffectTheme buttonTheme bg-white/90 py-1 px-2 shadow shadow-slate-200 text-sm text-black"
             onClick={() => {
               onAddToCart()
+              document.getElementById('body')!.style.overflow = 'hidden'
               dispatch(openCart())
             }}
-         >
+          >
             {btn}
           </button>
         </div>

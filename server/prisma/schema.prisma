@@ -42,7 +42,7 @@ model Address {
   street       String
   number       Int?
   complement   String?
-  consumerId   String  @unique
+  consumerId   String @unique
 
   consumer Consumer @relation(fields: [consumerId], references: [id])
 

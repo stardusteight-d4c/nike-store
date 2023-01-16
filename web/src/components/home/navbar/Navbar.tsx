@@ -24,6 +24,7 @@ export const Navbar = (props: Props) => {
   const currentConsumer = useAppSelector(selectCurrentConsumer)
 
   const onCartToggle = () => {
+    document.getElementById('body')!.style.overflow = 'hidden'
     dispatch(openCart())
   }
 

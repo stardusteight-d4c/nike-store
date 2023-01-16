@@ -1,11 +1,12 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { CreateConsumerRequest } from "../dtos";
+import { Address, CreateConsumerRequest } from "../dtos";
 import { addressMapper, consumerMapper } from "../mappers";
 import { prisma } from "../prisma";
 import { TriggersError } from "../utils/TriggersError";
 import jwt from "jsonwebtoken";
 import brcypt from "bcrypt";
 import dotenv from "dotenv";
+import { Consumer } from "@prisma/client";
 
 dotenv.config();
 
@@ -93,6 +94,10 @@ export class ConsumerController {
               expiresIn: "4d",
             },
           );
+
+          // @ts-expect-error
+          delete consumer.password;
+
           return reply.status(200).send({ consumer, sessionToken });
         } else {
           return reply
@@ -127,6 +132,47 @@ export class ConsumerController {
       return reply.status(200).send({ session: decode, consumer });
     } catch (error) {
       return reply.send({ msg: "Expired or invalid token" });
+    }
+  }
+
+  async getAddress(
+    request: FastifyRequest<{ Querystring: { consumer_id: string } }>,
+    reply: FastifyReply,
+  ) {
+    try {
+      const consumer_id = request.query.consumer_id;
+      const address = await prisma.address.findFirst({
+        where: {
+          consumerId: consumer_id,
+        },
+      });
+
+      return reply.status(200).send({ address });
+    } catch (error) {
+      new TriggersError(error, reply);
+    }
+  }
+
+  async newAddress(
+    request: FastifyRequest<{ Body: { address: Address; consumerId: string } }>,
+    reply: FastifyReply,
+  ) {
+    try {
+      const { address, consumerId } = request.body;
+
+      await prisma.address.update({
+        where: {
+          consumerId,
+        },
+        data: {
+          ...address,
+          number: Number(address.number)
+        },
+      });
+
+     return reply.status(200).send({ message: 'Address updated!'})
+    } catch (error) {
+      new TriggersError(error, reply);
     }
   }
 }

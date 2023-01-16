@@ -83,3 +83,21 @@ interface SignUpFormData {
   confirmPassword: string
   cep: string
 }
+
+interface CurrentConsumer {
+  id: string
+  name: string
+  email: string
+  cep: string
+}
+
+interface Address {
+  city: string
+  complement: string | null
+  consumerId: string
+  id: string
+  neighborhood: string
+  number: number
+  state: string
+  street: string
+}
