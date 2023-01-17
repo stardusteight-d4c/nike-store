@@ -6,7 +6,7 @@ import { TriggersError } from "../utils/TriggersError";
 import jwt from "jsonwebtoken";
 import brcypt from "bcrypt";
 import dotenv from "dotenv";
-import { Consumer } from "@prisma/client";
+import { getProductById } from "../graphql/queries";
 
 dotenv.config();
 
@@ -166,11 +166,11 @@ export class ConsumerController {
         },
         data: {
           ...address,
-          number: Number(address.number)
+          number: Number(address.number),
         },
       });
 
-     return reply.status(200).send({ message: 'Address updated!'})
+      return reply.status(200).send({ message: "Address updated!" });
     } catch (error) {
       new TriggersError(error, reply);
     }

@@ -12,6 +12,11 @@ export class CheckoutController {
     console.log("items", items);
     console.log("headers-origin", request.headers.origin);
 
+
+    // pegar apenas o id e a quantidade dos produtos -> processar os dados de pagemento pelo backend
+    // assim como o preço total a se pagar
+
+
     // Product price information must be handled only by the application server
     // This is the shape in which stripe expects the data to be
     const transformedItems = items.map((item: any) => ({
