@@ -36,9 +36,6 @@ export const Home = (props: Props) => {
     variables: { category: 'topRateSales' },
   })
 
-  // 
-
-
   const popularSalesCMS: any = {
     title: 'Popular Sales',
     items: firstQuery?.products,
@@ -60,7 +57,12 @@ export const Home = (props: Props) => {
 
           // limpar storage de products items
 
-          // fazer perfil com as compras realizadas
+          localStorage.removeItem('cart')
+
+          // Cheio de falha de segurança sapoura, não salve as informaçoes de preço no localStorage
+          
+          
+
 
           toast.success('successful purchase')
         }
@@ -75,9 +77,9 @@ export const Home = (props: Props) => {
       <Cart />
       <main className="flex flex-col gap-16 relative">
         <Hero heroApi={heroApi} />
-        <Sales sales={popularSalesCMS || popularSales} isFeaturedItem />
+        <Sales sales={popularSalesCMS.items ? popularSalesCMS : popularSales} isFeaturedItem />
         <MainSection data={highlight} reverse />
-        <Sales sales={topRateSalesCMS || topRateSales} />
+        <Sales sales={topRateSalesCMS.items ? topRateSalesCMS : topRateSales} />
         <MainSection data={sneaker} />
         <Stories story={story} />
       </main>

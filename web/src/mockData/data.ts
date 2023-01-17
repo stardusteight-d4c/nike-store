@@ -50,7 +50,7 @@ const heroApi = {
   ],
 }
 
-const popularSales = {
+const popularSales: any = {
   title: 'Popular Sales',
   items: [
     {
@@ -107,7 +107,7 @@ const sneaker = {
   img: sneakershoe,
 }
 
-const topRateSales = {
+const topRateSales: any = {
   title: 'Top Rated Sales',
   items: [
     {

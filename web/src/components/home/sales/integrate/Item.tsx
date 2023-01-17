@@ -54,7 +54,9 @@ export const Item = ({
             <h1 className="md:text-sm font-normal text-slate-100">{rating}</h1>
           </div>
         </div>
-        <span className='text-sm font-light text-white'>Stock: {stock}</span>
+        {stock && (
+          <span className="text-sm font-light text-white">Stock: {stock}</span>
+        )}
 
         <div className="flex items-center gap-3">
           <button
