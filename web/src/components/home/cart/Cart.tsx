@@ -12,6 +12,7 @@ import {
   selectCartTotalQuantity,
 } from '../../../store/slices/CartSlice'
 import { selectCurrentConsumer } from '../../../store/slices/ConsumerSlice'
+import { cartItemsToCheckout } from '../../../utils/cartItemsToCheckout'
 import { CartCount } from './integrate/CartCount'
 import { CartEmpty } from './integrate/CartEmpty'
 import { CartItem } from './integrate/CartItem'
@@ -55,7 +56,9 @@ export const Cart = (props: Props) => {
         'Content-Type': 'application/json',
       },
       referrerPolicy: 'no-referrer',
-      body: JSON.stringify({ items: cartItems }),
+      body: JSON.stringify({
+        items: cartItemsToCheckout(cartItems),
+      }),
     })
       .then((res) => res.json())
       .then((data) => {

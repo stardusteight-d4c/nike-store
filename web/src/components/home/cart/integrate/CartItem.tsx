@@ -39,7 +39,7 @@ export const CartItem = ({
           className={`bg-gradient-to-b ${color} ${shadow} relative rounded p-3 hover:scale-105 transition-all duration-75 ease-in-out grid items-center`}
         >
           <img
-            src={img}
+             src={img.url || img}
             alt={`cartItem-${id}/img`}
             className="w-36 h-auto object-fill lg:w-28"
           />

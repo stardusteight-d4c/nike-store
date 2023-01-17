@@ -57,7 +57,7 @@ interface CartItem {
   cartQuantity: number
   color: string
   id: string
-  img: string
+  img: any
   price: string
   shadow: string
   text: string

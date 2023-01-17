@@ -1,6 +1,9 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import Stripe from "stripe";
+import { getProductById } from "../graphql/queries";
+import { toCheckoutMapper } from "../mappers";
 import { stripe } from "../stripe";
+import { TriggersError } from "../utils/TriggersError";
 
 export class CheckoutController {
   async checkoutSession(
@@ -10,28 +13,32 @@ export class CheckoutController {
     const items = request.body.items;
 
     console.log("items", items);
-    console.log("headers-origin", request.headers.origin);
 
+    const ids = items.map((item: any) => item.id);
 
-    // pegar apenas o id e a quantidade dos produtos -> processar os dados de pagemento pelo backend
-    // assim como o preço total a se pagar
+    // Acquire product information from a DB or Content Manage System
+    // Ensure data integrity, that it has not been intercepted by an
+    // intermediary (through the front end)
+    const cmsData = await getProductById(ids);
 
+    console.log("cmsData", cmsData);
+
+    function mergeArrayOfObjectsByIdProperty(array1: any, array2: any) {
+      const array3 = array1.map((obj1: any) => ({
+        ...obj1,
+        ...array2.find((obj2: any) => obj2.id === obj1.id),
+      }));
+
+      return array3;
+    }
+
+    const mergeArray = mergeArrayOfObjectsByIdProperty(cmsData, items);
+
+    console.log("mergeArray", mergeArray);
 
     // Product price information must be handled only by the application server
     // This is the shape in which stripe expects the data to be
-    const transformedItems = items.map((item: any) => ({
-      price_data: {
-        currency: "BRL",
-        product_data: {
-          name: item.title,
-          // images: item.img,
-        },
-        unit_amount: item.price * 100,
-      },
-      quantity: 1,
-    }));
-
-    console.log("transformedItems", transformedItems);
+    const transformedItems = toCheckoutMapper(mergeArray);
 
     try {
       // Create checkout sessions from body params
@@ -42,11 +49,6 @@ export class CheckoutController {
         mode: "payment",
         success_url: `${request.headers.origin}?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${request.headers.origin}/`,
-        // metadata: {
-        //   images: JSON.stringify(
-        //     items.map((item: any) => item.image),
-        //   ),
-        // },
       };
 
       const checkoutSession: Stripe.Checkout.Session =
@@ -54,9 +56,7 @@ export class CheckoutController {
 
       reply.status(200).send(checkoutSession);
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Internal server error";
-      reply.status(500).send({ statusCode: 500, message: errorMessage });
+      new TriggersError(err, reply);
     }
   }
 

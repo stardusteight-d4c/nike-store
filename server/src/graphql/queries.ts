@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const getProductById = async (id: string) => {
+export const getProductById = async (ids: []) => {
   const products = await fetch(process.env.CMS_API_URL!, {
     method: "POST",
     headers: {
@@ -11,25 +11,20 @@ export const getProductById = async (id: string) => {
     },
     body: JSON.stringify({
       query: `
-      query getProductById($id: ID) {
-        products(where: { id: $id }) {
+      query getProductById($ids: [ID]) {
+        products(where: { id_in: $ids }) {
           id
-          category
           title
-          text
           stock
           img {
             url
           }
-          color
-          shadow
-          rating
           price
         }
       }
       `,
       variables: {
-        id,
+        ids,
       },
     }),
   })
