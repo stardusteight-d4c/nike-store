@@ -48,26 +48,28 @@ export const Home = (props: Props) => {
 
   useEffect(() => {
     if (sessionId) {
-      ;(async () => {
-        const products = await fetchLineItems(sessionId)
-        if (products) {
+      if (currentConsumer !== null) {
+        ;(async () => {
+          const products = await fetchLineItems(sessionId, currentConsumer.id)
+          if (products && currentConsumer) {
+            console.log('products', products)
+
+            // Mandar para o banco de dados nome - email - endereço - diminuir estoque dos produtos de
+            // acordo com o produto e quantidade do produto comprado
+
+            // limpar storage de products items
+
+            localStorage.removeItem('cart')
+
+            // Cheio de falha de segurança sapoura, não salve as informaçoes de preço no localStorage
+
+            toast.success('successful purchase')
+          }
           console.log('products', products)
-
-          // Mandar para o banco de dados nome - email - endereço - diminuir estoque dos produtos de
-          // acordo com o produto e quantidade do produto comprado
-
-          // limpar storage de products items
-
-          localStorage.removeItem('cart')
-
-          // Cheio de falha de segurança sapoura, não salve as informaçoes de preço no localStorage
-
-          toast.success('successful purchase')
-        }
-        console.log('products', products)
-      })()
+        })()
+      }
     }
-  }, [sessionId])
+  }, [sessionId, currentConsumer])
 
   return (
     <div>

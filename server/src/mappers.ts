@@ -21,12 +21,17 @@ export function addressMapper(data: Address, consumerId: string) {
 
 export function toCheckoutMapper(items: []) {
   const newObject = items.map((item: any) => {
+    console.log("item.id", item.id);
+
     return {
       price_data: {
         currency: "BRL",
         product_data: {
           name: item.title,
           images: [item.img.url],
+          metadata: {
+         nickname: item.id.toString()
+          }
         },
         unit_amount: item.price * 100,
       },

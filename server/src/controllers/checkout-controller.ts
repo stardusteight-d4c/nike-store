@@ -1,8 +1,8 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import Stripe from "stripe";
-import { boolean } from "zod";
 import { getProductById } from "../graphql/queries";
 import { toCheckoutMapper } from "../mappers";
+import { prisma } from "../prisma";
 import { stripe } from "../stripe";
 import { TriggersError } from "../utils/TriggersError";
 
@@ -43,6 +43,9 @@ export class CheckoutController {
         }
       });
 
+      console.log('transformedItems[0].price_data', transformedItems[0].price_data);
+      
+
       const isValid = result.find((element: boolean) => element === false);
 
       // Create checkout sessions from body params
@@ -69,15 +72,28 @@ export class CheckoutController {
   }
 
   async getSession(
-    request: FastifyRequest<{ Querystring: { session_id: string } }>,
+    request: FastifyRequest<{
+      Querystring: { session_id: string; consumer_id: string };
+    }>,
     reply: FastifyReply,
   ) {
     try {
-      const sessionId = request.query.session_id;
-      const session = await stripe.checkout.sessions.listLineItems(sessionId);
+      const { session_id, consumer_id } = request.query;
+      const session = await stripe.checkout.sessions.listLineItems(session_id);
 
       console.log(session);
-      
+      console.log(session.data[0].price);
+
+      session.data.map(
+        async (product) =>
+          await prisma.purchase.create({
+            data: {
+              productId: product.id,
+              quantity: product.quantity?.toString()!,
+              consumerId: consumer_id,
+            },
+          }),
+      );
 
       reply.status(200).send({
         session,

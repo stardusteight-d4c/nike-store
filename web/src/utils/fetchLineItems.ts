@@ -1,6 +1,6 @@
-export const fetchLineItems = async (sessionId: string) => {
+export const fetchLineItems = async (sessionId: string, consumerId: string) => {
   const res = await fetch(
-    `${import.meta.env.VITE_SERVER}/api/getSession?session_id=${sessionId}`
+    `${import.meta.env.VITE_SERVER}/api/getSession?session_id=${sessionId}&consumer_id=${consumerId}`
   )
 
   if (!res.ok) return
