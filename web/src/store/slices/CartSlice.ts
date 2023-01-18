@@ -33,7 +33,7 @@ const cartSlice = createSlice({
 
       if (itemIndex >= 0) {
         if (state.cartItems[itemIndex].cartQuantity === action.payload.stock) {
-          toast.error('Limite de estoque atingindo')
+          toast.error('Reaching stock limit')
           return
         }
 
@@ -65,7 +65,7 @@ const cartSlice = createSlice({
       )
       if (itemIndex >= 0) {
         if (state.cartItems[itemIndex].cartQuantity === action.payload.stock) {
-          toast.error('Limite de estoque atingindo')
+          toast.error('Reaching stock limit')
           return
         }
 

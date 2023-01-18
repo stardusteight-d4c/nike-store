@@ -41,7 +41,7 @@ export class ConsumerController {
             ...consumerMapped,
           },
         });
-        const addressMapped = addressMapper(address, prismaConsumer.id);
+        const addressMapped: any = addressMapper(address, prismaConsumer.id);
         await prisma.address.create({
           data: {
             ...addressMapped,
@@ -166,7 +166,7 @@ export class ConsumerController {
         },
         data: {
           ...address,
-          number: Number(address.number),
+          number: address.number,
         },
       });
 

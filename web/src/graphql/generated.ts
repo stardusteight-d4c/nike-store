@@ -3760,6 +3760,21 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
+export type UpdateProductByIdMutationVariables = Exact<{
+  stock?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['ID']>;
+}>;
+
+
+export type UpdateProductByIdMutation = { __typename?: 'Mutation', updateProduct?: { __typename?: 'Product', id: string, stock: number, title: string } | null };
+
+export type GetProductByIdQueryVariables = Exact<{
+  ids?: InputMaybe<Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>>;
+}>;
+
+
+export type GetProductByIdQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, category: string, title: string, text: string, stock: number, color: string, shadow: string, rating: string, price: string, img: { __typename?: 'Asset', url: string } }> };
+
 export type GetProductsByCategoryQueryVariables = Exact<{
   category?: InputMaybe<Scalars['String']>;
 }>;
@@ -3768,6 +3783,88 @@ export type GetProductsByCategoryQueryVariables = Exact<{
 export type GetProductsByCategoryQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, category: string, title: string, text: string, stock: number, color: string, shadow: string, rating: string, price: string, img: { __typename?: 'Asset', url: string } }> };
 
 
+export const UpdateProductByIdDocument = gql`
+    mutation updateProductById($stock: Int, $id: ID) {
+  updateProduct(where: {id: $id}, data: {stock: $stock}) {
+    id
+    stock
+    title
+  }
+}
+    `;
+export type UpdateProductByIdMutationFn = Apollo.MutationFunction<UpdateProductByIdMutation, UpdateProductByIdMutationVariables>;
+
+/**
+ * __useUpdateProductByIdMutation__
+ *
+ * To run a mutation, you first call `useUpdateProductByIdMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateProductByIdMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateProductByIdMutation, { data, loading, error }] = useUpdateProductByIdMutation({
+ *   variables: {
+ *      stock: // value for 'stock'
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useUpdateProductByIdMutation(baseOptions?: Apollo.MutationHookOptions<UpdateProductByIdMutation, UpdateProductByIdMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateProductByIdMutation, UpdateProductByIdMutationVariables>(UpdateProductByIdDocument, options);
+      }
+export type UpdateProductByIdMutationHookResult = ReturnType<typeof useUpdateProductByIdMutation>;
+export type UpdateProductByIdMutationResult = Apollo.MutationResult<UpdateProductByIdMutation>;
+export type UpdateProductByIdMutationOptions = Apollo.BaseMutationOptions<UpdateProductByIdMutation, UpdateProductByIdMutationVariables>;
+export const GetProductByIdDocument = gql`
+    query getProductById($ids: [ID]) {
+  products(where: {id_in: $ids}) {
+    id
+    category
+    title
+    text
+    stock
+    img {
+      url
+    }
+    color
+    shadow
+    rating
+    price
+  }
+}
+    `;
+
+/**
+ * __useGetProductByIdQuery__
+ *
+ * To run a query within a React component, call `useGetProductByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProductByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProductByIdQuery({
+ *   variables: {
+ *      ids: // value for 'ids'
+ *   },
+ * });
+ */
+export function useGetProductByIdQuery(baseOptions?: Apollo.QueryHookOptions<GetProductByIdQuery, GetProductByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetProductByIdQuery, GetProductByIdQueryVariables>(GetProductByIdDocument, options);
+      }
+export function useGetProductByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProductByIdQuery, GetProductByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetProductByIdQuery, GetProductByIdQueryVariables>(GetProductByIdDocument, options);
+        }
+export type GetProductByIdQueryHookResult = ReturnType<typeof useGetProductByIdQuery>;
+export type GetProductByIdLazyQueryHookResult = ReturnType<typeof useGetProductByIdLazyQuery>;
+export type GetProductByIdQueryResult = Apollo.QueryResult<GetProductByIdQuery, GetProductByIdQueryVariables>;
 export const GetProductsByCategoryDocument = gql`
     query getProductsByCategory($category: String) {
   products(where: {category: $category}) {

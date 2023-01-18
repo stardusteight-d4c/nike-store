@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { hostServer } from '../../../App'
+import { useGetProductByIdQuery } from '../../../graphql/generated'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks'
 import {
   removeCartItem,
@@ -73,17 +74,17 @@ export const Cart = (props: Props) => {
     const formData = new FormData(event.target as HTMLFormElement)
     const data = Object.fromEntries(formData)
 
-    fetch(`${hostServer}/api/consumer/newAddress`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      referrerPolicy: 'no-referrer',
-      body: JSON.stringify({ address: data, consumerId: currentConsumer.id }),
-    })
-      .then((res) => res.json())
-      .then(() => proceedToCheckout())
-      .catch((error) => console.log(error))
+      fetch(`${hostServer}/api/consumer/newAddress`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        referrerPolicy: 'no-referrer',
+        body: JSON.stringify({ address: data, consumerId: currentConsumer.id }),
+      })
+        .then((res) => res.json())
+        .then(() => proceedToCheckout())
+        .catch((error) => console.log(error))
   }
 
   const rendersButtonTitle = () => {
@@ -96,9 +97,7 @@ export const Cart = (props: Props) => {
     }
   }
 
-  // antes de prosseguir para o checkout, mostrar ao consumidor os dados de sua localidade
-  // adquiridos no cadastro, permitir mudar estes dados no banco de dados que posteriormente
-  // serão refletidos no perfil do usuário, onde também será possível alterar tais informações
+  // Salvar apenas o id e a qauntidade em localStorage, puxar as informações do cms
 
   return (
     <div

@@ -21,7 +21,7 @@ export const Item = ({
   const dispatch = useAppDispatch()
 
   const onAddToCart = () => {
-    const item = { id, title, text, stock, img, color, shadow, price }
+    const item = { id, color, shadow, title, text, img, stock, rating, price }
     dispatch(addItemToCart(item))
   }
 

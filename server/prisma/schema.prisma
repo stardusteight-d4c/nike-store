@@ -36,11 +36,11 @@ model Purchase {
 model Address {
   id String @id @default(uuid())
 
-  state        String
-  city         String
-  neighborhood String
-  street       String
-  number       Int?
+  state        String?
+  city         String?
+  neighborhood String?
+  street       String?
+  number       String?
   complement   String?
   consumerId   String @unique
 

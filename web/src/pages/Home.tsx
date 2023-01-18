@@ -46,12 +46,13 @@ export const Home = (props: Props) => {
     items: secondQuery?.products,
   }
 
-
   useEffect(() => {
     if (sessionId) {
       ;(async () => {
         const products = await fetchLineItems(sessionId)
         if (products) {
+          console.log('products', products)
+
           // Mandar para o banco de dados nome - email - endereço - diminuir estoque dos produtos de
           // acordo com o produto e quantidade do produto comprado
 
@@ -60,9 +61,6 @@ export const Home = (props: Props) => {
           localStorage.removeItem('cart')
 
           // Cheio de falha de segurança sapoura, não salve as informaçoes de preço no localStorage
-          
-          
-
 
           toast.success('successful purchase')
         }
@@ -77,7 +75,10 @@ export const Home = (props: Props) => {
       <Cart />
       <main className="flex flex-col gap-16 relative">
         <Hero heroApi={heroApi} />
-        <Sales sales={popularSalesCMS.items ? popularSalesCMS : popularSales} isFeaturedItem />
+        <Sales
+          sales={popularSalesCMS.items ? popularSalesCMS : popularSales}
+          isFeaturedItem
+        />
         <MainSection data={highlight} reverse />
         <Sales sales={topRateSalesCMS.items ? topRateSalesCMS : topRateSales} />
         <MainSection data={sneaker} />

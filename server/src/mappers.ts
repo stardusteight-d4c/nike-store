@@ -14,7 +14,7 @@ export async function consumerMapper(data: Consumer) {
 export function addressMapper(data: Address, consumerId: string) {
   return {
     ...data,
-    number: Number(data.number),
+    number: data.number,
     consumerId,
   };
 }
