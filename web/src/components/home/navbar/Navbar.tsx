@@ -49,10 +49,10 @@ export const Navbar = (props: Props) => {
       className={
         !scrollingPage
           ? 'absolute top-7 inset-x-0 opacity-100 z-50'
-          : 'blurEffectTheme fixed top-0 inset-x-0 h-[9vh] flex items-center justify-center opacity-100 z-[500]'
+          : 'blurEffectTheme pt-[18px] fixed inset-x-0 h-[60px] opacity-100 z-[500]'
       }
     >
-      <nav className="nikeContainer flex items-center justify-between">
+      <nav className="max-w-7xl px-4 mx-auto flex items-center justify-between">
         <div className="flex items-center">
           <img
             src={logo}
@@ -64,14 +64,14 @@ export const Navbar = (props: Props) => {
           <li className="grid items-center">
             <MagnifyingGlassCircleIcon
               className={`${
-                scrollingPage && 'text-slate-900 transition-all duration-300'
+                scrollingPage && 'text-black transition-all duration-300'
               } iconStyle`}
             />
           </li>
           <li className="grid items-center">
             <HeartIcon
               className={`${
-                scrollingPage && 'text-slate-900 transition-all duration-300'
+                scrollingPage && 'text-black transition-all duration-300'
               } iconStyle`}
             />
           </li>
@@ -79,7 +79,7 @@ export const Navbar = (props: Props) => {
             <Link to="/" className="grid items-center">
               <LoggedUser
                 className={`${
-                  scrollingPage && 'text-slate-900 transition-all duration-300'
+                  scrollingPage && 'text-black transition-all duration-300'
                 } iconStyle`}
               />
             </Link>
@@ -87,7 +87,7 @@ export const Navbar = (props: Props) => {
             <Link to="/login" className="grid items-center">
               <UserCircleIcon
                 className={`${
-                  scrollingPage && 'text-slate-900 transition-all duration-300'
+                  scrollingPage && 'text-black transition-all duration-300'
                 } iconStyle`}
               />
             </Link>
@@ -100,14 +100,14 @@ export const Navbar = (props: Props) => {
             >
               <ShoppingBagIcon
                 className={`${
-                  scrollingPage && 'text-slate-900 transition-all duration-300'
+                  scrollingPage && 'text-black transition-all duration-300'
                 } iconStyle`}
               />
               <div
                 className={`${
                   scrollingPage
-                    ? 'bg-slate-900 text-slate-100 shadow shadow-slate-900'
-                    : 'bg-white text-slate-900 shadow shadow-slate-100'
+                    ? 'bg-black text-white'
+                    : 'bg-white text-black'
                 } absolute top-4 right-0 w-4 h-4 text-[0.65rem] leading-tight font-medium rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-all duration-300`}
               >
                 {totalQuantity}

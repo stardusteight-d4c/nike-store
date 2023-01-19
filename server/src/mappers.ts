@@ -26,12 +26,10 @@ export function toCheckoutMapper(items: []) {
     return {
       price_data: {
         currency: "BRL",
+        description: item.id,
         product_data: {
           name: item.title,
           images: [item.img.url],
-          metadata: {
-         nickname: item.id.toString()
-          }
         },
         unit_amount: item.price * 100,
       },

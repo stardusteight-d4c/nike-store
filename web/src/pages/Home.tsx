@@ -22,6 +22,7 @@ import {
 import { useAppSelector } from '../store/hooks'
 import { selectCurrentConsumer } from '../store/slices/ConsumerSlice'
 import { fetchLineItems } from '../utils/fetchLineItems'
+import backgroud from '../assets/background.jpeg'
 
 interface Props {}
 
@@ -72,11 +73,13 @@ export const Home = (props: Props) => {
   }, [sessionId, currentConsumer])
 
   return (
-    <div>
+    <div className="w-screen">
+      {/* <div className="bgTheme clipPath inset-0 max-h-[637px] absolute z-10" /> */}
+      <img src={backgroud} className="bgTheme w-full clipPath inset-0 max-h-[637px] absolute z-10" />
       <Navbar />
       <Cart />
-      <main className="flex flex-col gap-16 relative">
-        <Hero heroApi={heroApi} />
+      <main className="flex flex-col max-w-7xl mx-auto gap-16 relative">
+        <Hero />
         <Sales
           sales={popularSalesCMS.items ? popularSalesCMS : popularSales}
           isFeaturedItem
