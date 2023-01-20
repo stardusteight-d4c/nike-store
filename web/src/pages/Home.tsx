@@ -11,7 +11,6 @@ import {
 } from '../components'
 import { useGetProductsByCategoryQuery } from '../graphql/generated'
 import {
-  heroApi,
   highlight,
   sneaker,
   popularSales,

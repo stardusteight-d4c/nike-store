@@ -27,9 +27,9 @@ export const Item = ({
 
   return (
     <div
-      className={`${color} ${shadow} ${
+      className={`${color} ${
         isFeaturedItem ? 'justify-items-start' : 'justify-items-center'
-      } relative rounded-xl py-4 px-5 transition-all duration-700 ease-in-out w-full bg-gradient-to-b grid items-center hover:scale-105`}
+      } relative rounded-3xl py-4 px-5 transition-all duration-700 ease-in-out w-full bg-gradient-to-b grid items-center hover:scale-105`}
     >
       <div
         className={`${
@@ -91,7 +91,7 @@ export const Item = ({
             isFeaturedItem
               ? 'h-auto w-64 lg:w-56 md:w-48 -rotate-[35deg]'
               : 'w-64 h-36'
-          } transitionTheme hover:-rotate-12`}
+          } transitionTheme`}
         />
       </div>
     </div>

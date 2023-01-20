@@ -31,24 +31,13 @@ import twitter from '../assets/twitter.svg'
 import youtube from '../assets/youtube.svg'
 import messenger from '../assets/messenger.svg'
 
-const heroApi = {
-  title: 'Play With Electric Nike',
-  subtitle: 'Adapt 2.0 Sneakers',
-  img: heroimg,
-  btntext: 'Explore Product',
-  videos: [
-    { imgsrc: vcover1, clip: clip },
-    { imgsrc: vcover2, clip: clip },
-    { imgsrc: vcover3, clip: clip },
-  ],
-  sociallinks: [
-    { icon: facebook },
-    { icon: messenger },
-    { icon: instagram },
-    { icon: twitter },
-    { icon: youtube },
-  ],
-}
+const socialLinks = [
+  { icon: facebook, link: '' },
+  { icon: messenger, link: '' },
+  { icon: instagram, link: '' },
+  { icon: twitter, link: '' },
+  { icon: youtube, link: '' },
+]
 
 const popularSales: any = {
   title: 'Popular Sales',
@@ -376,7 +365,7 @@ const footerData = {
 }
 
 export {
-  heroApi,
+  socialLinks,
   footerData,
   story,
   sneaker,

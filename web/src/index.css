@@ -56,10 +56,10 @@
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 60%);
   }
   .blurEffectTheme {
-    background: rgba(255, 255, 255, 0.507);
+    background: rgba(255, 255, 255, 0.349);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.212);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
   }
   .iconStyle {
     @apply h-6 w-6 sm:h-5 sm:w-5 text-white cursor-pointer transition-all duration-100 active:scale-110 leading-tight;
@@ -74,6 +74,6 @@
     @apply px-4 py-2 rounded active:scale-90 transition-all duration-100 ease-in-out shadow-md sm:text-sm;
   }
   .transitionTheme {
-    @apply transition-all duration-700 ease-in-out cursor-pointer;
+    @apply transition-all duration-1000 ease-in-out cursor-pointer;
   }
 }
