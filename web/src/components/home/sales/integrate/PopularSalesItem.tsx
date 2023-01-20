@@ -30,11 +30,11 @@ export const PopularSalesItem = ({
           className="blurEffectTheme buttonTheme absolute right-24 bottom-2 bg-white/90 p-0.5 shadow shadow-slate-200"
           onClick={() => onAddToCart()}
         >
-          <ShoppingBagIcon className="iconStyle text-slate-900" />
+          <ShoppingBagIcon className="iconStyle text-zinc-900" />
         </button>
         <button
           type="button"
-          className="blurEffectTheme absolute right-2 bottom-2 buttonTheme bg-white/90 py-1 px-2 shadow shadow-slate-200 text-sm text-black"
+          className="blurEffectTheme absolute right-2 bottom-2 buttonTheme bg-white/90 py-1 px-2 shadow shadow-slate-200 text-sm text-zinc-900"
           onClick={() => {
             onAddToCart()
             document.getElementById('body')!.style.overflow = 'hidden'
@@ -45,7 +45,7 @@ export const PopularSalesItem = ({
         </button>
       </div>
       <div title={subtitle}>
-        <h2 className="font-medium text-lg mt-2 line-clamp-1">{title}</h2>
+        <h2 className="font-medium text-zinc-900 text-lg mt-2 line-clamp-1">{title}</h2>
         <span className="text-[#505050] w-[330px] inline-block line-clamp-2 mb-2">
           {subtitle}
         </span>

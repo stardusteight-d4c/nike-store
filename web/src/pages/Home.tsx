@@ -23,6 +23,7 @@ import { selectCurrentConsumer } from '../store/slices/ConsumerSlice'
 import { fetchLineItems } from '../utils/fetchLineItems'
 import backgroud from '../assets/background.jpeg'
 import { PopularSales } from '../components/home/sales/PopularSales'
+import { Highlight } from '../components/home/mainSection/Highlight'
 
 interface Props {}
 
@@ -87,7 +88,8 @@ export const Home = (props: Props) => {
           isFeaturedItem
         /> */}
         <PopularSales popularSales={popularSales} />
-        <MainSection data={highlight} reverse />
+        <Highlight />
+        {/* <MainSection data={highlight} reverse /> */}
         <Sales sales={topRateSalesCMS.items ? topRateSalesCMS : topRateSales} />
         <MainSection data={sneaker} />
         <Stories story={story} />

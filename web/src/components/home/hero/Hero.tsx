@@ -19,7 +19,7 @@ export const Hero = (props: Props) => {
           </h2>
           <button
             type="button"
-            className="buttonTheme bg-white rounded-full hover:brightness-90 my-5"
+            className="buttonTheme bg-white !py-1.5 !rounded-full hover:brightness-90 my-5"
           >
             Explore Product
           </button>

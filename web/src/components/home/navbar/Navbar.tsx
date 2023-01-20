@@ -64,14 +64,14 @@ export const Navbar = (props: Props) => {
           <li className="grid items-center">
             <MagnifyingGlassCircleIcon
               className={`${
-                scrollingPage && 'text-black transition-all duration-300'
+                scrollingPage && 'text-zinc-900 transition-all duration-300'
               } iconStyle`}
             />
           </li>
           <li className="grid items-center">
             <HeartIcon
               className={`${
-                scrollingPage && 'text-black transition-all duration-300'
+                scrollingPage && 'text-zinc-900 transition-all duration-300'
               } iconStyle`}
             />
           </li>
@@ -79,7 +79,7 @@ export const Navbar = (props: Props) => {
             <Link to="/" className="grid items-center">
               <LoggedUser
                 className={`${
-                  scrollingPage && 'text-black transition-all duration-300'
+                  scrollingPage && 'text-zinc-900 transition-all duration-300'
                 } iconStyle`}
               />
             </Link>
@@ -87,7 +87,7 @@ export const Navbar = (props: Props) => {
             <Link to="/login" className="grid items-center">
               <UserCircleIcon
                 className={`${
-                  scrollingPage && 'text-black transition-all duration-300'
+                  scrollingPage && 'text-zinc-900 transition-all duration-300'
                 } iconStyle`}
               />
             </Link>
@@ -100,14 +100,14 @@ export const Navbar = (props: Props) => {
             >
               <ShoppingBagIcon
                 className={`${
-                  scrollingPage && 'text-black transition-all duration-300'
+                  scrollingPage && 'text-zinc-900 transition-all duration-300'
                 } iconStyle`}
               />
               <div
                 className={`${
                   scrollingPage
-                    ? 'bg-black text-white'
-                    : 'bg-white text-black'
+                    ? 'bg-zinc-900 text-white'
+                    : 'bg-white text-zinc-900'
                 } absolute top-4 right-0 w-4 h-4 text-[0.65rem] leading-tight font-medium rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-all duration-300`}
               >
                 {totalQuantity}
