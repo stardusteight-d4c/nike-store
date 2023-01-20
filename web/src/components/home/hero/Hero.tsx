@@ -12,10 +12,10 @@ export const Hero = (props: Props) => {
       <div className="nikeContainer relative opacity-100 z-20 grid items-center justify-items-center">
         <div className="grid items-center justify-items-center mt-28 md:mt-24">
           <h1 className="text-6xl mb-4 lg:text-5xl md:text-4xl sm:text-3xl xsm:text-2xl font-extrabold filter drop-shadow-sm text-white">
-            Play With Electric Nike
+            Nike Air Force,
           </h1>
           <h2 className="text-6xl lg:text-5xl md:text-4xl sm:text-3xl xsm:text-2xl font-extrabold filter drop-shadow-sm text-white">
-            Adapt 2.0 Sneakers
+            For Hard Landings.
           </h2>
           <button
             type="button"
@@ -38,7 +38,7 @@ export const Hero = (props: Props) => {
           <img
             src={heroImg}
             alt="hero/img"
-            className='transitionTheme  w-auto  max-w-[700px] max-h-[350px] h-[45vh] lg:h-[35vh] md:h-[31vh] sm:h-[21vh] xsm:h-[19vh] rotate-[15deg] hover:rotate-0 cursor-pointer object-fill'
+            className="transitionTheme  w-auto  max-w-[700px] max-h-[350px] h-[45vh] lg:h-[35vh] md:h-[31vh] sm:h-[21vh] xsm:h-[19vh] rotate-[15deg] hover:rotate-0 cursor-pointer object-fill"
           />
         </div>
       </div>

@@ -12,17 +12,15 @@ interface Sale {
   items: ItemSale[]
 }
 
-interface ItemSale {
+interface Product {
   id: string
   title: string
-  text: string
-  rating: string
-  btn: string
+  subtitle: string
+  offer?: string
+  oldPrice?: string
   img: any
   price: string
   stock: number
-  color: string
-  shadow: string
 }
 
 interface MainSection {

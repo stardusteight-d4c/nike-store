@@ -49,7 +49,7 @@ export const Navbar = (props: Props) => {
       className={
         !scrollingPage
           ? 'absolute top-7 inset-x-0 opacity-100 z-50'
-          : 'blurEffectTheme pt-[18px] fixed inset-x-0 h-[60px] opacity-100 z-[500]'
+          : 'bg-[#f7f7f7] pt-[18px] fixed inset-x-0 h-[60px] opacity-100 z-[500]'
       }
     >
       <nav className="max-w-7xl px-4 mx-auto flex items-center justify-between">

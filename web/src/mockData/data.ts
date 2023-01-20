@@ -1,35 +1,15 @@
-import heroimg from '../assets/hero.png'
-
 import hightlightimg from '../assets/hightlightimg.png'
 import sneakershoe from '../assets/sneaker.png'
 
-import clip from '../assets/video/clip.mp4'
-import vcover1 from '../assets/video/vcover1.png'
-import vcover2 from '../assets/video/vcover2.png'
-import vcover3 from '../assets/video/vcover3.png'
+import facebook from '../assets/icons/facebook.svg'
+import instagram from '../assets/icons/instagram.svg'
+import twitter from '../assets/icons/twitter.svg'
+import youtube from '../assets/icons/youtube.svg'
+import messenger from '../assets/icons/messenger.svg'
 
-import psale1 from '../assets/nike-air-red.png'
-import psale2 from '../assets/nike-adapt-bb.png'
-import psale3 from '../assets/nike-adapt-bb-smart.png'
-
-import product1 from '../assets/product1.png'
-import product2 from '../assets/product2.png'
-import product3 from '../assets/product3.png'
-import product4 from '../assets/product4.png'
-import product5 from '../assets/product5.png'
-import product6 from '../assets/product6.png'
-import product7 from '../assets/product7.png'
-import product8 from '../assets/product8.png'
-import product9 from '../assets/product9.png'
-import product10 from '../assets/product10.png'
-import product11 from '../assets/product11.png'
-import product12 from '../assets/product12.png'
-
-import facebook from '../assets/facebook.svg'
-import instagram from '../assets/instagram.svg'
-import twitter from '../assets/twitter.svg'
-import youtube from '../assets/youtube.svg'
-import messenger from '../assets/messenger.svg'
+import product1 from '../assets/products/product1.png'
+import product2 from '../assets/products/product2.png'
+import product3 from '../assets/products/product3.png'
 
 const socialLinks = [
   { icon: facebook, link: '' },
@@ -39,44 +19,36 @@ const socialLinks = [
   { icon: youtube, link: '' },
 ]
 
-const popularSales: any = {
-  title: 'Popular Sales',
-  items: [
-    {
-      id: '0p0x1',
-      title: 'Nike Addapt BB 2.0',
-      text: 'MEN Running Shoes',
-      rating: '4.9',
-      btn: 'Buy Now',
-      img: psale2,
-      price: '200',
-      color: 'from-blue-600 to-blue-500',
-      shadow: 'shadow-lg shadow-blue-500',
-    },
-    {
-      id: '0p0x2',
-      title: 'Nike Martine Rose',
-      text: 'MEN Running Shoes',
-      rating: '4.5',
-      btn: 'Buy Now',
-      img: psale1,
-      price: '200',
-      color: 'from-red-500 to-rose-500',
-      shadow: 'shadow-lg shadow-rose-500',
-    },
-    {
-      id: '0p0x3',
-      title: 'Nike Smart Shoe 2.0',
-      text: 'MEN Running Shoes',
-      rating: '5+',
-      btn: 'Buy Now',
-      img: psale3,
-      price: '200',
-      color: 'from-violet-500 to-indigo-500',
-      shadow: 'shadow-lg shadow-violet-500',
-    },
-  ],
-}
+const popularSales: Product[] = [
+  {
+    id: '0p0x1',
+    title: 'AIR MAX PENNY 1',
+    subtitle: "Anfernee “Penny” Hardaway's signature basketball shoe.",
+    stock: 20,
+    price: '1039,99',
+    offer: '20% off',
+    oldPrice: '1299,99',
+    img: product1,
+  },
+  {
+    id: '0p0x2',
+    title: "Air Force 1 '07 Premium",
+    subtitle:
+      'Celebrating 40 years of pushing the boundaries of sport and fashion',
+    stock: 10,
+    price: '899,99',
+    img: product2,
+  },
+  {
+    id: '0p0x3',
+    title: 'Air Force 1 Mid',
+    subtitle:
+      'Shadows crept under the "AIR" while ghoulish green accents added a Halloween touch      ',
+    stock: 5,
+    price: '1199,99',
+    img: product3,
+  },
+]
 
 const highlight = {
   heading: 'HIGHLIGHTS',
@@ -96,143 +68,20 @@ const sneaker = {
   img: sneakershoe,
 }
 
-const topRateSales: any = {
-  title: 'Top Rated Sales',
-  items: [
+const topRateSales: any = [
     {
       id: '0M0x1',
       title: 'Nike Air Low Premium',
       text: 'MEN Running Shoes',
       rating: '5+',
       btn: 'Buy Now',
-      img: product7,
+      img: 'product7',
       price: '150',
       color: 'from-sky-600 to-indigo-600',
       shadow: 'shadow-lg shadow-blue-500',
     },
-    {
-      id: '0M0x2',
-      title: 'Nike Air Force Green',
-      text: 'MEN Running Shoes',
-      rating: '5+',
-      btn: 'Buy Now',
-      img: product2,
-      price: '150',
-      color: 'from-green-500 to-emerald-500',
-      shadow: 'shadow-lg shadow-green-500',
-    },
-    {
-      id: '0M0x3',
-      title: 'Nike Addapt BB Rose',
-      text: 'MEN Running Shoes',
-      rating: '5+',
-      btn: 'Buy Now',
-      img: product3,
-      price: '150',
-      color: 'from-red-500 to-rose-500',
-      shadow: 'shadow-lg shadow-rose-500',
-    },
-    {
-      id: '0M0x4',
-      title: 'Nike Air Premium',
-      text: 'MEN Running Shoes',
-      rating: '5+',
-      btn: 'Buy Now',
-      img: product4,
-      price: '150',
-      color: 'from-orange-500 to-amber-500',
-      shadow: 'shadow-lg shadow-orange-500',
-    },
-    {
-      id: '0M0x5',
-      title: 'Nike Adapt BB Pro',
-      text: 'MEN Running Shoes',
-      rating: '5+',
-      btn: 'Buy Now',
-      img: product5,
-      price: '150',
-      color: 'from-gray-900 to-yellow-500',
-      shadow: 'shadow-lg shadow-yellow-500',
-    },
-    {
-      id: '0M0x6',
-      title: 'Air Jordan PR3',
-      text: 'MEN Running Shoes',
-      rating: '5+',
-      btn: 'Buy Now',
-      img: product6,
-      price: '150',
-      color: 'from-blue-500 to-cyan-500',
-      shadow: 'shadow-lg shadow-cyan-500',
-    },
-    {
-      id: '0M0x7',
-      title: 'Nike Multi Smart Shoe',
-      text: 'MEN Running Shoes',
-      rating: '5+',
-      btn: 'Buy Now',
-      img: product1,
-      price: '150',
-      color: 'from-yellow-500 to-yellow-500',
-      shadow: 'shadow-lg shadow-yellow-500',
-    },
-    {
-      id: '0M0x8',
-      title: 'Nike Jordan Air Max',
-      text: 'MEN Running Shoes',
-      rating: '5+',
-      btn: 'Buy Now',
-      img: product9,
-      price: '150',
-      color: 'from-[#936550] to-orange-900',
-      shadow: 'shadow-lg shadow-orange-800',
-    },
-    {
-      id: '0M0x9',
-      title: 'Nike Old Max-x',
-      text: 'MEN Running Shoes',
-      rating: '5+',
-      btn: 'Buy Now',
-      img: product10,
-      price: '150',
-      color: 'from-indigo-700 to-indigo-700',
-      shadow: 'shadow-lg shadow-indigo-500',
-    },
-    {
-      id: '0M0x10',
-      title: 'Nike Lime Jordan 11',
-      text: 'MEN Running Shoes',
-      rating: '5+',
-      btn: 'Buy Now',
-      img: product12,
-      price: '150',
-      color: 'from-green-600 to-lime-500',
-      shadow: 'shadow-lg shadow-lime-500',
-    },
-    {
-      id: '0M0x11',
-      title: 'Nike Air Black Max',
-      text: 'MEN Running Shoes',
-      rating: '5+',
-      btn: 'Buy Now',
-      img: product11,
-      price: '150',
-      color: 'from-slate-900 to-black',
-      shadow: 'shadow-lg shadow-black',
-    },
-    {
-      id: '0M0x12',
-      title: 'Nike Zoom Max',
-      text: 'MEN Running Shoes',
-      rating: '5+',
-      btn: 'Buy Now',
-      img: product8,
-      price: '150',
-      color: 'from-blue-900 to-blue-500',
-      shadow: 'shadow-lg shadow-blue-500',
-    },
-  ],
-}
+]
+
 
 const story = {
   title: 'Top Stories',
@@ -366,10 +215,10 @@ const footerData = {
 
 export {
   socialLinks,
+  popularSales,
   footerData,
   story,
   sneaker,
   highlight,
   topRateSales,
-  popularSales,
 }
