@@ -1,4 +1,4 @@
-import { PopularSalesItem } from './integrate/PopularSalesItem'
+import { SalesItem } from './integrate/SalesItem'
 
 interface Props {
   popularSales: Product[]
@@ -12,7 +12,9 @@ export const PopularSales = ({ popularSales }: Props) => {
       </h2>
       <div className="flex items-center gap-x-8 mx-auto w-fit">
         {popularSales.map((product) => (
-          <PopularSalesItem product={product} />
+          <div className="w-full max-w-[330px]">
+            <SalesItem product={product} />
+          </div>
         ))}
       </div>
     </div>

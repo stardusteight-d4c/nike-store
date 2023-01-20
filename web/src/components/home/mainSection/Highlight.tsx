@@ -5,7 +5,7 @@ interface Props {}
 
 export const Highlight = (props: Props) => {
   return (
-    <div className="flex-row mt-14 flex items-center justify-between lg:flex-col lg:justify-center">
+    <div className="flex-row my-24 flex items-center justify-between lg:flex-col lg:justify-center">
       <div className="flex items-center justify-center max-w-xl relative lg:max-w-none w-full">
         <img
           src={nikeGif}
@@ -15,7 +15,7 @@ export const Highlight = (props: Props) => {
       </div>
       <div className="max-w-lg lg:max-w-none w-full md:text-center grid items-center lg:justify-items-center">
         <h1 className="textGradient mb-2 tracking-wide text-lg sm:text-3xl">
-          Build the Future with Non Fungible Token
+          Build the Future with Non Fungible Tokens
         </h1>
         <h2 className="text-5xl lg:text-4xl md:text-3xl sm:text-2xl font-bold text-zinc-900">
           RTFKT x Nike Dunk Genesis CRYPTOKICKS

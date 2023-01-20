@@ -11,12 +11,12 @@ import {
 } from '../components'
 import { useGetProductsByCategoryQuery } from '../graphql/generated'
 import {
-    highlight,
-    sneaker,
+  sneaker,
   popularSales,
-    topRateSales,
-    story,
-    footerData,
+  trendsSales,
+  topRateSales,
+  story,
+  footerData,
 } from '../mockData/data'
 import { useAppSelector } from '../store/hooks'
 import { selectCurrentConsumer } from '../store/slices/ConsumerSlice'
@@ -24,6 +24,7 @@ import { fetchLineItems } from '../utils/fetchLineItems'
 import backgroud from '../assets/background.jpeg'
 import { PopularSales } from '../components/home/sales/PopularSales'
 import { Highlight } from '../components/home/mainSection/Highlight'
+import { TrendsSales } from '../components/home/sales/TrendsSales'
 
 interface Props {}
 
@@ -89,10 +90,10 @@ export const Home = (props: Props) => {
         /> */}
         <PopularSales popularSales={popularSales} />
         <Highlight />
-        {/* <MainSection data={highlight} reverse /> */}
-        <Sales sales={topRateSalesCMS.items ? topRateSalesCMS : topRateSales} />
-        <MainSection data={sneaker} />
-        <Stories story={story} />
+        <TrendsSales trendsSales={trendsSales} />
+        {/* <Sales sales={topRateSalesCMS.items ? topRateSalesCMS : topRateSales} /> */}
+        {/* <MainSection data={sneaker} /> */}
+        {/* <Stories story={story} /> */}
       </main>
       {/* <Footer footerData={footerData} /> */}
     </div>

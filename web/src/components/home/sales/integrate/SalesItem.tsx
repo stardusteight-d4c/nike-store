@@ -7,7 +7,7 @@ interface Props {
   product: Product
 }
 
-export const PopularSalesItem = ({
+export const SalesItem = ({
   product: { id, title, subtitle, img, price, stock, offer, oldPrice },
 }: Props) => {
   const dispatch = useAppDispatch()
@@ -20,11 +20,7 @@ export const PopularSalesItem = ({
   return (
     <div className="flex flex-col">
       <div className="relative w-fit h-fit">
-        <img
-          src={img}
-          alt=""
-          className="w-full max-w-[330px] h-full max-h-[330px]"
-        />
+        <img src={img} alt={title} className="w-auto h-auto" />
         <button
           type="button"
           className="blurEffectTheme buttonTheme absolute right-24 bottom-2 bg-white/90 p-0.5 shadow shadow-slate-200"
@@ -45,8 +41,10 @@ export const PopularSalesItem = ({
         </button>
       </div>
       <div title={subtitle}>
-        <h2 className="font-medium text-zinc-900 text-lg mt-2 line-clamp-1">{title}</h2>
-        <span className="text-[#505050] w-[330px] inline-block line-clamp-2 mb-2">
+        <h2 className="font-medium text-zinc-900 text-lg mt-2 line-clamp-1">
+          {title}
+        </h2>
+        <span className="text-[#505050] w-auto inline-block line-clamp-2 mb-2">
           {subtitle}
         </span>
         <div className="flex items-center gap-x-2">

@@ -1,4 +1,3 @@
-import hightlightimg from '../assets/hightlightimg.png'
 import sneakershoe from '../assets/sneaker.png'
 
 import facebook from '../assets/icons/facebook.svg'
@@ -7,9 +6,24 @@ import twitter from '../assets/icons/twitter.svg'
 import youtube from '../assets/icons/youtube.svg'
 import messenger from '../assets/icons/messenger.svg'
 
+// Popular Sales
 import product1 from '../assets/products/product1.png'
 import product2 from '../assets/products/product2.png'
 import product3 from '../assets/products/product3.png'
+
+// Trends Sales
+import product4 from '../assets/products/product4.png'
+import product5 from '../assets/products/product5.png'
+import product6 from '../assets/products/product6.png'
+import product7 from '../assets/products/product7.png'
+import product8 from '../assets/products/product8.png'
+import product9 from '../assets/products/product9.png'
+import product10 from '../assets/products/product10.png'
+import product11 from '../assets/products/product11.png'
+import product12 from '../assets/products/product12.png'
+import product13 from '../assets/products/product13.png'
+import product14 from '../assets/products/product14.png'
+import product15 from '../assets/products/product15.png'
 
 const socialLinks = [
   { icon: facebook, link: '' },
@@ -34,7 +48,7 @@ const popularSales: Product[] = [
     id: '0p0x2',
     title: "Air Force 1 '07 Premium",
     subtitle:
-      'Celebrating 40 years of pushing the boundaries of sport and fashion',
+      'Celebrating 40 years of pushing the boundaries of sport and fashion.',
     stock: 10,
     price: '899,99',
     img: product2,
@@ -43,21 +57,127 @@ const popularSales: Product[] = [
     id: '0p0x3',
     title: 'Air Force 1 Mid',
     subtitle:
-      'Shadows crept under the "AIR" while ghoulish green accents added a Halloween touch      ',
+      'Shadows crept under the "AIR" while ghoulish green accents added a Halloween touch.',
     stock: 5,
     price: '1199,99',
     img: product3,
   },
 ]
 
-const highlight = {
-  heading: 'HIGHLIGHTS',
-  title: 'NIKE AIR WITH LIMITLESS CHOICES',
-  text: 'Our Purpose is to move the world forward. We take action by building community, protecting our planet and increasing access to sport.',
-  btn: 'Explore More',
-  url: 'https://www.nike.com/launch/t/nocta-hot-step-black-gold',
-  img: hightlightimg,
-}
+const trendsSales: Product[] = [
+  {
+    id: '0t0x1',
+    title: 'Nike Air Deldon',
+    subtitle: 'Elena Delle Donne signature basketball shoes.',
+    stock: 4,
+    price: '999,99',
+    img: product4,
+  },
+  {
+    id: '0t0x2',
+    title: 'Nike Kyrie Infinity',
+    subtitle:
+      'The faster the Kyrie slows down, the faster it can accelerate or change direction.',
+    stock: 4,
+    price: '739,99',
+    offer: '33% off',
+    oldPrice: '1099,99',
+    img: product5,
+  },
+  {
+    id: '0t0x3',
+    title: 'Air Jordan 1 Mid SE',
+    subtitle:
+      'Take off with the Jumpman logo in the Air Jordan 1 Mid SE, made with at least 20% recycled materials by weight.',
+    stock: 20,
+    price: '1099,99',
+    img: product6,
+  },
+  {
+    id: '0t0x4',
+    title: 'Air Force 1 "07',
+    subtitle:
+      "The shine lives on in the Nike Air Force 1 '07, the original hoops shoe that puts a fresh spin on what you know best.",
+    stock: 12,
+    price: '799,99',
+    img: product7,
+  },
+  {
+    id: '0t0x5',
+    title: 'Nike Air Max Excee',
+    subtitle:
+      'Inspired by the Nike Air Max 90, the Nike Air Max Excee celebrates a classic with a fresh look.',
+    stock: 2,
+    price: '639,99',
+    offer: '15% off',
+    oldPrice: '749,99',
+    img: product8,
+  },
+  {
+    id: '0t0x6',
+    title: "Air Force 1 '07 Premium",
+    subtitle:
+      'Get ready for your adventure. This AF1 puts a premium spin on what you know best: stitched overlays, bold colors and the perfect amount of court style to make you go wild.',
+    stock: 4,
+    price: '899,99',
+    img: product9,
+  },
+  {
+    id: '0t0x7',
+    title: 'AIR FORCE 1 EXPERIMENTAL',
+    subtitle:
+      "After emerging as a revolutionary hoops shoe in the '80s, the Air Force 1 has transformed from an on-court pioneer to a beloved streetwear icon. This new discovery puts a new spin on the silhouette with a vacuum-sealed treatment on the upper, creating a one-of-a-kind textured finish you'll want to show off.",
+    stock: 4,
+    price: '849,99',
+    img: product10,
+  },
+  {
+    id: '0t0x8',
+    title: 'Nike Air Max TW',
+    subtitle:
+      "Accelerate your style. Inspired by the Tailwind franchise - the cherished racing look of the '90s.",
+    stock: 6,
+    price: '1299,99',
+    img: product11,
+  },
+  {
+    id: '0t0x9',
+    title: 'Nike ZoomX Zegama',
+    subtitle: 'Navigate uphill and downhill terrain in the Nike ZoomX Zegama.',
+    stock: 6,
+    price: '1019,99',
+    offer: '15% off',
+    oldPrice: '1199,99',
+    img: product12,
+  },
+  {
+    id: '0t0x10',
+    title: 'Nike Dunk Low Retro',
+    subtitle:
+      "Created for the court and embraced by street fashion, the '80s hoops icon is back with classic details and vintage hoops style.",
+    stock: 2,
+    price: '849,99',
+    img: product13,
+  },
+  {
+    id: '0t0x11',
+    title: 'Air Jordan 1 Mid SE',
+    subtitle:
+      'The charismatic shoes that broke the rules on the court now set the standard off the court.',
+    stock: 6,
+    price: '999,99',
+    img: product14,
+  },
+  {
+    id: '0t0x12',
+    title: 'Air Jordan 11 Retro',
+    subtitle:
+      'The Air Jordan 11 is one of the most memorable releases from the Jordan brand.',
+    stock: 6,
+    price: '1499,99',
+    img: product15,
+  },
+]
 
 const sneaker = {
   heading: 'FEATURED',
@@ -69,19 +189,18 @@ const sneaker = {
 }
 
 const topRateSales: any = [
-    {
-      id: '0M0x1',
-      title: 'Nike Air Low Premium',
-      text: 'MEN Running Shoes',
-      rating: '5+',
-      btn: 'Buy Now',
-      img: 'product7',
-      price: '150',
-      color: 'from-sky-600 to-indigo-600',
-      shadow: 'shadow-lg shadow-blue-500',
-    },
+  {
+    id: '0M0x1',
+    title: 'Nike Air Low Premium',
+    text: 'MEN Running Shoes',
+    rating: '5+',
+    btn: 'Buy Now',
+    img: 'product7',
+    price: '150',
+    color: 'from-sky-600 to-indigo-600',
+    shadow: 'shadow-lg shadow-blue-500',
+  },
 ]
-
 
 const story = {
   title: 'Top Stories',
@@ -216,9 +335,9 @@ const footerData = {
 export {
   socialLinks,
   popularSales,
+  trendsSales,
   footerData,
   story,
   sneaker,
-  highlight,
   topRateSales,
 }
