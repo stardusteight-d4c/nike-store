@@ -1,5 +1,4 @@
-import React from 'react'
-import nikeGif from '../../../assets/nike-future.gif'
+import nikeGif from '../../../assets/highlight.gif'
 
 interface Props {}
 

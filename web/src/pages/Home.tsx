@@ -1,23 +1,13 @@
 import { useEffect } from 'react'
 import { toast } from 'react-hot-toast'
-import {
-  MainSection,
-  Hero,
-  Sales,
-  Stories,
-  Footer,
-  Navbar,
-  Cart,
-} from '../components'
+import { Hero, Stories, Footer, Navbar, Cart } from '../components'
 import { useGetProductsByCategoryQuery } from '../graphql/generated'
 import {
-  sneaker,
   popularSales,
   trendsSales,
-  topRateSales,
-  story,
+  stories,
   footerData,
-} from '../mockData/data'
+} from '../mock-data/data'
 import { useAppSelector } from '../store/hooks'
 import { selectCurrentConsumer } from '../store/slices/ConsumerSlice'
 import { fetchLineItems } from '../utils/fetchLineItems'
@@ -85,19 +75,13 @@ export const Home = (props: Props) => {
       <Cart />
       <main className="flex flex-col max-w-7xl mx-auto gap-16 relative">
         <Hero />
-        {/* <Sales
-          sales={popularSalesCMS.items ? popularSalesCMS : popularSales}
-          isFeaturedItem
-        /> */}
         <PopularSales popularSales={popularSales} />
         <Highlight />
         <TrendsSales trendsSales={trendsSales} />
         <Featured />
-        {/* <Sales sales={topRateSalesCMS.items ? topRateSalesCMS : topRateSales} /> */}
-        {/* <MainSection data={sneaker} /> */}
-        {/* <Stories story={story} /> */}
+        <Stories stories={stories} />
       </main>
-      {/* <Footer footerData={footerData} /> */}
+      <Footer footerData={footerData} />
     </div>
   )
 }

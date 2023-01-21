@@ -1,8 +1,11 @@
-export const splideOptions: any = {
+import { Options } from "@splidejs/react-splide";
+
+export const splideOptions: Options = {
   perPage: 4,
-  perMove: 1,
+  perMove: 2,
   type: 'loop',
   rewind: true,
+  arrows: false,
   keyboard: 'global',
   gap: '1rem',
   pagination: false,

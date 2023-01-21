@@ -1,5 +1,4 @@
-import React from 'react'
-import featuredImg from '../../../assets/featured-img.png'
+import featuredImg from '../../../assets/featured.png'
 
 
 interface Props {}

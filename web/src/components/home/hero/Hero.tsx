@@ -1,8 +1,6 @@
-import React from 'react'
-import { Clips } from './integrate/Clips'
 import { SocialLink } from './integrate/SocialLink'
 import heroImg from '../../../assets/hero-img.png'
-import { socialLinks } from '../../../mockData/data'
+import { socialLinks } from '../../../mock-data/data'
 
 interface Props {}
 
@@ -23,11 +21,7 @@ export const Hero = (props: Props) => {
           >
             Explore Product
           </button>
-          <div className="grid items-center gap-5 md:gap-3 absolute top-[33vh] lg:top-[27vh] left-[11%] xl:left-0 w-auto h-auto">
-            {/* {videos?.map((video, index) => (
-              <Clips key={index} imgsrc={video.imgsrc} clip={video.clip} />
-            ))} */}
-          </div>
+          <div className="grid items-center gap-5 md:gap-3 absolute top-[33vh] lg:top-[27vh] left-[11%] xl:left-0 w-auto h-auto"></div>
           <div className="grid items-center absolute top-[200px] lg:top-[27vh] -right-8 space-y-4 z-50">
             {socialLinks?.map((link, index) => (
               <SocialLink key={index} icon={link.icon} />
