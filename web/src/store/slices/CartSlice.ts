@@ -93,7 +93,10 @@ const cartSlice = createSlice({
       let { totalAmount, totalQTY } = state.cartItems.reduce(
         (cartTotal: any, cartItem: any) => {
           const { price, cartQuantity } = cartItem
-          const totalPrice = price * cartQuantity
+
+        const handledPrice = Number(price.replace(',', '.'))
+
+          const totalPrice = handledPrice * cartQuantity
 
           cartTotal.totalAmount += totalPrice
           cartTotal.totalQTY += cartQuantity
@@ -105,7 +108,7 @@ const cartSlice = createSlice({
           totalQTY: 0,
         }
       )
-      state.cartTotalAmount = totalAmount
+      state.cartTotalAmount = parseFloat(totalAmount).toFixed(2).toString().replace('.', ',')
       state.cartTotalQuantity = totalQTY
     },
   },

@@ -14,7 +14,7 @@ export const CartCount = ({
   totalQuantity,
 }: Props) => {
   return (
-    <div className="bg-white h-11 flex items-center justify-between px-3 sticky top-0 inset-x-0 w-full">
+    <div className="bg-white border-b shadow-sm h-11 flex items-center justify-between px-3 sticky top-0 inset-x-0 w-full">
       <div className="flex items-center gap-3">
         <div
           className="grid items-center cursor-pointer"

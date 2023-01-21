@@ -28,13 +28,14 @@ interface Footer {
 
 interface CartItem {
   cartQuantity: number
-  color: string
   id: string
+  title: string
+  subtitle: string
+  offer?: string
+  oldPrice?: string
   img: any
   price: string
-  shadow: string
-  text: string
-  title: string
+  stock: number
 }
 
 interface ViaCepApiResponse {
