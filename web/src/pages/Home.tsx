@@ -66,14 +66,11 @@ export const Home = (props: Props) => {
   }, [sessionId, currentConsumer])
 
   return (
-    <div className="w-screen">
-      <img
-        src={backgroud}
-        className="bgTheme w-full clipPath inset-0 max-h-[637px] absolute z-10"
-      />
+    <div className={style.wrapper}>
+      <img src={backgroud} className={style.bannerImage} />
       <Navbar />
       <Cart />
-      <main className="flex flex-col max-w-7xl mx-auto gap-16 relative">
+      <main className={style.mainContentWrapper}>
         <Hero />
         <PopularSales popularSales={popularSales} />
         <Highlight />
@@ -84,4 +81,10 @@ export const Home = (props: Props) => {
       <Footer footerData={footerData} />
     </div>
   )
+}
+
+const style = {
+  wrapper: `max-w-[100vw] overflow-x-hidden`,
+  bannerImage: `bgTheme w-full clipPath inset-0 max-h-[637px] lg:h-[75vh] md:h-[65vh] sm:h-[55vh] absolute z-10`,
+  mainContentWrapper: `flex flex-col max-w-7xl mx-auto gap-16 relative`,
 }
