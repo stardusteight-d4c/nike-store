@@ -20,7 +20,7 @@ export const TrendsSales = ({ trendsSales }: Props) => {
         ))}
       </div>
       <span className="mx-auto w-fit flex flex-col items-center justify-center gap-y-2 mt-14 cursor-pointer">
-        See more
+        See More
         <ChevronDoubleDownIcon className="w-5 animate-bounce" />
       </span>
     </div>

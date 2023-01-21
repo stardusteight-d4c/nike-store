@@ -17,7 +17,7 @@ export const Highlight = (props: Props) => {
         <h1 className="textGradient mb-2 tracking-wide text-lg sm:text-3xl">
           Build the Future with Non Fungible Tokens
         </h1>
-        <h2 className="text-5xl lg:text-4xl md:text-3xl sm:text-2xl font-bold text-zinc-900">
+        <h2 className="text-5xl leading-[55px] lg:text-4xl md:text-3xl sm:text-2xl font-bold text-zinc-900">
           RTFKT x Nike Dunk Genesis CRYPTOKICKS
         </h2>
         <p className="xl:text-sm text-lg font-light my-4 text-zinc-900">

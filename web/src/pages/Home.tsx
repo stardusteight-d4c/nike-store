@@ -25,6 +25,7 @@ import backgroud from '../assets/background.jpeg'
 import { PopularSales } from '../components/home/sales/PopularSales'
 import { Highlight } from '../components/home/mainSection/Highlight'
 import { TrendsSales } from '../components/home/sales/TrendsSales'
+import { Featured } from '../components/home/mainSection/Featured'
 
 interface Props {}
 
@@ -91,6 +92,7 @@ export const Home = (props: Props) => {
         <PopularSales popularSales={popularSales} />
         <Highlight />
         <TrendsSales trendsSales={trendsSales} />
+        <Featured />
         {/* <Sales sales={topRateSalesCMS.items ? topRateSalesCMS : topRateSales} /> */}
         {/* <MainSection data={sneaker} /> */}
         {/* <Stories story={story} /> */}
