@@ -1,5 +1,6 @@
 import React from 'react'
 import { ChevronDoubleLeftIcon, XMarkIcon } from '@heroicons/react/24/solid'
+import { TrashIcon } from '@heroicons/react/24/outline'
 
 interface Props {
   onCartToggle: () => void
@@ -19,12 +20,12 @@ export const CartCount = ({
           className="grid items-center cursor-pointer"
           onClick={onCartToggle}
         >
-          <ChevronDoubleLeftIcon className="w-5 h-5 text-slate-900 hover:text-orange-500 stroke-[2]" />
+          <ChevronDoubleLeftIcon className="w-5 h-5 text-zinc-900 hover:text-blue-500 stroke-[2]" />
         </div>
         <div className="grid items-center">
-          <h1 className="text-base font-medium text-slate-900">
+          <h1 className="text-base font-medium text-zinc-900">
             Your Cart{' '}
-            <span className="bgThemeCart rounded px-1 py-0.5 text-slate-100 font-normal text-xs">
+            <span className="bg-zinc-900 rounded-full px-2 py-0.5 text-slate-100 font-medium text-xs">
               ({totalQuantity} Items)
             </span>
           </h1>
@@ -33,10 +34,10 @@ export const CartCount = ({
       <div className="flex items-center">
         <button
           type="button"
-          className="bgThemeCart rounded active:scale-90 p-0.5"
+          className="text-zinc-900 shadow ring-inset hover:scale-105 transition-all font-thin active:scale-90 p-0.5"
           onClick={onRemoveCartItem}
         >
-          <XMarkIcon className="w-5 h-5 text-white stoke-[2]" />
+          <TrashIcon className="w-5 h-5" />
         </button>
       </div>
     </div>

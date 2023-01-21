@@ -25,7 +25,7 @@ export const Login = (props: Props) => {
     <main className="flex items-center justify-center h-screen relative">
       {!currentConsumer && (
         <>
-          <Link to="/" className="text-slate-900 absolute top-5 left-[18px]">
+          <Link to="/" className="text-zinc-900 absolute top-5 left-[18px]">
             <span className="flex items-center gap-x-2">
               <ArrowLongLeftIcon className="w-8 h-8 text-2xl" />
               Back to the Store

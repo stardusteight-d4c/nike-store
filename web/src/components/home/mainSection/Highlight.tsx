@@ -37,7 +37,7 @@ const style = {
   wrapper: `flex-row lg:space-y-16 my-24 flex items-center justify-between lg:flex-col lg:justify-center`,
   imgContainer: `flex items-center justify-center max-w-xl relative lg:max-w-none w-full`,
   img: `h-72 lg:h-64 md:h-60 sm:h-48 xsm:h-40 rotate-[-5deg] w-auto object-fill`,
-  textContentContainer: `max-w-lg lg:px-8 md:px-2 lg:max-w-2xl md:max-w-md w-full lg:text-center grid items-center lg:justify-items-center`,
+  textContentContainer: `max-w-lg xl:pl-8 lg:px-8 md:px-2 lg:max-w-2xl md:max-w-md w-full lg:text-center grid items-center lg:justify-items-center`,
   headerTitle: `textGradient mb-2 tracking-wide text-lg md:text-2xl sm:text-2xl`,
   title: `text-5xl leading-[55px] lg:text-4xl md:text-4xl sm:text-4xl font-bold text-zinc-900`,
   text: `xl:text-sm text-lg font-light my-4 text-zinc-900`,

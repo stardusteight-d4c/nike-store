@@ -105,11 +105,11 @@ export const Cart = (props: Props) => {
         cartOpen
           ? 'opacity-100 visible translate-x-0'
           : 'opacity-0 invisible translate-x-8'
-      } blurEffectTheme duration-500 fixed inset-0 w-full h-screen z-[600]`}
+      } overlayBlur duration-500 fixed inset-0 w-full h-screen z-[600]`}
     >
       <form
         onSubmit={(e) => onSubmit(e)}
-        className={`blurEffectTheme h-screen max-w-xl w-full absolute right-0`}
+        className={`cartBlur h-screen max-w-xl w-full absolute right-0`}
       >
         <CartCount
           onCartToggle={onCartToggle}
@@ -139,7 +139,7 @@ export const Cart = (props: Props) => {
         <div className="fixed bottom-0 bg-white w-full px-5 py-2 grid items-center">
           <div className="flex items-center justify-between">
             <h1 className="text-base font-semibold uppercase">SubTotal</h1>
-            <h1 className="bgThemeCart text-sm rounded text-slate-100 px-1 py-0.5">
+            <h1 className="bg-zinc-900 text-sm rounded text-slate-100 px-1 py-0.5">
               ${totalAmount}
             </h1>
           </div>
@@ -150,7 +150,7 @@ export const Cart = (props: Props) => {
             {currentConsumer ? (
               <button
                 type="submit"
-                className="buttonTheme bgThemeCart text-white disabled:cursor-not-allowed"
+                className="buttonTheme bg-zinc-900 text-white disabled:cursor-not-allowed"
                 onClick={(e) => {
                   !openShippingAddress
                     ? setOpenShippingAddress(true)
@@ -163,7 +163,7 @@ export const Cart = (props: Props) => {
             ) : (
               <Link
                 to="/login"
-                className="buttonTheme bgThemeCart text-white text-center"
+                className="rounded-full px-4 py-1.5 bg-zinc-900 text-white text-center"
               >
                 Create an account
               </Link>

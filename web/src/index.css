@@ -51,17 +51,20 @@
       #000000
     ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   }
-  .bgThemeCart {
-    @apply bg-gradient-to-b from-slate-900 to-gray-900 shadow-sm shadow-gray-900;
-  }
   .clipPath {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 60%);
   }
-  .blurEffectTheme {
-    background: rgba(255, 255, 255, 0.349);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.212);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+  .overlayBlur {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .cartBlur {
+    background: rgba(255, 255, 255, 0.733);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
   .iconStyle {
     @apply h-6 w-6 sm:h-5 sm:w-5 text-white cursor-pointer transition-all duration-100 active:scale-110 leading-tight;

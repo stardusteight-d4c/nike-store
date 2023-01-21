@@ -75,14 +75,14 @@ const style = {
   },
   handleImg: (isFeaturedItem: boolean) => {
     return isFeaturedItem
-      ? 'md:min-w-[140px] md:max-w-[140px] min-w-[180px] max-w-[180px] h-full'
+      ? 'md:min-w-[160px] md:max-w-[160px] min-w-[180px] max-w-[180px] h-full'
       : 'w-auto h-auto'
   },
   addToCartButton: `blurEffectTheme buttonTheme absolute right-24 bottom-2 bg-white/90 p-0.5 shadow shadow-slate-200`,
   buyIcon: `iconStyle text-zinc-900`,
   buyNowButton: `blurEffectTheme absolute right-2 bottom-2 buttonTheme bg-white/90 py-1 px-2 shadow shadow-slate-200 text-sm text-zinc-900`,
   title: `font-medium text-zinc-900 text-lg mt-2 line-clamp-1`,
-  subtitle: `text-[#505050] w-auto inline-block line-clamp-2 mb-2`,
+  subtitle: `text-[#505050] md:pr-1 w-auto inline-block line-clamp-2 mb-2`,
   handlePriceContainer: (isFeaturedItem: boolean) => {
     return `flex gap-x-2 ${
       isFeaturedItem ? 'items-start flex-col-reverse' : 'flex-row items-center'

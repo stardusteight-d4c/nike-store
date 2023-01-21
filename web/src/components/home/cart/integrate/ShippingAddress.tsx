@@ -30,7 +30,7 @@ export const ShippingAddress = (props: Props) => {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl text-slate-900">Confirm Shipping Address</h1>
+      <h1 className="text-2xl text-zinc-900">Confirm Shipping Address</h1>
       <div>
         <div className="flex flex-col items-start py-1">
           <label htmlFor="state" className="text-lg font-medium">
@@ -41,7 +41,7 @@ export const ShippingAddress = (props: Props) => {
             name="state"
             type="text"
             defaultValue={address.state}
-            className="px-2 py-1 border border-slate-900/90 bg-white/30 filter backdrop-blur-lg text-slate-800 outline-none rounded-md w-full focus:border-blue-500"
+            className="px-2 py-1 border border-zinc-900 bg-white/30 filter backdrop-blur-lg text-slate-800 outline-none rounded-md w-full focus:border-blue-500"
           />
         </div>
         <div className="flex flex-col items-start py-1">
@@ -53,7 +53,7 @@ export const ShippingAddress = (props: Props) => {
             name="city"
             type="text"
             defaultValue={address.city}
-            className="px-2 py-1 border border-slate-900/90 bg-white/30 filter backdrop-blur-lg text-slate-800 outline-none rounded-md w-full focus:border-blue-500"
+            className="px-2 py-1 border border-zinc-900 bg-white/30 filter backdrop-blur-lg text-slate-800 outline-none rounded-md w-full focus:border-blue-500"
           />
         </div>
         <div className="flex flex-col items-start py-1">
@@ -65,7 +65,7 @@ export const ShippingAddress = (props: Props) => {
             name="neighborhood"
             type="text"
             defaultValue={address.neighborhood}
-            className="px-2 py-1 border border-slate-900/90 bg-white/30 filter backdrop-blur-lg text-slate-800 outline-none rounded-md w-full focus:border-blue-500"
+            className="px-2 py-1 border border-zinc-900 bg-white/30 filter backdrop-blur-lg text-slate-800 outline-none rounded-md w-full focus:border-blue-500"
           />
         </div>
         <div className="flex flex-col items-start py-1">
@@ -77,7 +77,7 @@ export const ShippingAddress = (props: Props) => {
             name="street"
             type="text"
             defaultValue={address.street}
-            className="px-2 py-1 border border-slate-900/90 bg-white/30 filter backdrop-blur-lg text-slate-800 outline-none rounded-md w-full focus:border-blue-500"
+            className="px-2 py-1 border border-zinc-900 bg-white/30 filter backdrop-blur-lg text-slate-800 outline-none rounded-md w-full focus:border-blue-500"
           />
         </div>
         <div className="flex flex-col items-start py-1">
@@ -89,7 +89,7 @@ export const ShippingAddress = (props: Props) => {
             name="number"
             type="text"
             defaultValue={address.number}
-            className="px-2 py-1 border border-slate-900/90 bg-white/30 filter backdrop-blur-lg text-slate-800 outline-none rounded-md w-full focus:border-blue-500"
+            className="px-2 py-1 border border-zinc-900 bg-white/30 filter backdrop-blur-lg text-slate-800 outline-none rounded-md w-full focus:border-blue-500"
           />
         </div>
         <div className="flex flex-col items-start py-1">
@@ -101,7 +101,7 @@ export const ShippingAddress = (props: Props) => {
             name="complement"
             type="text"
             defaultValue={address?.complement!}
-            className="px-2 py-1 border border-slate-900/90 bg-white/30 filter backdrop-blur-lg text-slate-800 outline-none rounded-md w-full focus:border-blue-500"
+            className="px-2 py-1 border border-zinc-900 bg-white/30 filter backdrop-blur-lg text-slate-800 outline-none rounded-md w-full focus:border-blue-500"
           />
         </div>
       </div>
