@@ -43,9 +43,6 @@ export class CheckoutController {
         }
       });
 
-      console.log('transformedItems[0].price_data', transformedItems[0].price_data);
-      
-
       const isValid = result.find((element: boolean) => element === false);
 
       // Create checkout sessions from body params
@@ -80,9 +77,6 @@ export class CheckoutController {
     try {
       const { session_id, consumer_id } = request.query;
       const session = await stripe.checkout.sessions.listLineItems(session_id);
-
-      console.log(session);
-      console.log(session.data[0].price);
 
       session.data.map(
         async (product) =>

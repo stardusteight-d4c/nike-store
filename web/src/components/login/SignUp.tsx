@@ -9,6 +9,7 @@ import { setConsumer } from '../../store/slices/ConsumerSlice'
 import { confirmPassword } from '../../utils/confirmPassword'
 import { isValidEmailAddress } from '../../utils/isValidEmailAddress'
 import { isValidZipCode } from '../../utils/isValidZipCode'
+import { Input } from './integrate/Input'
 
 interface Props {
   setActiveLogin: React.Dispatch<React.SetStateAction<'sign-in' | 'sign-up'>>
@@ -73,23 +74,47 @@ export const SignUp = ({ setActiveLogin }: Props) => {
     }
   }
 
+  const signUpInputProps = [
+    {
+      id: 'fullName',
+      type: 'text',
+      placeholder: 'Full name',
+      styles: 'rounded-t-md',
+    },
+    {
+      id: 'emailAddress',
+      type: 'email',
+      placeholder: 'Email address',
+    },
+    {
+      id: 'password',
+      type: 'password',
+      placeholder: 'Password',
+    },
+    {
+      id: 'confirmPassword',
+      type: 'password',
+      placeholder: 'Confirm password',
+    },
+    {
+      id: 'cep',
+      type: 'text',
+      placeholder: 'CEP (00000-000)',
+      styles: 'rounded-b-md',
+    },
+  ]
+
   return (
-    <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md space-y-8">
+    <div className={style.wrapper}>
+      <div className={style.contentWrapper}>
         <div>
-          <img
-            className="mx-auto h-12 w-auto brightness-0"
-            src={nikeLogo}
-            alt="Your Company"
-          />
-          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-            Create an account
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
+          <img className={style.logoImg} src={nikeLogo} alt="Nike Store" />
+          <h2 className={style.title}>Create an account</h2>
+          <p className={style.paragraph}>
             Or{' '}
             <a
               onClick={() => setActiveLogin('sign-in')}
-              className="font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer transition-all duration-200 hover:underline"
+              className={style.linkSignIn}
             >
               Sign in
             </a>
@@ -97,88 +122,17 @@ export const SignUp = ({ setActiveLogin }: Props) => {
         </div>
         <form
           autoComplete="false"
-          className="mt-8 space-y-6"
+          className={style.formContainer}
           onSubmit={(e) => onSubmit(e)}
         >
-          <div className="-space-y-px rounded-md shadow-sm">
-            <div>
-              <label htmlFor="fullName" className="sr-only">
-                Full name
-              </label>
-              <input
-                id="fullName"
-                name="fullName"
-                type="text"
-                required
-                className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                placeholder="Full name"
-              />
-            </div>
-            <div>
-              <label htmlFor="emailAddress" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="emailAddress"
-                name="emailAddress"
-                type="email"
-                required
-                className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                placeholder="Email address"
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                required
-                className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                placeholder="Password"
-              />
-            </div>
-            <div>
-              <label htmlFor="confirmPassword" className="sr-only">
-                Confirm password
-              </label>
-              <input
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                required
-                className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                placeholder="Confirm password"
-              />
-            </div>
-            <div>
-              <label htmlFor="cep" className="sr-only">
-                CEP
-              </label>
-              <input
-                id="cep"
-                name="cep"
-                type="text"
-                required
-                className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                placeholder="CEP (00000-000)"
-              />
-            </div>
+          <div className={style.inputsWrapper}>
+            {signUpInputProps.map((input) => (
+              <Input {...input} />
+            ))}
           </div>
 
           <div>
-            <button
-              type="submit"
-              className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            >
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                <LockClosedIcon
-                  className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
-                  aria-hidden="true"
-                />
-              </span>
+            <button type="submit" className={style.buttonSubmit}>
               {loading ? 'Loading... ' : 'Sign up'}
             </button>
           </div>
@@ -186,4 +140,16 @@ export const SignUp = ({ setActiveLogin }: Props) => {
       </div>
     </div>
   )
+}
+
+const style = {
+  wrapper: `flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8`,
+  contentWrapper: `w-full max-w-md space-y-8`,
+  logoImg: `mx-auto h-12 w-auto brightness-0`,
+  title: `mt-6 text-center text-3xl font-bold tracking-tight text-gray-900`,
+  paragraph: `mt-2 text-center text-sm text-gray-600`,
+  linkSignIn: `font-medium text-blue-500 hover:text-indigo-600 cursor-pointer transition-all duration-200 hover:underline`,
+  formContainer: `mt-8 space-y-6`,
+  inputsWrapper: `-space-y-px rounded-md shadow-sm`,
+  buttonSubmit: `group relative flex w-full justify-center rounded-md border border-transparent bg-blue-500 py-2 px-4 text-sm font-medium text-white hover:bg-blue-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2`,
 }

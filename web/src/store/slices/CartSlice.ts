@@ -29,8 +29,6 @@ const cartSlice = createSlice({
         (item: any) => item.id === action.payload.id
       )
 
-      console.log('action.payload.stock', action.payload.stock)
-
       if (itemIndex >= 0) {
         if (state.cartItems[itemIndex].cartQuantity === action.payload.stock) {
           toast.error('Reaching stock limit')

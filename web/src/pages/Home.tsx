@@ -23,22 +23,22 @@ export const Home = (props: Props) => {
   const urlParams = new URLSearchParams(window.location.search)
   const sessionId = urlParams.get('session_id')
   const currentConsumer = useAppSelector(selectCurrentConsumer)
-  const { data: firstQuery } = useGetProductsByCategoryQuery({
-    variables: { category: 'popularSales' },
-  })
-  const { data: secondQuery } = useGetProductsByCategoryQuery({
-    variables: { category: 'topRateSales' },
-  })
+  // const { data: firstQuery } = useGetProductsByCategoryQuery({
+  //   variables: { category: 'popularSales' },
+  // })
+  // const { data: secondQuery } = useGetProductsByCategoryQuery({
+  //   variables: { category: 'topRateSales' },
+  // })
 
-  const popularSalesCMS: any = {
-    title: 'Popular Sales',
-    items: firstQuery?.products,
-  }
+  // const popularSalesCMS: any = {
+  //   title: 'Popular Sales',
+  //   items: firstQuery?.products,
+  // }
 
-  const topRateSalesCMS: any = {
-    title: 'Top Rated Sales',
-    items: secondQuery?.products,
-  }
+  // const topRateSalesCMS: any = {
+  //   title: 'Top Rated Sales',
+  //   items: secondQuery?.products,
+  // }
 
   useEffect(() => {
     if (sessionId) {
@@ -46,7 +46,6 @@ export const Home = (props: Props) => {
         ;(async () => {
           const products = await fetchLineItems(sessionId, currentConsumer.id)
           if (products && currentConsumer) {
-            console.log('products', products)
 
             // Mandar para o banco de dados nome - email - endereço - diminuir estoque dos produtos de
             // acordo com o produto e quantidade do produto comprado
@@ -59,7 +58,6 @@ export const Home = (props: Props) => {
 
             toast.success('successful purchase')
           }
-          console.log('products', products)
         })()
       }
     }

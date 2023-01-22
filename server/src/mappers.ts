@@ -21,8 +21,6 @@ export function addressMapper(data: Address, consumerId: string) {
 
 export function toCheckoutMapper(items: []) {
   const newObject = items.map((item: any) => {
-    console.log("item.id", item.id);
-
     return {
       price_data: {
         currency: "BRL",

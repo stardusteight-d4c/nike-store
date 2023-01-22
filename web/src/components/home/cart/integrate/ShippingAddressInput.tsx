@@ -18,6 +18,7 @@ export const ShippingAdressInput = ({ id, labelName, defaultValue }: Props) => {
         type="text"
         defaultValue={defaultValue}
         className={style.input}
+        placeholder={labelName}
       />
     </div>
   )

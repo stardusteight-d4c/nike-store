@@ -27,8 +27,6 @@ export const Footer = ({openShippingAddress, setOpenShippingAddress}: Props) => 
     }
   }
 
-  console.log('openShippingAddress', openShippingAddress)
-
   return (
     <footer className={style.wrapper}>
       <div className={style.totalContainer}>
