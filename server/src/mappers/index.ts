@@ -1,4 +1,4 @@
-import { Address, Consumer } from "./dtos";
+import { Address, Consumer } from "../infra/dtos/dtos";
 import brcypt from "bcrypt";
 
 export async function consumerMapper(data: Consumer) {

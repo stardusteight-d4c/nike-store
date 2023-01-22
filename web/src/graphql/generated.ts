@@ -1261,7 +1261,6 @@ export type PageInfo = {
 export type Product = Node & {
   __typename?: 'Product';
   category: Scalars['String'];
-  color: Scalars['String'];
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
   /** User that created this document */
@@ -1273,18 +1272,19 @@ export type Product = Node & {
   /** The unique identifier */
   id: Scalars['ID'];
   img: Asset;
+  /** Ex.: 20% off */
+  offer?: Maybe<Scalars['String']>;
+  oldPrice?: Maybe<Scalars['String']>;
   price: Scalars['String'];
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
   /** User that last published this document */
   publishedBy?: Maybe<User>;
-  rating: Scalars['String'];
   scheduledIn: Array<ScheduledOperation>;
-  shadow: Scalars['String'];
   /** System stage field */
   stage: Stage;
   stock: Scalars['Int'];
-  text: Scalars['String'];
+  subtitle: Scalars['String'];
   title: Scalars['String'];
   /** The time the document was updated */
   updatedAt: Scalars['DateTime'];
@@ -1361,14 +1361,13 @@ export type ProductConnection = {
 
 export type ProductCreateInput = {
   category: Scalars['String'];
-  color: Scalars['String'];
   createdAt?: InputMaybe<Scalars['DateTime']>;
   img: AssetCreateOneInlineInput;
+  offer?: InputMaybe<Scalars['String']>;
+  oldPrice?: InputMaybe<Scalars['String']>;
   price: Scalars['String'];
-  rating: Scalars['String'];
-  shadow: Scalars['String'];
   stock: Scalars['Int'];
-  text: Scalars['String'];
+  subtitle: Scalars['String'];
   title: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
@@ -1425,25 +1424,6 @@ export type ProductManyWhereInput = {
   category_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   category_starts_with?: InputMaybe<Scalars['String']>;
-  color?: InputMaybe<Scalars['String']>;
-  /** All values containing the given string. */
-  color_contains?: InputMaybe<Scalars['String']>;
-  /** All values ending with the given string. */
-  color_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are contained in given list. */
-  color_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  /** All values that are not equal to given value. */
-  color_not?: InputMaybe<Scalars['String']>;
-  /** All values not containing the given string. */
-  color_not_contains?: InputMaybe<Scalars['String']>;
-  /** All values not ending with the given string */
-  color_not_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are not contained in given list. */
-  color_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  /** All values not starting with the given string. */
-  color_not_starts_with?: InputMaybe<Scalars['String']>;
-  /** All values starting with the given string. */
-  color_starts_with?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -1483,6 +1463,44 @@ export type ProductManyWhereInput = {
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
   img?: InputMaybe<AssetWhereInput>;
+  offer?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  offer_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  offer_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  offer_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  offer_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  offer_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  offer_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  offer_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  offer_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  offer_starts_with?: InputMaybe<Scalars['String']>;
+  oldPrice?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  oldPrice_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  oldPrice_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  oldPrice_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  oldPrice_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  oldPrice_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  oldPrice_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  oldPrice_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  oldPrice_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  oldPrice_starts_with?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   price_contains?: InputMaybe<Scalars['String']>;
@@ -1518,47 +1536,9 @@ export type ProductManyWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
   publishedBy?: InputMaybe<UserWhereInput>;
-  rating?: InputMaybe<Scalars['String']>;
-  /** All values containing the given string. */
-  rating_contains?: InputMaybe<Scalars['String']>;
-  /** All values ending with the given string. */
-  rating_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are contained in given list. */
-  rating_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  /** All values that are not equal to given value. */
-  rating_not?: InputMaybe<Scalars['String']>;
-  /** All values not containing the given string. */
-  rating_not_contains?: InputMaybe<Scalars['String']>;
-  /** All values not ending with the given string */
-  rating_not_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are not contained in given list. */
-  rating_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  /** All values not starting with the given string. */
-  rating_not_starts_with?: InputMaybe<Scalars['String']>;
-  /** All values starting with the given string. */
-  rating_starts_with?: InputMaybe<Scalars['String']>;
   scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
-  shadow?: InputMaybe<Scalars['String']>;
-  /** All values containing the given string. */
-  shadow_contains?: InputMaybe<Scalars['String']>;
-  /** All values ending with the given string. */
-  shadow_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are contained in given list. */
-  shadow_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  /** All values that are not equal to given value. */
-  shadow_not?: InputMaybe<Scalars['String']>;
-  /** All values not containing the given string. */
-  shadow_not_contains?: InputMaybe<Scalars['String']>;
-  /** All values not ending with the given string */
-  shadow_not_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are not contained in given list. */
-  shadow_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  /** All values not starting with the given string. */
-  shadow_not_starts_with?: InputMaybe<Scalars['String']>;
-  /** All values starting with the given string. */
-  shadow_starts_with?: InputMaybe<Scalars['String']>;
   stock?: InputMaybe<Scalars['Int']>;
   /** All values greater than the given value. */
   stock_gt?: InputMaybe<Scalars['Int']>;
@@ -1574,25 +1554,25 @@ export type ProductManyWhereInput = {
   stock_not?: InputMaybe<Scalars['Int']>;
   /** All values that are not contained in given list. */
   stock_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  text?: InputMaybe<Scalars['String']>;
+  subtitle?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
-  text_contains?: InputMaybe<Scalars['String']>;
+  subtitle_contains?: InputMaybe<Scalars['String']>;
   /** All values ending with the given string. */
-  text_ends_with?: InputMaybe<Scalars['String']>;
+  subtitle_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  text_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  subtitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
-  text_not?: InputMaybe<Scalars['String']>;
+  subtitle_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
-  text_not_contains?: InputMaybe<Scalars['String']>;
+  subtitle_not_contains?: InputMaybe<Scalars['String']>;
   /** All values not ending with the given string */
-  text_not_ends_with?: InputMaybe<Scalars['String']>;
+  subtitle_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  text_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  subtitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
-  text_not_starts_with?: InputMaybe<Scalars['String']>;
+  subtitle_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
-  text_starts_with?: InputMaybe<Scalars['String']>;
+  subtitle_starts_with?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   title_contains?: InputMaybe<Scalars['String']>;
@@ -1633,24 +1613,22 @@ export type ProductManyWhereInput = {
 export enum ProductOrderByInput {
   CategoryAsc = 'category_ASC',
   CategoryDesc = 'category_DESC',
-  ColorAsc = 'color_ASC',
-  ColorDesc = 'color_DESC',
   CreatedAtAsc = 'createdAt_ASC',
   CreatedAtDesc = 'createdAt_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
+  OfferAsc = 'offer_ASC',
+  OfferDesc = 'offer_DESC',
+  OldPriceAsc = 'oldPrice_ASC',
+  OldPriceDesc = 'oldPrice_DESC',
   PriceAsc = 'price_ASC',
   PriceDesc = 'price_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
   PublishedAtDesc = 'publishedAt_DESC',
-  RatingAsc = 'rating_ASC',
-  RatingDesc = 'rating_DESC',
-  ShadowAsc = 'shadow_ASC',
-  ShadowDesc = 'shadow_DESC',
   StockAsc = 'stock_ASC',
   StockDesc = 'stock_DESC',
-  TextAsc = 'text_ASC',
-  TextDesc = 'text_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
   TitleAsc = 'title_ASC',
   TitleDesc = 'title_DESC',
   UpdatedAtAsc = 'updatedAt_ASC',
@@ -1659,13 +1637,12 @@ export enum ProductOrderByInput {
 
 export type ProductUpdateInput = {
   category?: InputMaybe<Scalars['String']>;
-  color?: InputMaybe<Scalars['String']>;
   img?: InputMaybe<AssetUpdateOneInlineInput>;
+  offer?: InputMaybe<Scalars['String']>;
+  oldPrice?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['String']>;
-  rating?: InputMaybe<Scalars['String']>;
-  shadow?: InputMaybe<Scalars['String']>;
   stock?: InputMaybe<Scalars['Int']>;
-  text?: InputMaybe<Scalars['String']>;
+  subtitle?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
 };
 
@@ -1688,12 +1665,11 @@ export type ProductUpdateManyInlineInput = {
 
 export type ProductUpdateManyInput = {
   category?: InputMaybe<Scalars['String']>;
-  color?: InputMaybe<Scalars['String']>;
+  offer?: InputMaybe<Scalars['String']>;
+  oldPrice?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['String']>;
-  rating?: InputMaybe<Scalars['String']>;
-  shadow?: InputMaybe<Scalars['String']>;
   stock?: InputMaybe<Scalars['Int']>;
-  text?: InputMaybe<Scalars['String']>;
+  subtitle?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
 };
 
@@ -1775,25 +1751,6 @@ export type ProductWhereInput = {
   category_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   category_starts_with?: InputMaybe<Scalars['String']>;
-  color?: InputMaybe<Scalars['String']>;
-  /** All values containing the given string. */
-  color_contains?: InputMaybe<Scalars['String']>;
-  /** All values ending with the given string. */
-  color_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are contained in given list. */
-  color_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  /** All values that are not equal to given value. */
-  color_not?: InputMaybe<Scalars['String']>;
-  /** All values not containing the given string. */
-  color_not_contains?: InputMaybe<Scalars['String']>;
-  /** All values not ending with the given string */
-  color_not_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are not contained in given list. */
-  color_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  /** All values not starting with the given string. */
-  color_not_starts_with?: InputMaybe<Scalars['String']>;
-  /** All values starting with the given string. */
-  color_starts_with?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -1833,6 +1790,44 @@ export type ProductWhereInput = {
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
   img?: InputMaybe<AssetWhereInput>;
+  offer?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  offer_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  offer_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  offer_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  offer_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  offer_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  offer_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  offer_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  offer_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  offer_starts_with?: InputMaybe<Scalars['String']>;
+  oldPrice?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  oldPrice_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  oldPrice_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  oldPrice_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  oldPrice_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  oldPrice_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  oldPrice_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  oldPrice_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  oldPrice_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  oldPrice_starts_with?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   price_contains?: InputMaybe<Scalars['String']>;
@@ -1868,47 +1863,9 @@ export type ProductWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
   publishedBy?: InputMaybe<UserWhereInput>;
-  rating?: InputMaybe<Scalars['String']>;
-  /** All values containing the given string. */
-  rating_contains?: InputMaybe<Scalars['String']>;
-  /** All values ending with the given string. */
-  rating_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are contained in given list. */
-  rating_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  /** All values that are not equal to given value. */
-  rating_not?: InputMaybe<Scalars['String']>;
-  /** All values not containing the given string. */
-  rating_not_contains?: InputMaybe<Scalars['String']>;
-  /** All values not ending with the given string */
-  rating_not_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are not contained in given list. */
-  rating_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  /** All values not starting with the given string. */
-  rating_not_starts_with?: InputMaybe<Scalars['String']>;
-  /** All values starting with the given string. */
-  rating_starts_with?: InputMaybe<Scalars['String']>;
   scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
-  shadow?: InputMaybe<Scalars['String']>;
-  /** All values containing the given string. */
-  shadow_contains?: InputMaybe<Scalars['String']>;
-  /** All values ending with the given string. */
-  shadow_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are contained in given list. */
-  shadow_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  /** All values that are not equal to given value. */
-  shadow_not?: InputMaybe<Scalars['String']>;
-  /** All values not containing the given string. */
-  shadow_not_contains?: InputMaybe<Scalars['String']>;
-  /** All values not ending with the given string */
-  shadow_not_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are not contained in given list. */
-  shadow_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  /** All values not starting with the given string. */
-  shadow_not_starts_with?: InputMaybe<Scalars['String']>;
-  /** All values starting with the given string. */
-  shadow_starts_with?: InputMaybe<Scalars['String']>;
   stock?: InputMaybe<Scalars['Int']>;
   /** All values greater than the given value. */
   stock_gt?: InputMaybe<Scalars['Int']>;
@@ -1924,25 +1881,25 @@ export type ProductWhereInput = {
   stock_not?: InputMaybe<Scalars['Int']>;
   /** All values that are not contained in given list. */
   stock_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  text?: InputMaybe<Scalars['String']>;
+  subtitle?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
-  text_contains?: InputMaybe<Scalars['String']>;
+  subtitle_contains?: InputMaybe<Scalars['String']>;
   /** All values ending with the given string. */
-  text_ends_with?: InputMaybe<Scalars['String']>;
+  subtitle_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  text_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  subtitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
-  text_not?: InputMaybe<Scalars['String']>;
+  subtitle_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
-  text_not_contains?: InputMaybe<Scalars['String']>;
+  subtitle_not_contains?: InputMaybe<Scalars['String']>;
   /** All values not ending with the given string */
-  text_not_ends_with?: InputMaybe<Scalars['String']>;
+  subtitle_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  text_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  subtitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
-  text_not_starts_with?: InputMaybe<Scalars['String']>;
+  subtitle_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
-  text_starts_with?: InputMaybe<Scalars['String']>;
+  subtitle_starts_with?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   title_contains?: InputMaybe<Scalars['String']>;
@@ -3768,19 +3725,12 @@ export type UpdateProductByIdMutationVariables = Exact<{
 
 export type UpdateProductByIdMutation = { __typename?: 'Mutation', updateProduct?: { __typename?: 'Product', id: string, stock: number, title: string } | null };
 
-export type GetProductByIdQueryVariables = Exact<{
-  ids?: InputMaybe<Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>>;
-}>;
-
-
-export type GetProductByIdQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, category: string, title: string, text: string, stock: number, color: string, shadow: string, rating: string, price: string, img: { __typename?: 'Asset', url: string } }> };
-
 export type GetProductsByCategoryQueryVariables = Exact<{
   category?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type GetProductsByCategoryQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, category: string, title: string, text: string, stock: number, color: string, shadow: string, rating: string, price: string, img: { __typename?: 'Asset', url: string } }> };
+export type GetProductsByCategoryQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, category: string, title: string, subtitle: string, stock: number, price: string, offer?: string | null, oldPrice?: string | null, img: { __typename?: 'Asset', url: string } }> };
 
 
 export const UpdateProductByIdDocument = gql`
@@ -3819,67 +3769,20 @@ export function useUpdateProductByIdMutation(baseOptions?: Apollo.MutationHookOp
 export type UpdateProductByIdMutationHookResult = ReturnType<typeof useUpdateProductByIdMutation>;
 export type UpdateProductByIdMutationResult = Apollo.MutationResult<UpdateProductByIdMutation>;
 export type UpdateProductByIdMutationOptions = Apollo.BaseMutationOptions<UpdateProductByIdMutation, UpdateProductByIdMutationVariables>;
-export const GetProductByIdDocument = gql`
-    query getProductById($ids: [ID]) {
-  products(where: {id_in: $ids}) {
-    id
-    category
-    title
-    text
-    stock
-    img {
-      url
-    }
-    color
-    shadow
-    rating
-    price
-  }
-}
-    `;
-
-/**
- * __useGetProductByIdQuery__
- *
- * To run a query within a React component, call `useGetProductByIdQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetProductByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetProductByIdQuery({
- *   variables: {
- *      ids: // value for 'ids'
- *   },
- * });
- */
-export function useGetProductByIdQuery(baseOptions?: Apollo.QueryHookOptions<GetProductByIdQuery, GetProductByIdQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetProductByIdQuery, GetProductByIdQueryVariables>(GetProductByIdDocument, options);
-      }
-export function useGetProductByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProductByIdQuery, GetProductByIdQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetProductByIdQuery, GetProductByIdQueryVariables>(GetProductByIdDocument, options);
-        }
-export type GetProductByIdQueryHookResult = ReturnType<typeof useGetProductByIdQuery>;
-export type GetProductByIdLazyQueryHookResult = ReturnType<typeof useGetProductByIdLazyQuery>;
-export type GetProductByIdQueryResult = Apollo.QueryResult<GetProductByIdQuery, GetProductByIdQueryVariables>;
 export const GetProductsByCategoryDocument = gql`
     query getProductsByCategory($category: String) {
   products(where: {category: $category}) {
     id
     category
     title
-    text
+    subtitle
     stock
     img {
       url
     }
-    color
-    shadow
-    rating
     price
+    offer
+    oldPrice
   }
 }
     `;

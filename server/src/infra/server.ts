@@ -1,7 +1,7 @@
 import Fastify from "fastify";
 import cors from "@fastify/cors";
 import dotenv from "dotenv";
-import { checkoutRoutes, consumerRoutes } from "./routes";
+import { checkoutRoutes, consumerRoutes } from "./routes/routes";
 
 dotenv.config();
 const PORT = process.env.PORT;

@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { Address, CreateConsumerRequest } from "../dtos";
-import { addressMapper, consumerMapper } from "../mappers";
-import { prisma } from "../prisma";
+import { Address, CreateConsumerRequest } from "../dtos/dtos";
+import { addressMapper, consumerMapper } from "../../mappers";
+import { prisma } from "../database/prisma";
 import { TriggersError } from "../utils/TriggersError";
 import jwt from "jsonwebtoken";
 import brcypt from "bcrypt";

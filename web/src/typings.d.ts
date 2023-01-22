@@ -9,7 +9,7 @@ interface Product {
   subtitle: string
   offer?: string
   oldPrice?: string
-  img: any
+  img: string
   price: string
   stock: number
 }

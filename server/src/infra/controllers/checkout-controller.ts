@@ -1,10 +1,10 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import Stripe from "stripe";
 import { getProductById } from "../graphql/queries";
-import { toCheckoutMapper } from "../mappers";
-import { prisma } from "../prisma";
+import { prisma } from "../database/prisma";
 import { stripe } from "../stripe";
 import { TriggersError } from "../utils/TriggersError";
+import { toCheckoutMapper } from "../../mappers";
 
 export class CheckoutController {
   async checkoutSession(

@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
-import { CheckoutController } from "./controllers/checkout-controller";
-import { ConsumerController } from "./controllers/consumer-controller";
+import { CheckoutController } from "../controllers/checkout-controller";
+import { ConsumerController } from "../controllers/consumer-controller";
 
 const checkoutController = new CheckoutController();
 const consumerController = new ConsumerController();

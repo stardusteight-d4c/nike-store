@@ -3,14 +3,13 @@ query getProductsByCategory($category: String) {
     id
     category
     title
-    text
+    subtitle
     stock
     img {
       url
     }
-    color
-    shadow
-    rating
     price
+    offer
+    oldPrice
   }
 }

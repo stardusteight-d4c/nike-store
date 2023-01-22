@@ -3,8 +3,8 @@ import { toast } from 'react-hot-toast'
 import { Hero, Stories, Footer, Navbar, Cart } from '../components'
 import { useGetProductsByCategoryQuery } from '../graphql/generated'
 import {
-  popularSales,
-  trendsSales,
+  popularSales as popularSalesMOCKED,
+  trendsSales as trendsSalesMOCKED,
   stories,
   footerData,
 } from '../mock-data/data'
@@ -16,6 +16,7 @@ import { PopularSales } from '../components/home/sales/PopularSales'
 import { Highlight } from '../components/home/mainSection/Highlight'
 import { TrendsSales } from '../components/home/sales/TrendsSales'
 import { Featured } from '../components/home/mainSection/Featured'
+import { toAppMapper } from '@/utils/cmsToAppMapper'
 
 interface Props {}
 
@@ -23,22 +24,22 @@ export const Home = (props: Props) => {
   const urlParams = new URLSearchParams(window.location.search)
   const sessionId = urlParams.get('session_id')
   const currentConsumer = useAppSelector(selectCurrentConsumer)
-  // const { data: firstQuery } = useGetProductsByCategoryQuery({
-  //   variables: { category: 'popularSales' },
-  // })
-  // const { data: secondQuery } = useGetProductsByCategoryQuery({
-  //   variables: { category: 'topRateSales' },
-  // })
+  const { data: popularSales } = useGetProductsByCategoryQuery({
+    variables: { category: 'popularSales' },
+  })
+  const { data: trendsSales } = useGetProductsByCategoryQuery({
+    variables: { category: 'trendsSales' },
+  })
 
-  // const popularSalesCMS: any = {
-  //   title: 'Popular Sales',
-  //   items: firstQuery?.products,
-  // }
+  const popularSalesCMS: Product[] =
+    (popularSales &&
+      popularSales!.products.map((product) => toAppMapper(product))) ||
+    []
 
-  // const topRateSalesCMS: any = {
-  //   title: 'Top Rated Sales',
-  //   items: secondQuery?.products,
-  // }
+  const trendsSalesCMS: Product[] =
+    (trendsSales &&
+      trendsSales!.products.map((product) => toAppMapper(product))) ||
+    []
 
   useEffect(() => {
     if (sessionId) {
@@ -46,7 +47,6 @@ export const Home = (props: Props) => {
         ;(async () => {
           const products = await fetchLineItems(sessionId, currentConsumer.id)
           if (products && currentConsumer) {
-
             // Mandar para o banco de dados nome - email - endereço - diminuir estoque dos produtos de
             // acordo com o produto e quantidade do produto comprado
 
@@ -70,9 +70,9 @@ export const Home = (props: Props) => {
       <Cart />
       <main className={style.mainContentWrapper}>
         <Hero />
-        <PopularSales popularSales={popularSales} />
+        <PopularSales popularSales={popularSalesCMS || popularSalesMOCKED} />
         <Highlight />
-        <TrendsSales trendsSales={trendsSales} />
+        <TrendsSales trendsSales={trendsSalesCMS || trendsSalesMOCKED} />
         <Featured />
         <Stories stories={stories} />
       </main>
