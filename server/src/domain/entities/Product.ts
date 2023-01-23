@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 
 export interface ProductProps {
-  id: string;
+  id?: string;
   title: string;
   subtitle: string;
   price: string;
@@ -23,7 +23,7 @@ export class Product {
   }
 
   public get id(): string {
-    return this._id;
+    return this.props.id ? this.props.id : this._id;
   }
 
   public get title(): string {

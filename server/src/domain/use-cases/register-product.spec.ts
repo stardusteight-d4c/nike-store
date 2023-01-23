@@ -39,11 +39,11 @@ describe("Register a product", () => {
     const product1 = new Product(makeProduct());
     await registerProduct.execute(product1);
 
-    const product2 = new Product(makeProduct({ id: "MyID", title: "MyTitle" }));
+    const product2 = new Product(makeProduct({ title: "MyTitle" }));
     const product3 = new Product(
       makeProduct({ id: "YourID", title: "YourTitle" }),
     );
-    
+
     await registerProduct.execute(product2);
 
     expect(

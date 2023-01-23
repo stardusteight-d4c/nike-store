@@ -6,7 +6,6 @@ export class InMemoryProductsRepository implements ProductsRepository {
   public products: Product[] = [];
 
   async register(data: Product): Promise<RegisterProductResponse> {
-
     const findById = this.products.find(
       (product) => product.id === data.id,
     );
