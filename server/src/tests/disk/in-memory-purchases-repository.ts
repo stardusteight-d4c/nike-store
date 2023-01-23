@@ -1,14 +1,32 @@
-import { Purchase } from "@prisma/client";
 import { Product } from "../../domain/entities/Product";
-import { PurchasesRepository } from "../../domain/repositories/purchases-repository";
-import { CreateCheckoutSessionResponse } from "../../domain/use-cases/create-checkout-session";
+import {
+  CreateCheckoutSessionResponse,
+  PurchasesRepository,
+} from "../../domain/repositories/purchases-repository";
 import { makeProduct } from "../../factories/products-factory";
-import { mergeArrayOfObjectsByIdProperty } from "../../utils/merge-array-of-objects-by-id-property";
-import { stringPriceToNumber } from "../../utils/string-price-to-number";
+import { mergeArrayOfObjectsByIdProperty } from "../../utils/mergeArrayOfObjectsByIdProperty";
+import { stringPriceToNumber } from "../../utils/stringPriceToNumber";
+import { randomUUID } from "node:crypto";
+
+type CheckoutSession = {
+  id: string;
+  success_url: string;
+  purchaseInfo: Array<{
+    productId: string;
+    title: string;
+    quantity: number;
+    totalPrice: number;
+  }>;
+  totalAmount?: number;
+};
 
 export class InMemoryPurchasesRepository implements PurchasesRepository {
   public products: Product[] = [];
-  public purchases: Purchase[] = [];
+  public checkoutSessionInformation: CheckoutSession = {
+    id: "",
+    success_url: "",
+    purchaseInfo: [],
+  };
 
   async createCheckoutSession(
     data: { id: string; quantity: number }[],
@@ -29,7 +47,7 @@ export class InMemoryPurchasesRepository implements PurchasesRepository {
       purchaseProductsIds.includes(product.id),
     );
 
-    console.log("purchaseProductsData", purchaseProductsData);
+    // console.log("purchaseProductsData", purchaseProductsData);
     const mergeArray = mergeArrayOfObjectsByIdProperty(
       purchaseProductsData,
       data,
@@ -56,11 +74,17 @@ export class InMemoryPurchasesRepository implements PurchasesRepository {
         0,
       );
 
+      this.checkoutSessionInformation.id = randomUUID();
+      this.checkoutSessionInformation.success_url = `http://localhost:5173/?session_id=${this.checkoutSessionInformation.id}`;
+
+      this.checkoutSessionInformation.purchaseInfo.push(purchaseInfo);
+
       const parsedFloat = parseFloat(totalAmount).toFixed(2);
+      this.checkoutSessionInformation.totalAmount = Number(parsedFloat);
+
       return {
         proceedToCheckout: true,
-        purchaseInfo,
-        totalAmount: Number(parsedFloat),
+        checkoutSession: this.checkoutSessionInformation,
       };
     }
 

@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { InMemoryPurchasesRepository } from "../../tests/disk/in-memory-purchases-repository";
+import { CreateCheckoutSessionResponse } from "../repositories/purchases-repository";
 import {
   CreateCheckoutSession,
-  CreateCheckoutSessionResponse,
   CreateCheckoutSessionRequest,
 } from "./create-checkout-session";
 
@@ -29,13 +29,19 @@ describe("Create a checkout session", async () => {
     expect(
       createCheckoutSession
         .execute(checkoutProducts)
-        .then((data: CreateCheckoutSessionResponse) => data),
+        .then((data: CreateCheckoutSessionResponse) => {
+          // console.log('Checkout Session Created!', data);
+          return data;
+        }),
     ).resolves.toBeTruthy();
 
     expect(
       createCheckoutSession
         .execute(checkoutProducts)
-        .then((data: CreateCheckoutSessionResponse) => data.totalAmount),
+        .then(
+          (data: CreateCheckoutSessionResponse) =>
+            data.checkoutSession?.totalAmount,
+        ),
     ).resolves.toBeTypeOf("number");
   });
 

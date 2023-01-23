@@ -1,4 +1,4 @@
-import { PurchasesRepository } from "../repositories/purchases-repository";
+import { CreateCheckoutSessionResponse, PurchasesRepository } from "../repositories/purchases-repository";
 
 export interface CreateCheckoutSessionRequest {
   data: Array<{
@@ -7,24 +7,13 @@ export interface CreateCheckoutSessionRequest {
   }>;
 }
 
-export interface CreateCheckoutSessionResponse {
-  proceedToCheckout: boolean;
-  purchaseInfo?: Array<{
-    productId: string;
-    title: string;
-    quantity: number;
-    totalPrice: number;
-  }>;
-  totalAmount?: number;
-}
-
 export class CreateCheckoutSession {
   constructor(private purchasesRepository: PurchasesRepository) {}
 
   async execute(
     request: CreateCheckoutSessionRequest,
   ): Promise<CreateCheckoutSessionResponse> {
-    const { proceedToCheckout, purchaseInfo, totalAmount } =
+    const { proceedToCheckout, checkoutSession } =
       await this.purchasesRepository.createCheckoutSession(request.data);
 
     if (proceedToCheckout === false) {
@@ -33,6 +22,6 @@ export class CreateCheckoutSession {
       );
     }
 
-    return { proceedToCheckout, purchaseInfo, totalAmount };
+    return { proceedToCheckout, checkoutSession };
   }
 }
