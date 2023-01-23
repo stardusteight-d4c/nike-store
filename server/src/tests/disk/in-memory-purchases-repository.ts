@@ -37,16 +37,35 @@ export class InMemoryPurchasesRepository implements PurchasesRepository {
       data,
     );
 
-    console.log("mergeArray", mergeArray);
-
     if (purchaseProductsData) {
-      mergeArray.map((product: any) =>
-        console.log(product[0].props.price)
-              
+      let purchaseInfo: any = [];
+      const totalArray = mergeArray.map((product: any) => {
+        const totalPrice =
+          stringPriceToNumber(product.props.price) * product.quantity;
+        const toPurchaseInfo = {
+          productId: product.props.id,
+          title: product.title,
+          quantity: product.quantity,
+          totalPrice,
+        };
+        purchaseInfo.push(toPurchaseInfo);
+        return totalPrice;
+      });
+
+      const totalAmount = totalArray.reduce(
+        (accumulator: number, currentValue: number) =>
+          accumulator + currentValue,
+        0,
       );
+
+      const parsedFloat = parseFloat(totalAmount).toFixed(2);
+      return {
+        proceedToCheckout: true,
+        purchaseInfo,
+        totalAmount: Number(parsedFloat),
+      };
     }
 
-    const obj: any = {};
-    return { proceedToCheckout: true, purchaseInfo: obj };
+    return { proceedToCheckout: false };
   }
 }

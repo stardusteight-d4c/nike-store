@@ -6,13 +6,12 @@ export abstract class PurchasesRepository {
     }>,
   ): Promise<{
     proceedToCheckout: boolean;
-    purchaseInfo: [
-      {
-        productId: string;
-        title: string;
-        quantity: number;
-        totalPrice: number;
-      },
-    ];
+    purchaseInfo?:  Array<{
+      productId: string;
+      title: string;
+      quantity: number;
+      totalPrice: number;
+    }>;
+    totalAmount?: number
   }>;
 }
