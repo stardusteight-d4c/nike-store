@@ -30,7 +30,7 @@ describe("Create a checkout session", async () => {
       createCheckoutSession
         .execute(checkoutProducts)
         .then((data: CreateCheckoutSessionResponse) => {
-          console.log('Checkout Session Created!', data.checkoutSession);
+          // console.log('Checkout Session Created!', data.checkoutSession);
           return data;
         }),
     ).resolves.toBeTruthy();

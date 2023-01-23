@@ -27,5 +27,5 @@ export abstract class PurchasesRepository {
   abstract make(
     session_id: string,
     consumer_id: string,
-  ): Promise<Session>;
+  ): Promise<{session?: Session, status: boolean}>;
 }

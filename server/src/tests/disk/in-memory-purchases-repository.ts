@@ -29,6 +29,23 @@ export class InMemoryPurchasesRepository implements PurchasesRepository {
     purchaseInfo: [],
   };
   public checkoutSessions: CheckoutSession[] = [];
+  public consumers = [
+    {
+      id: "a8f8d60ea2a48fc662326ceb6372c99d",
+      purchases: {},
+      cep: "76811-114",
+    },
+    {
+      id: "8a76dd1bbd2833f9f78611eee28d00c4",
+      purchases: {},
+      cep: "69305-220",
+    },
+    {
+      id: "b08e28184709a38d9ceeb583e24e8842",
+      purchases: {},
+      cep: "69059-340",
+    },
+  ];
 
   async createCheckoutSession(
     data: { id: string; quantity: number }[],
@@ -104,7 +121,47 @@ export class InMemoryPurchasesRepository implements PurchasesRepository {
     return { proceedToCheckout: false };
   }
 
-  make(session_id: string, consumer_id: string): Promise<Session> {
-    throw new Error("Method not implemented.");
+  async make(
+    session_id: string,
+    consumer_id: string,
+  ): Promise<{ session?: Session; status: boolean }> {
+    this.checkoutSessions = [
+      {
+        id: "3387d124-c3c1-45b7-826a-463d7d9fd46a",
+        success_url:
+          "http://localhost:5173/?session_id=3387d124-c3c1-45b7-826a-463d7d9fd46a",
+        purchaseInfo: [
+          {
+            productId: "AAA",
+            title: "AAA",
+            quantity: 2,
+            totalPrice: 1761.98,
+          },
+          { productId: "BBB", title: "BBB", quantity: 1, totalPrice: 880.99 },
+        ],
+        totalAmount: 2642.97,
+      },
+    ];
+
+    const session = this.checkoutSessions.find(
+      (session) => session.id === session_id,
+    );
+
+    console.log('session', session);
+    
+
+    const consumer = this.consumers.find(
+      (consumer) => consumer.id === consumer_id,
+    );
+
+    console.log('consumer', consumer);
+
+
+    if (session !== undefined && consumer) {
+      consumer.purchases = session;
+      return { session, status: true };
+    }
+
+    return { session: undefined, status: false };
   }
 }
