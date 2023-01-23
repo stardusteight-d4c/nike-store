@@ -30,10 +30,19 @@ describe("Create a checkout session", async () => {
       createCheckoutSession
         .execute(checkoutProducts)
         .then((data: CreateCheckoutSessionResponse) => {
-          // console.log('Checkout Session Created!', data);
+          console.log('Checkout Session Created!', data.checkoutSession);
           return data;
         }),
     ).resolves.toBeTruthy();
+
+    expect(
+      createCheckoutSession
+        .execute(checkoutProducts)
+        .then(
+          (data: CreateCheckoutSessionResponse) =>
+            data.checkoutSession?.success_url,
+        ),
+    ).resolves.toBeTypeOf("string");
 
     expect(
       createCheckoutSession

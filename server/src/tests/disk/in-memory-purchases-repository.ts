@@ -2,6 +2,7 @@ import { Product } from "../../domain/entities/Product";
 import {
   CreateCheckoutSessionResponse,
   PurchasesRepository,
+  Session,
 } from "../../domain/repositories/purchases-repository";
 import { makeProduct } from "../../factories/products-factory";
 import { mergeArrayOfObjectsByIdProperty } from "../../utils/mergeArrayOfObjectsByIdProperty";
@@ -27,6 +28,7 @@ export class InMemoryPurchasesRepository implements PurchasesRepository {
     success_url: "",
     purchaseInfo: [],
   };
+  public checkoutSessions: CheckoutSession[] = [];
 
   async createCheckoutSession(
     data: { id: string; quantity: number }[],
@@ -47,20 +49,22 @@ export class InMemoryPurchasesRepository implements PurchasesRepository {
       purchaseProductsIds.includes(product.id),
     );
 
-    // console.log("purchaseProductsData", purchaseProductsData);
-    const mergeArray = mergeArrayOfObjectsByIdProperty(
-      purchaseProductsData,
-      data,
-    );
-
     if (purchaseProductsData.length > 0) {
+      const mergeArray = mergeArrayOfObjectsByIdProperty(
+        purchaseProductsData,
+        data,
+      );
+
+      // console.log("purchaseProductsData", purchaseProductsData);
+      // console.log("mergeArray", mergeArray);
+
       let purchaseInfo: any = [];
       const totalArray = mergeArray.map((product: any) => {
         const totalPrice =
           stringPriceToNumber(product.props.price) * product.quantity;
         const toPurchaseInfo = {
           productId: product.props.id,
-          title: product.title,
+          title: product.props.title,
           quantity: product.quantity,
           totalPrice,
         };
@@ -82,12 +86,25 @@ export class InMemoryPurchasesRepository implements PurchasesRepository {
       const parsedFloat = parseFloat(totalAmount).toFixed(2);
       this.checkoutSessionInformation.totalAmount = Number(parsedFloat);
 
+      this.checkoutSessions.push(this.checkoutSessionInformation);
+
+      const checkoutSession = this.checkoutSessionInformation;
+      this.checkoutSessionInformation = {
+        id: "",
+        success_url: "",
+        purchaseInfo: [],
+      };
+
       return {
         proceedToCheckout: true,
-        checkoutSession: this.checkoutSessionInformation,
+        checkoutSession,
       };
     }
 
     return { proceedToCheckout: false };
+  }
+
+  make(session_id: string, consumer_id: string): Promise<Session> {
+    throw new Error("Method not implemented.");
   }
 }
