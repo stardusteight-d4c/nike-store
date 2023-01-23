@@ -21,11 +21,9 @@ export class InMemoryPurchasesRepository implements PurchasesRepository {
       (product: any) => product.id,
     );
 
-    console.log("data", data);
-
-    console.log("purchaseProductsIds", purchaseProductsIds);
-
-    console.log("products", this.products);
+    // console.log("data", data);
+    // console.log("purchaseProductsIds", purchaseProductsIds);
+    // console.log("products", this.products);
 
     const purchaseProductsData = this.products.filter((product) =>
       purchaseProductsIds.includes(product.id),
@@ -37,7 +35,7 @@ export class InMemoryPurchasesRepository implements PurchasesRepository {
       data,
     );
 
-    if (purchaseProductsData) {
+    if (purchaseProductsData.length > 0) {
       let purchaseInfo: any = [];
       const totalArray = mergeArray.map((product: any) => {
         const totalPrice =

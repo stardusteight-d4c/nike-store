@@ -5,7 +5,7 @@ import { Product } from "../entities/Product";
 import { RegisterProduct, RegisterProductResponse } from "./register-product";
 
 describe("Register a product", () => {
-  it("must be possible to register a product", () => {
+  it("must be possible to register a product.", () => {
     const productsRepository = new InMemoryProductsRepository();
     const registerProduct = new RegisterProduct(productsRepository);
 
@@ -32,7 +32,7 @@ describe("Register a product", () => {
     ).resolves.toBeTypeOf("string");
   });
 
-  it("must not be possible to register a product with the same title or id", async () => {
+  it("must not be possible to register a product with the same title or id.", async () => {
     const productsRepository = new InMemoryProductsRepository();
     const registerProduct = new RegisterProduct(productsRepository);
 

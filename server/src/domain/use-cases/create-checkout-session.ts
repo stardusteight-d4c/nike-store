@@ -15,7 +15,7 @@ export interface CreateCheckoutSessionResponse {
     quantity: number;
     totalPrice: number;
   }>;
-  totalAmount?: number
+  totalAmount?: number;
 }
 
 export class CreateCheckoutSession {
