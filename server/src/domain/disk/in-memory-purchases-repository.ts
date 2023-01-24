@@ -77,10 +77,13 @@ export class InMemoryPurchasesRepository implements PurchasesRepository {
       );
 
       // console.log("purchaseProductsData", purchaseProductsData);
-      // console.log("mergeArray", mergeArray);
 
       let purchaseInfo: any = [];
       const totalArray = mergeArray.map((product: any) => {
+        if (product.quantity > product.props.stock) {
+          return false;
+        }
+
         const totalPrice =
           stringPriceToNumber(product.props.price) * product.quantity;
         const toPurchaseInfo = {
@@ -92,6 +95,13 @@ export class InMemoryPurchasesRepository implements PurchasesRepository {
         purchaseInfo.push(toPurchaseInfo);
         return totalPrice;
       });
+
+      if (totalArray.includes(false)) {
+        return {
+          proceedToCheckout: false,
+          message: "There is an item that exceeds the stock quantity.",
+        };
+      }
 
       const totalAmount = totalArray.reduce(
         (accumulator: number, currentValue: number) =>
@@ -122,7 +132,11 @@ export class InMemoryPurchasesRepository implements PurchasesRepository {
       };
     }
 
-    return { proceedToCheckout: false };
+    return {
+      proceedToCheckout: false,
+      message:
+        "An error occurred while processing product data and creating a checkout session.",
+    };
   }
 
   async make(

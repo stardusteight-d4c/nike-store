@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { makeProduct } from "../../factories/products-factory";
-import { InMemoryProductsRepository } from "../../tests/disk/in-memory-products-repository";
+import { InMemoryProductsRepository } from "../disk/in-memory-products-repository";
 import { Product } from "../entities/Product";
 import { RegisterProduct, RegisterProductResponse } from "./register-product";
 

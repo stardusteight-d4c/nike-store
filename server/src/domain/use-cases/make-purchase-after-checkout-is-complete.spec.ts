@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { InMemoryPurchasesRepository } from "../../tests/disk/in-memory-purchases-repository";
+import { InMemoryPurchasesRepository } from "../disk/in-memory-purchases-repository";
 import { Session } from "../repositories/purchases-repository";
 import { MakePurchaseAfterCheckoutIsComplete } from "./make-purchase-after-checkout-is-complete";
 

@@ -1,4 +1,7 @@
-import { CreateCheckoutSessionResponse, PurchasesRepository } from "../repositories/purchases-repository";
+import {
+  CreateCheckoutSessionResponse,
+  PurchasesRepository,
+} from "../repositories/purchases-repository";
 
 export interface CreateCheckoutSessionRequest {
   data: Array<{
@@ -13,13 +16,11 @@ export class CreateCheckoutSession {
   async execute(
     request: CreateCheckoutSessionRequest,
   ): Promise<CreateCheckoutSessionResponse> {
-    const { proceedToCheckout, checkoutSession } =
+    const { proceedToCheckout, checkoutSession, message } =
       await this.purchasesRepository.createCheckoutSession(request.data);
 
     if (proceedToCheckout === false) {
-      throw new Error(
-        "An error occurred while processing product data and creating a checkout session.",
-      );
+      throw new Error(message);
     }
 
     return { proceedToCheckout, checkoutSession };

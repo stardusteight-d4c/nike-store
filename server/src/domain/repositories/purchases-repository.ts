@@ -18,6 +18,7 @@ export type Session = {
 export interface CreateCheckoutSessionResponse {
   proceedToCheckout: boolean;
   checkoutSession?: Session;
+  message?: string
 }
 
 export abstract class PurchasesRepository {

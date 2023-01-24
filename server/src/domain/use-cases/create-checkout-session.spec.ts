@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { InMemoryPurchasesRepository } from "../../tests/disk/in-memory-purchases-repository";
+import { InMemoryPurchasesRepository } from "../disk/in-memory-purchases-repository";
 import { CreateCheckoutSessionResponse } from "../repositories/purchases-repository";
 import {
   CreateCheckoutSession,
@@ -76,5 +76,31 @@ describe("Create a checkout session", async () => {
     ).rejects.toThrow(
       "An error occurred while processing product data and creating a checkout session.",
     );
+  });
+
+  it("should throw an error if an item exceeds the stock limit.", async () => {
+    const purchasesRepository = new InMemoryPurchasesRepository();
+    const createCheckoutSession = new CreateCheckoutSession(
+      purchasesRepository,
+    );
+
+    const checkoutProducts: CreateCheckoutSessionRequest = {
+      data: [
+        {
+          id: "AAA",
+          quantity: 2,
+        },
+        {
+          id: "BBB",
+          quantity: 7,
+        },
+      ],
+    };
+
+    expect(
+      createCheckoutSession
+        .execute(checkoutProducts)
+        .then((data: CreateCheckoutSessionResponse) => data),
+    ).rejects.toThrow("There is an item that exceeds the stock quantity.");
   });
 });
