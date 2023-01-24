@@ -16,7 +16,6 @@ export class LoginConsumer {
     const { consumer, message, status } = await this.consumersRepository.login(
       request,
     );
-    console.log("status", status);
 
     if (status === false) {
       throw new Error(message);

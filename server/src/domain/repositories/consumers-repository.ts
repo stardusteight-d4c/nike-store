@@ -25,9 +25,25 @@ export interface LoginConsumerResponse {
   message?: string;
 }
 
+export interface ValidateSessionRequest {
+  encodedToken: string;
+}
+
+export interface ValidateSessionResponse {
+  decodedToken?: {};
+  consumer?: Consumer;
+  status?: boolean;
+  message?: string;
+}
+
 export abstract class ConsumersRepository {
   abstract register(
     data: RegisterConsumerRequest,
   ): Promise<RegisterConsumerResponse>;
+
   abstract login(data: LoginConsumerRequest): Promise<LoginConsumerResponse>;
+
+  abstract validateSession(
+    data: ValidateSessionRequest,
+  ): Promise<ValidateSessionResponse>;
 }

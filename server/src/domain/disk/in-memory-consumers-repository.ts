@@ -6,6 +6,8 @@ import {
   LoginConsumerRequest,
   LoginConsumerResponse,
   RegisterConsumerRequest,
+  ValidateSessionRequest,
+  ValidateSessionResponse,
 } from "../repositories/consumers-repository";
 import { RegisterConsumerResponse } from "../repositories/consumers-repository";
 
@@ -68,5 +70,42 @@ export class InMemoryConsumersRepository implements ConsumersRepository {
     }
 
     return { status: false, message: "Invalid password or email." };
+  }
+
+  async validateSession(
+    data: ValidateSessionRequest,
+  ): Promise<ValidateSessionResponse> {
+    const { encodedToken } = data;
+
+    const consumer: Consumer = new Consumer(makeConsumer());
+    this.consumers.push(consumer);
+
+    // simulation of a generic token check
+    function verifyToken(encodedToken: string) {
+      const consumerToken = "c949ce7276db1e9f84f8a7e598e0b6ae";
+      const verifyToken = encodedToken === consumerToken;
+      if (verifyToken) {
+        const decodedToken = {
+          id: "180790068254449ce83cc2e16bd45745",
+          email: "example@gmail.com",
+        };
+        return decodedToken;
+      } else {
+        return false;
+      }
+    }
+
+    const decodedToken = verifyToken(encodedToken);
+
+    if (decodedToken) {
+      const consumer = this.consumers.find(
+        (consumer) => consumer.id === decodedToken.id,
+      );
+      if (consumer) {
+        return { consumer, decodedToken, status: true };
+      }
+    }
+
+    return { status: false, message: "Invalid or expired token." };
   }
 }

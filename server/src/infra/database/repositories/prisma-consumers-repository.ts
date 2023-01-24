@@ -5,6 +5,8 @@ import {
   LoginConsumerResponse,
   RegisterConsumerRequest,
   RegisterConsumerResponse,
+  ValidateSessionRequest,
+  ValidateSessionResponse,
 } from "../../../domain/repositories/consumers-repository";
 import {
   addressMapperToDomain,
@@ -12,6 +14,10 @@ import {
 } from "../../http/mappers";
 import { prisma } from "../prisma";
 import brcypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export class PrismaConsumersRepository implements ConsumersRepository {
   async register(
@@ -86,5 +92,31 @@ export class PrismaConsumersRepository implements ConsumersRepository {
       }
     }
     return { status: false, message: "Invalid password or email." };
+  }
+
+  async validateSession(
+    data: ValidateSessionRequest,
+  ): Promise<ValidateSessionResponse> {
+    const sessionToken = data.encodedToken;
+
+    try {
+      const decode: any = jwt.verify(sessionToken, process.env.JWT_SECRET!);
+
+      if (decode) {
+        const consumer = await prisma.consumer.findFirst({
+          where: {
+            id: decode.id,
+          },
+        });
+        if (consumer) {
+          const consumerToDomain = new Consumer(consumer);
+          return { consumer: consumerToDomain, decodedToken: decode };
+        }
+      }
+
+      return { status: false, message: "Invalid or expired token." };
+    } catch (error: any) {
+      return { status: false, message: error };
+    }
   }
 }

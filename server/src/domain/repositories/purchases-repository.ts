@@ -24,13 +24,14 @@ export interface CreateCheckoutSessionResponse {
 export interface MakePurchaseResponse {
   session?: Session;
   status: boolean;
-  message?: string
+  message?: string;
 }
 
 export abstract class PurchasesRepository {
   abstract createCheckoutSession(
     data: CreateCheckoutSessionRequest,
   ): Promise<CreateCheckoutSessionResponse>;
+
   abstract make(
     session_id: string,
     consumer_id: string,

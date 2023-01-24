@@ -5,7 +5,7 @@ export class TriggersError {
     console.error(error);
     return reply.status(500).send({
       status: false,
-      msg: error.message,
+      message: error.message,
     });
   }
 }

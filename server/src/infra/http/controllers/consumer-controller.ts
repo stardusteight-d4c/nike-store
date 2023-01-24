@@ -8,6 +8,7 @@ import { Consumer, ConsumerProps } from "../../../domain/entities/Consumer";
 import { consumerMapperToHttp } from "../mappers";
 import { LoginConsumerRequest } from "../../../domain/repositories/consumers-repository";
 import { LoginConsumer } from "../../../domain/use-cases/login-consumer";
+import { ValidateSession } from "../../../domain/use-cases/validate-session";
 
 dotenv.config();
 
@@ -68,29 +69,31 @@ export class ConsumerController {
       new TriggersError(error, reply);
     }
   }
+
+  async validateSession(
+    request: FastifyRequest<{ Headers: { authorization: string } }>,
+    reply: FastifyReply,
+  ) {
+    try {
+      const prismaConsumersRepository = new PrismaConsumersRepository();
+      const service = new ValidateSession(prismaConsumersRepository);
+
+      const sessionToken = request.headers.authorization;
+
+      const result = await service.execute({
+        encodedToken: sessionToken,
+      });
+
+      const consumerHttp = await consumerMapperToHttp(result.consumer);
+
+      return reply
+        .status(200)
+        .send({ session: result.decodedToken, consumer: consumerHttp });
+    } catch (error) {
+      new TriggersError(error, reply);
+    }
+  }
 }
-
-// TRANSFORMAR EM UM MIDDLEWARE
-// async verifySession(
-//   request: FastifyRequest<{ Headers: { authorization: string } }>,
-//   reply: FastifyReply,
-// ) {
-//   try {
-//     const sessionToken = request.headers.authorization;
-
-//     const decode: any = jwt.verify(sessionToken, process.env.JWT_SECRET!);
-
-//     const consumer = await prisma.consumer.findFirst({
-//       where: {
-//         id: decode.id,
-//       },
-//     });
-
-//     return reply.status(200).send({ session: decode, consumer });
-//   } catch (error) {
-//     return reply.send({ msg: "Expired or invalid token" });
-//   }
-// }
 
 // async getAddress(
 //   request: FastifyRequest<{ Querystring: { consumer_id: string } }>,
