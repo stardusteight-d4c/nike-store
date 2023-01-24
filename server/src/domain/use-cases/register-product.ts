@@ -1,10 +1,5 @@
 import { Product } from "../entities/Product";
-import { ProductsRepository } from "../repositories/products-repository";
-
-export interface RegisterProductResponse {
-  status: true | false;
-  message: string;
-}
+import { ProductsRepository, RegisterProductResponse } from "../repositories/products-repository";
 
 export class RegisterProduct {
   constructor(private productsRepository: ProductsRepository) {}
@@ -13,7 +8,7 @@ export class RegisterProduct {
     const { status, message } = await this.productsRepository.register(request);
 
     if (status === false) {
-      throw new Error("Product cannot be registered, see logs.");
+      throw new Error(message);
     }
 
     return { status, message };

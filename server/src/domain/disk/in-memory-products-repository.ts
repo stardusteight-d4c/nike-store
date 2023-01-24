@@ -1,6 +1,5 @@
 import { Product } from "../../domain/entities/Product";
-import { ProductsRepository } from "../../domain/repositories/products-repository";
-import { RegisterProductResponse } from "../../domain/use-cases/register-product";
+import { ProductsRepository, RegisterProductResponse } from "../../domain/repositories/products-repository";
 
 export class InMemoryProductsRepository implements ProductsRepository {
   public products: Product[] = [];
@@ -13,7 +12,7 @@ export class InMemoryProductsRepository implements ProductsRepository {
       (product) => product.title === data.title,
     );
 
-    if (!findByTitle) {
+    if (!findByTitle && !findById) {
       this.products.push(data);
     }
 
@@ -22,7 +21,7 @@ export class InMemoryProductsRepository implements ProductsRepository {
     } else {
       return {
         status: false,
-        message: "There was an error registering this new product",
+        message: "There was an error registering this new product.",
       };
     }
   }

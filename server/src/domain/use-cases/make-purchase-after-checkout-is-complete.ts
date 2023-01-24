@@ -1,6 +1,6 @@
 import {
+  MakePurchaseResponse,
   PurchasesRepository,
-  Session,
 } from "../repositories/purchases-repository";
 
 export class MakePurchaseAfterCheckoutIsComplete {
@@ -9,17 +9,16 @@ export class MakePurchaseAfterCheckoutIsComplete {
   async execute(
     session_id: string,
     consumer_id: string,
-  ): Promise<{ session?: Session; status: boolean }> {
-    const { session, status } = await this.purchasesRepository.make(
+  ): Promise<MakePurchaseResponse> {
+    const { session, status, message } = await this.purchasesRepository.make(
       session_id,
       consumer_id,
     );
 
     if (status === false) {
-      throw new Error(
-        "There was an error acquiring information about this session.",
-      );
+      throw new Error(message);
     }
+    
     return { session, status };
   }
 }

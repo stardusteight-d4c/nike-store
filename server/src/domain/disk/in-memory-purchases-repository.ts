@@ -1,6 +1,7 @@
 import { Product } from "../../domain/entities/Product";
 import {
   CreateCheckoutSessionResponse,
+  MakePurchaseResponse,
   PurchasesRepository,
   Session,
 } from "../../domain/repositories/purchases-repository";
@@ -142,7 +143,7 @@ export class InMemoryPurchasesRepository implements PurchasesRepository {
   async make(
     session_id: string,
     consumer_id: string,
-  ): Promise<{ session?: Session; status: boolean }> {
+  ): Promise<MakePurchaseResponse> {
     this.checkoutSessions = [
       {
         id: "3387d124-c3c1-45b7-826a-463d7d9fd46a",
@@ -174,6 +175,9 @@ export class InMemoryPurchasesRepository implements PurchasesRepository {
       return { session, status: true };
     }
 
-    return { session: undefined, status: false };
+    return {
+      status: false,
+      message: "There was an error acquiring information about this session.",
+    };
   }
 }

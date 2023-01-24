@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { InMemoryPurchasesRepository } from "../disk/in-memory-purchases-repository";
-import { CreateCheckoutSessionResponse } from "../repositories/purchases-repository";
 import {
-  CreateCheckoutSession,
   CreateCheckoutSessionRequest,
-} from "./create-checkout-session";
+  CreateCheckoutSessionResponse,
+} from "../repositories/purchases-repository";
+import { CreateCheckoutSession } from "./create-checkout-session";
 
 describe("Create a checkout session", async () => {
   it("must be possible to create a checkout session from the id and quantity of the product.", () => {
@@ -13,7 +13,7 @@ describe("Create a checkout session", async () => {
       purchasesRepository,
     );
 
-    const checkoutProducts: CreateCheckoutSessionRequest = {
+    const checkoutProducts: { data: CreateCheckoutSessionRequest } = {
       data: [
         {
           id: "AAA",
@@ -60,7 +60,7 @@ describe("Create a checkout session", async () => {
       purchasesRepository,
     );
 
-    const checkoutProduct: CreateCheckoutSessionRequest = {
+    const checkoutProduct: { data: CreateCheckoutSessionRequest } = {
       data: [
         {
           id: "DDD",
@@ -84,7 +84,7 @@ describe("Create a checkout session", async () => {
       purchasesRepository,
     );
 
-    const checkoutProducts: CreateCheckoutSessionRequest = {
+    const checkoutProducts: { data: CreateCheckoutSessionRequest } = {
       data: [
         {
           id: "AAA",

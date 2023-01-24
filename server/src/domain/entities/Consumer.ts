@@ -8,7 +8,7 @@ export interface ConsumerProps {
   email: string;
   password: string;
   cep: string;
-  address: Address;
+  address?: Address;
   purchases?: Purchase[];
 }
 
@@ -55,10 +55,10 @@ export class Consumer {
     this.props.cep = cep;
   }
 
-  public get address(): Address {
+  public get address(): Address | undefined {
     return this.props.address;
   }
-  public set address(address: Address) {
+  public set address(address: Address | undefined) {
     this.props.address = address;
   }
 }

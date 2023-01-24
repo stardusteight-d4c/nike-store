@@ -2,7 +2,8 @@ import { describe, expect, it } from "vitest";
 import { makeProduct } from "../../factories/products-factory";
 import { InMemoryProductsRepository } from "../disk/in-memory-products-repository";
 import { Product } from "../entities/Product";
-import { RegisterProduct, RegisterProductResponse } from "./register-product";
+import { RegisterProductResponse } from "../repositories/products-repository";
+import { RegisterProduct } from "./register-product";
 
 describe("Register a product", () => {
   it("must be possible to register a product.", () => {
@@ -50,7 +51,7 @@ describe("Register a product", () => {
       registerProduct
         .execute(product1)
         .then((data: RegisterProductResponse) => data),
-    ).rejects.toThrow("Product cannot be registered, see logs.");
+    ).rejects.toThrow("There was an error registering this new product.");
 
     expect(
       registerProduct

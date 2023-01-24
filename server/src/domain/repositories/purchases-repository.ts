@@ -1,4 +1,4 @@
-type CreateCheckoutSessionRequestData = Array<{
+export type CreateCheckoutSessionRequest = Array<{
   id: string;
   quantity: number;
 }>;
@@ -18,15 +18,21 @@ export type Session = {
 export interface CreateCheckoutSessionResponse {
   proceedToCheckout: boolean;
   checkoutSession?: Session;
+  message?: string;
+}
+
+export interface MakePurchaseResponse {
+  session?: Session;
+  status: boolean;
   message?: string
 }
 
 export abstract class PurchasesRepository {
   abstract createCheckoutSession(
-    data: CreateCheckoutSessionRequestData,
+    data: CreateCheckoutSessionRequest,
   ): Promise<CreateCheckoutSessionResponse>;
   abstract make(
     session_id: string,
     consumer_id: string,
-  ): Promise<{session?: Session, status: boolean}>;
+  ): Promise<MakePurchaseResponse>;
 }
