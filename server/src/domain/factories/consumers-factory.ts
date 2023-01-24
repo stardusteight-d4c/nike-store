@@ -8,7 +8,7 @@ export function makeConsumer(consumer?: {
     id: consumer?.id ?? "180790068254449ce83cc2e16bd45745",
     email: consumer?.email ?? "example@email.com",
     name: "José Gomes",
-    password: "senhasupersecreta",
+    password: "password",
     cep: "69914-790",
   };
 }

@@ -6,9 +6,8 @@ const consumerController = new ConsumerController();
 
 async function consumerRoutes(fastify: FastifyInstance) {
   fastify.post("/register", consumerController.register);
+  fastify.post("/login", consumerController.login);
 
-
-  // fastify.post("/findConsumer", consumerController.findConsumer);
   // fastify.post("/verifySession", consumerController.verifySession);
   // fastify.get("/address", consumerController.getAddress);
   // fastify.put("/newAddress", consumerController.newAddress);

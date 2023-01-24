@@ -5,8 +5,9 @@ import { RegisterConsumer } from "../../../domain/use-cases/register-consumer";
 import { PrismaConsumersRepository } from "../../database/repositories/prisma-consumers-repository";
 import { Address, AddressProps } from "../../../domain/entities/Address";
 import { Consumer, ConsumerProps } from "../../../domain/entities/Consumer";
-import jwt from "jsonwebtoken";
 import { consumerMapperToHttp } from "../mappers";
+import { LoginConsumerRequest } from "../../../domain/repositories/consumers-repository";
+import { LoginConsumer } from "../../../domain/use-cases/login-consumer";
 
 dotenv.config();
 
@@ -31,70 +32,45 @@ export class ConsumerController {
         address: addressToDomain,
       });
 
-      if (result.status === true) {
-        const consumerHttp = await consumerMapperToHttp(result.consumer);
-        const sessionToken = jwt.sign(
-          { id: consumerHttp.id, email: consumerHttp.email },
-          process.env.JWT_SECRET!,
-          {
-            expiresIn: "4d",
-          },
-        );
+      const consumerHttp = await consumerMapperToHttp(result.consumer);
 
-        return reply.status(201).send({ sessionToken, consumer: consumerHttp });
-      }
+      return reply
+        .status(201)
+        .send({ sessionToken: result.sessionToken, consumer: consumerHttp });
+    } catch (error) {
+      new TriggersError(error, reply);
+    }
+  }
+
+  async login(
+    request: FastifyRequest<{
+      Body: LoginConsumerRequest;
+    }>,
+    reply: FastifyReply,
+  ) {
+    const prismaConsumersRepository = new PrismaConsumersRepository();
+    const service = new LoginConsumer(prismaConsumersRepository);
+
+    try {
+      const { email, password } = request.body;
+
+      const result = await service.execute({
+        email,
+        password,
+      });
+
+      const consumerHttp = await consumerMapperToHttp(result.consumer);
+
+      return reply
+        .status(200)
+        .send({ sessionToken: result.sessionToken, consumer: consumerHttp });
     } catch (error) {
       new TriggersError(error, reply);
     }
   }
 }
 
-// async findConsumer(
-//   request: FastifyRequest<{ Body: { email: string; password: string } }>,
-//   reply: FastifyReply,
-// ) {
-//   try {
-//     const { email, password } = request.body;
-
-//     const consumer = await prisma.consumer.findFirst({
-//       where: {
-//         email,
-//       },
-//     });
-
-//     if (consumer) {
-//       const isValidPassword = await brcypt.compareSync(
-//         password,
-//         consumer?.password,
-//       );
-//       if (isValidPassword) {
-//         const sessionToken = jwt.sign(
-//           { id: consumer.id, email: consumer.email },
-//           process.env.JWT_SECRET!,
-//           {
-//             expiresIn: "4d",
-//           },
-//         );
-
-//         // @ts-expect-error
-//         delete consumer.password;
-
-//         return reply.status(200).send({ consumer, sessionToken });
-//       } else {
-//         return reply
-//           .status(200)
-//           .send({ message: "Incorrect email or password" });
-//       }
-//     } else {
-//       return reply
-//         .status(200)
-//         .send({ message: "Incorrect email or password" });
-//     }
-//   } catch (error) {
-//     new TriggersError(error, reply);
-//   }
-// }
-
+// TRANSFORMAR EM UM MIDDLEWARE
 // async verifySession(
 //   request: FastifyRequest<{ Headers: { authorization: string } }>,
 //   reply: FastifyReply,
