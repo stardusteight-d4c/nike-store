@@ -22,7 +22,6 @@ describe("Make a purchase", async () => {
     ).resolves.toBeTruthy();
   });
 
-
   it("must be return an error when searching for a non-existing checkout session or pass a non-existent consumer.", async () => {
     const purchasesRepository = new InMemoryPurchasesRepository();
     const makePurchaseAfterCheckoutIsComplete =
