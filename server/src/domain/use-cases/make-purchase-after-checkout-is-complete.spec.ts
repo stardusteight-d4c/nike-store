@@ -4,7 +4,7 @@ import { Session } from "../repositories/purchases-repository";
 import { MakePurchaseAfterCheckoutIsComplete } from "./make-purchase-after-checkout-is-complete";
 
 describe("Make a purchase", async () => {
-  it("must be possible to make a purchase by associating the data of a checkout session with a consumer after confirming the checkout and payment.", () => {
+  it("must be possible to make a purchase by associating the data from a previous checkout session with a consumer after confirming the checkout and payment.", () => {
     const purchasesRepository = new InMemoryPurchasesRepository();
     const makePurchaseAfterCheckoutIsComplete =
       new MakePurchaseAfterCheckoutIsComplete(purchasesRepository);
@@ -17,10 +17,11 @@ describe("Make a purchase", async () => {
         )
         .then((data: { session?: Session; status: boolean }) => {
           // console.log("Session", data);
-          return data;
+          return data.session;
         }),
     ).resolves.toBeTruthy();
   });
+
 
   it("must be return an error when searching for a non-existing checkout session or pass a non-existent consumer.", async () => {
     const purchasesRepository = new InMemoryPurchasesRepository();

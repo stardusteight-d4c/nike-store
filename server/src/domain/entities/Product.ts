@@ -23,7 +23,7 @@ export class Product {
   }
 
   public get id(): string {
-    return this.props.id ? this.props.id : this._id;
+    return this.props.id ?? this._id;
   }
 
   public get title(): string {

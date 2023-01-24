@@ -29,20 +29,24 @@ export class InMemoryPurchasesRepository implements PurchasesRepository {
     purchaseInfo: [],
   };
   public checkoutSessions: CheckoutSession[] = [];
-  public consumers = [
+  public consumers: {
+    id: string;
+    purchases: CheckoutSession[];
+    cep: string;
+  }[] = [
     {
       id: "a8f8d60ea2a48fc662326ceb6372c99d",
-      purchases: {},
+      purchases: [],
       cep: "76811-114",
     },
     {
       id: "8a76dd1bbd2833f9f78611eee28d00c4",
-      purchases: {},
+      purchases: [],
       cep: "69305-220",
     },
     {
       id: "b08e28184709a38d9ceeb583e24e8842",
-      purchases: {},
+      purchases: [],
       cep: "69059-340",
     },
   ];
@@ -147,18 +151,12 @@ export class InMemoryPurchasesRepository implements PurchasesRepository {
       (session) => session.id === session_id,
     );
 
-    console.log('session', session);
-    
-
     const consumer = this.consumers.find(
       (consumer) => consumer.id === consumer_id,
     );
 
-    console.log('consumer', consumer);
-
-
     if (session !== undefined && consumer) {
-      consumer.purchases = session;
+      consumer.purchases.push(session);
       return { session, status: true };
     }
 
