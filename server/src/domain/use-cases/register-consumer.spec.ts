@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { makeAddress } from "../../factories/addresses-factory";
-import { makeConsumer } from "../../factories/consumers-factory";
+import { makeAddress } from "../factories/addresses-factory";
+import { makeConsumer } from "../factories/consumers-factory";
 import { InMemoryConsumersRepository } from "../disk/in-memory-consumers-repository";
 import { Address } from "../entities/Address";
 import { Consumer } from "../entities/Consumer";

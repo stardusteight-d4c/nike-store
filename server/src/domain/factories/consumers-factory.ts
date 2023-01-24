@@ -1,4 +1,4 @@
-import { ConsumerProps } from "../domain/entities/Consumer";
+import { ConsumerProps } from "../../domain/entities/Consumer";
 
 export function makeConsumer(consumer?: {
   id?: string;

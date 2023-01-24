@@ -5,7 +5,7 @@ import {
   PurchasesRepository,
   Session,
 } from "../../domain/repositories/purchases-repository";
-import { makeProduct } from "../../factories/products-factory";
+import { makeProduct } from "../factories/products-factory";
 import { mergeArrayOfObjectsByIdProperty } from "../../utils/mergeArrayOfObjectsByIdProperty";
 import { stringPriceToNumber } from "../../utils/stringPriceToNumber";
 import { randomUUID } from "node:crypto";

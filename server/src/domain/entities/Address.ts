@@ -6,9 +6,9 @@ export interface AddressProps {
   city: string;
   neighborhood: string;
   street: string;
-  number: string;
-  complement: string;
-  consumerId?: string | undefined; 
+  number?: string;
+  complement?: string;
+  consumerId: string;
 }
 
 export class Address {
@@ -54,24 +54,24 @@ export class Address {
     this.props.street = street;
   }
 
-  public get number(): string {
+  public get number(): string | undefined {
     return this.props.number;
   }
-  public set number(number: string) {
+  public set number(number: string | undefined) {
     this.props.number = number;
   }
 
-  public get complement(): string {
+  public get complement(): string | undefined {
     return this.props.complement;
   }
-  public set complement(complement: string) {
+  public set complement(complement: string | undefined) {
     this.props.complement = complement;
   }
 
-  public get consumerId(): string | undefined {
-    return this.props.consumerId ?? undefined;
+  public get consumerId(): string {
+    return this.props.consumerId;
   }
-  public set consumerId(consumerId: string | undefined) {
+  public set consumerId(consumerId: string) {
     this.props.consumerId = consumerId;
   }
 }

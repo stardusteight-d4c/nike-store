@@ -4,8 +4,8 @@ export interface CreateConsumerRequest {
 }
 
 export type Consumer = {
-  fullName: string;
-  emailAddress: string;
+  name: string;
+  email: string;
   password: string;
   cep: string;
 };

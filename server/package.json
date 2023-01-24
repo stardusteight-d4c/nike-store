@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/infra/server.ts",
+    "dev": "nodemon src/infra/http/server.ts",
     "test": "vitest",
     "coverage": "vitest run --coverage"
   },
