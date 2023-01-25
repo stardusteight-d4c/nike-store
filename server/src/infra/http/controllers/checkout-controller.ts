@@ -23,9 +23,6 @@ export class CheckoutController {
 
       const checkoutSession: Stripe.Checkout.Session = result.checkoutSession;
 
-      console.log(result.checkoutSession);
-      
-
       reply.status(200).redirect(checkoutSession.success_url);
     } catch (error) {
       new TriggersError(error, reply);
@@ -47,11 +44,12 @@ export class CheckoutController {
       const { session_id, consumer_id } = request.query;
 
       const result = await service.execute(session_id, consumer_id);
-      console.log('result', result.session);
 
-      // reply.status(200).send({
-      //   session,
-      // });
+      reply.status(200).send({
+        status: result.status,
+        session: result.session,
+        message: result.message,
+      });
     } catch (error) {
       new TriggersError(error, reply);
     }

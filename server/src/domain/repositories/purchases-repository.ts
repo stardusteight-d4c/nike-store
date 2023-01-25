@@ -22,7 +22,7 @@ export interface CreateCheckoutSessionResponse {
 }
 
 export interface MakePurchaseResponse {
-  session?: Session;
+  session?: Session | any;
   status: boolean;
   message?: string;
 }

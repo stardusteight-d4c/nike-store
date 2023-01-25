@@ -71,48 +71,40 @@ export class PrismaPurchasesRepository implements PurchasesRepository {
     consumer_id: string,
   ): Promise<MakePurchaseResponse> {
     const session = await stripe.checkout.sessions.listLineItems(session_id);
-    // const product = await stripe.products.retrieve("prod_NEhdrQjNfFE03M");
 
-    // console.log("session", session);
-    // console.log("session.data.price", session.data[0].price);
+    if (!session) {
+      return {
+        status: false,
+        message: "There was an error acquiring information about this session.",
+      };
+    }
 
-    const stripeProducts = await Promise.all (session.data.map(async (product) => {
-      const stripeProductId: any = product?.price!.product;
-      const stripeProduct = await stripe.products
-        .retrieve(stripeProductId)
-        .then((data) => data);
-      return stripeProduct;
-    }))
+    await Promise.all(
+      session.data.map(async (product) => {
+        const stripeProductId: any = product?.price!.product;
+        const stripeProduct = await stripe.products
+          .retrieve(stripeProductId)
+          // @ts-ignore
+          .then((data) => (product.hygraphId = data.metadata.hygraphId));
+        return stripeProduct;
+      }),
+    );
 
-    console.log("stripeProducts", stripeProducts);
-
-    // console.log("product", product);
-
-    // prod_NEfCWuHD06ZNKn
-
-    // fetch(
-    //   "https://api.stripe.com/v1/checkout/sessions/cs_test_a1XOW8d8VpDiBonReSiyBCZMFU97AteE2ofB44X815bVKNmkcUCAvVZInv/line_items",
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer ${process.env.SECRET_KEY!}`,
-    //     },
-    //   },
-    // )
-    //   .then((res) => res.json())
-    //   .then((data) => console.log(data));
-
-    // session.data.map(
-    //   async (product) =>
-    //     await prisma.purchase.create({
-    //       data: {
-    //         productId: product.id,
-    //         quantity: product.quantity?.toString()!,
-    //         consumerId: consumer_id,
-    //       },
-    //     }),
-    // );
-
-    const obj: any = {};
-    return obj;
+    session.data.map(
+      async (product) =>
+        await prisma.purchase.create({
+          data: {
+            // @ts-ignore
+            productId: product.hygraphId,
+            quantity: product.quantity?.toString()!,
+            consumerId: consumer_id,
+          },
+        }),
+    );
+    return {
+      status: true,
+      session: session.data,
+      message: "Purchase made successfully.",
+    };
   }
 }
