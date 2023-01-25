@@ -5,10 +5,11 @@ import { RegisterConsumer } from "../../../domain/use-cases/register-consumer";
 import { PrismaConsumersRepository } from "../../database/repositories/prisma-consumers-repository";
 import { Address, AddressProps } from "../../../domain/entities/Address";
 import { Consumer, ConsumerProps } from "../../../domain/entities/Consumer";
-import { consumerMapperToHttp } from "../mappers";
+import { addressMapperToHttp, consumerMapperToHttp } from "../mappers";
 import { LoginConsumerRequest } from "../../../domain/repositories/consumers-repository";
 import { LoginConsumer } from "../../../domain/use-cases/login-consumer";
 import { ValidateSession } from "../../../domain/use-cases/validate-session";
+import { FindConsumerAddress } from "../../../domain/use-cases/find-consumer-address";
 
 dotenv.config();
 
@@ -33,7 +34,7 @@ export class ConsumerController {
         address: addressToDomain,
       });
 
-      const consumerHttp = await consumerMapperToHttp(result.consumer);
+      const consumerHttp = consumerMapperToHttp(result.consumer);
 
       return reply
         .status(201)
@@ -60,7 +61,7 @@ export class ConsumerController {
         password,
       });
 
-      const consumerHttp = await consumerMapperToHttp(result.consumer);
+      const consumerHttp = consumerMapperToHttp(result.consumer);
 
       return reply
         .status(200)
@@ -74,17 +75,17 @@ export class ConsumerController {
     request: FastifyRequest<{ Headers: { authorization: string } }>,
     reply: FastifyReply,
   ) {
-    try {
-      const prismaConsumersRepository = new PrismaConsumersRepository();
-      const service = new ValidateSession(prismaConsumersRepository);
+    const prismaConsumersRepository = new PrismaConsumersRepository();
+    const service = new ValidateSession(prismaConsumersRepository);
 
+    try {
       const sessionToken = request.headers.authorization;
 
       const result = await service.execute({
         encodedToken: sessionToken,
       });
 
-      const consumerHttp = await consumerMapperToHttp(result.consumer);
+      const consumerHttp = consumerMapperToHttp(result.consumer);
 
       return reply
         .status(200)
@@ -93,25 +94,29 @@ export class ConsumerController {
       new TriggersError(error, reply);
     }
   }
+
+  async address(
+    request: FastifyRequest<{ Querystring: { consumer_id: string } }>,
+    reply: FastifyReply,
+  ) {
+    const prismaConsumersRepository = new PrismaConsumersRepository();
+    const service = new FindConsumerAddress(prismaConsumersRepository);
+
+    try {
+      const consumer_id = request.query.consumer_id;
+
+      const result = await service.execute({
+        consumer_id,
+      });
+
+      const addressHttp = addressMapperToHttp(result.address);
+
+      return reply.status(200).send({ address: addressHttp });
+    } catch (error) {
+      new TriggersError(error, reply);
+    }
+  }
 }
-
-// async getAddress(
-//   request: FastifyRequest<{ Querystring: { consumer_id: string } }>,
-//   reply: FastifyReply,
-// ) {
-//   try {
-//     const consumer_id = request.query.consumer_id;
-//     const address = await prisma.address.findFirst({
-//       where: {
-//         consumerId: consumer_id,
-//       },
-//     });
-
-//     return reply.status(200).send({ address });
-//   } catch (error) {
-//     new TriggersError(error, reply);
-//   }
-// }
 
 // async newAddress(
 //   request: FastifyRequest<{ Body: { address: Address; consumerId: string } }>,

@@ -1,5 +1,7 @@
 import { Consumer } from "../../../domain/entities/Consumer";
 import {
+  AddressRequest,
+  AddressResponse,
   ConsumersRepository,
   LoginConsumerRequest,
   LoginConsumerResponse,
@@ -16,6 +18,7 @@ import { prisma } from "../prisma";
 import brcypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { Address } from "../../../domain/entities/Address";
 
 dotenv.config();
 
@@ -118,5 +121,22 @@ export class PrismaConsumersRepository implements ConsumersRepository {
     } catch (error: any) {
       return { status: false, message: error };
     }
+  }
+
+  async address(data: AddressRequest): Promise<AddressResponse> {
+    const consumer_id = data.consumer_id;
+
+    const address = await prisma.address.findFirst({
+      where: {
+        consumerId: consumer_id,
+      },
+    });
+
+    if (address) {
+      const addressToDomain = new Address(address);
+      return { status: true, address: addressToDomain };
+    }
+
+    return { status: false, message: "Could not find address." };
   }
 }

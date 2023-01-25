@@ -36,6 +36,16 @@ export interface ValidateSessionResponse {
   message?: string;
 }
 
+export interface AddressRequest {
+  consumer_id: string;
+}
+
+export interface AddressResponse {
+  address?: Address;
+  status?: boolean;
+  message?: string;
+}
+
 export abstract class ConsumersRepository {
   abstract register(
     data: RegisterConsumerRequest,
@@ -46,4 +56,6 @@ export abstract class ConsumersRepository {
   abstract validateSession(
     data: ValidateSessionRequest,
   ): Promise<ValidateSessionResponse>;
+
+  abstract address(data: AddressRequest): Promise<AddressResponse>;
 }

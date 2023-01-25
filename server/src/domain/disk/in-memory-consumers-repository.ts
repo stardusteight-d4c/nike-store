@@ -2,6 +2,8 @@ import { Address } from "../entities/Address";
 import { Consumer } from "../entities/Consumer";
 import { makeConsumer } from "../factories/consumers-factory";
 import {
+  AddressRequest,
+  AddressResponse,
   ConsumersRepository,
   LoginConsumerRequest,
   LoginConsumerResponse,
@@ -107,5 +109,19 @@ export class InMemoryConsumersRepository implements ConsumersRepository {
     }
 
     return { status: false, message: "Invalid or expired token." };
+  }
+
+  async address(data: AddressRequest): Promise<AddressResponse> {
+    const { consumer_id } = data;
+
+    const address = this.addresses.find(
+      (address) => address.consumerId === consumer_id,
+    );
+
+    if (address) {
+      return { status: true, address };
+    }
+
+    return { status: false, message: "Could not find address." };
   }
 }

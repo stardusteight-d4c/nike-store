@@ -15,7 +15,7 @@ export async function consumerMapperToDomain(
   return consumer;
 }
 
-export async function consumerMapperToHttp(data: any) {
+export function consumerMapperToHttp(data: any) {
   return {
     id: data.props.id,
     name: data.props.name,
@@ -38,6 +38,19 @@ export async function addressMapperToDomain(
     consumerId,
   });
   return address;
+}
+
+export function addressMapperToHttp(data: any) {
+  return {
+    id: data.props.id,
+    state: data.props.state,
+    city: data.props.city,
+    neighborhood: data.props.neighborhood,
+    street: data.props.street,
+    number: data.props.number ?? undefined,
+    complement: data.props.complement ?? undefined,
+    consumerId: data.props.consumerId,
+  };
 }
 
 export function toCheckoutMapper(items: []) {
