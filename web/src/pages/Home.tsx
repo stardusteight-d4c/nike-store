@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { Hero, Stories, Footer, Navbar, Cart } from '../components'
 import { useGetProductsByCategoryQuery } from '../graphql/generated'
@@ -10,7 +10,7 @@ import {
 } from '../mock-data/data'
 import { useAppSelector } from '../store/hooks'
 import { selectCurrentConsumer } from '../store/slices/ConsumerSlice'
-import { fetchLineItems } from '../utils/fetchLineItems'
+import { makePurchase } from '../utils/makePurchase'
 import backgroud from '../assets/background.jpeg'
 import { PopularSales } from '../components/home/sales/PopularSales'
 import { Highlight } from '../components/home/mainSection/Highlight'
@@ -45,17 +45,9 @@ export const Home = (props: Props) => {
     if (sessionId) {
       if (currentConsumer !== null) {
         ;(async () => {
-          const products = await fetchLineItems(sessionId, currentConsumer.id)
+          const products = await makePurchase(sessionId, currentConsumer.id)
           if (products && currentConsumer) {
-            // Mandar para o banco de dados nome - email - endereço - diminuir estoque dos produtos de
-            // acordo com o produto e quantidade do produto comprado
-
-            // limpar storage de products items
-
             localStorage.removeItem('cart')
-
-            // Cheio de falha de segurança sapoura, não salve as informaçoes de preço no localStorage
-
             toast.success('successful purchase')
           }
         })()

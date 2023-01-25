@@ -29,7 +29,7 @@ export const SignUp = ({ setActiveLogin }: Props) => {
     const data = Object.fromEntries(formData)
 
     const CEP = data.cep.toString()
-    const EMAIL = data.emailAddress.toString()
+    const EMAIL = data.email.toString()
 
     const zipCode: ViaCepApiResponse = await isValidZipCode(CEP)
     const validEmailAddres = isValidEmailAddress(EMAIL)
@@ -49,8 +49,7 @@ export const SignUp = ({ setActiveLogin }: Props) => {
         number: null,
         complement: null,
       }
-      // 11724-110
-      fetch(`${hostServer}/api/consumer/createConsumer`, {
+      fetch(`${hostServer}/api/consumer/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -76,13 +75,13 @@ export const SignUp = ({ setActiveLogin }: Props) => {
 
   const signUpInputProps = [
     {
-      id: 'fullName',
+      id: 'name',
       type: 'text',
       placeholder: 'Full name',
       styles: 'rounded-t-md',
     },
     {
-      id: 'emailAddress',
+      id: 'email',
       type: 'email',
       placeholder: 'Email address',
     },
@@ -127,7 +126,7 @@ export const SignUp = ({ setActiveLogin }: Props) => {
         >
           <div className={style.inputsWrapper}>
             {signUpInputProps.map((input) => (
-              <Input {...input} />
+              <Input key={input.id} {...input} />
             ))}
           </div>
 

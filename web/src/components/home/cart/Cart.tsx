@@ -48,19 +48,18 @@ export const Cart = (props: Props) => {
 
   // create Checkout Session
   const proceedToCheckout = async () => {
-    fetch(`${hostServer}/api/checkout`, {
+    fetch(`${hostServer}/api/purchase/checkout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       referrerPolicy: 'no-referrer',
-      body: JSON.stringify({
-        items: cartItemsToCheckout(cartItems),
-      }),
+
+      body: JSON.stringify(cartItemsToCheckout(cartItems)),
     })
       .then((res) => res.json())
       .then((data) => {
-        window.open(data.url)
+        window.open(data.url, '_self')
       })
       .catch((error) => console.log(error))
   }
@@ -71,7 +70,7 @@ export const Cart = (props: Props) => {
     const formData = new FormData(event.target as HTMLFormElement)
     const data = Object.fromEntries(formData)
 
-    fetch(`${hostServer}/api/consumer/newAddress`, {
+    fetch(`${hostServer}/api/consumer/address`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

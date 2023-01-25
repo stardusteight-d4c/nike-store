@@ -26,7 +26,7 @@ export const SignIn = ({ setActiveLogin }: Props) => {
     const formData = new FormData(event.target as HTMLFormElement)
     const data = Object.fromEntries(formData)
 
-    fetch(`${hostServer}/api/consumer/findConsumer`, {
+    fetch(`${hostServer}/api/consumer/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -36,8 +36,6 @@ export const SignIn = ({ setActiveLogin }: Props) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log('data', data)
-
         if (data.message) {
           toast.error(data.message)
         } else {
@@ -85,7 +83,7 @@ export const SignIn = ({ setActiveLogin }: Props) => {
           <input type="hidden" name="remember" defaultValue="true" />
           <div className={style.inputsWrapper}>
             {signInInputProps.map((input) => (
-              <Input {...input} />
+              <Input key={input.id} {...input} />
             ))}
           </div>
           <RememberMeCheckbox />

@@ -15,6 +15,7 @@ export const Input = ({ id, type, placeholder, styles }: Props) => {
       </label>
       <input
         id={id}
+        name={id}
         type={type}
         required
         className={`${style.input} ${styles}`}

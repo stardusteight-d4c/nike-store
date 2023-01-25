@@ -27,6 +27,7 @@ model Purchase {
   productId  String
   quantity   String
   consumerId String 
+  sessionId   String @unique
 
   consumer Consumer @relation(fields: [consumerId], references: [id])
 

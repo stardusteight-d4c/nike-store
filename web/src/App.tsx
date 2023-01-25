@@ -23,7 +23,7 @@ export const App = (props: Props) => {
   useEffect(() => {
     ;(async () => {
       if (session && !currentConsumer) {
-        await fetch(`${hostServer}/api/consumer/verifySession`, {
+        await fetch(`${hostServer}/api/consumer/validateSession`, {
           method: 'POST',
           headers: {
             authorization: session,

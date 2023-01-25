@@ -23,7 +23,7 @@ export class CheckoutController {
 
       const checkoutSession: Stripe.Checkout.Session = result.checkoutSession;
 
-      reply.status(200).redirect(checkoutSession.success_url);
+      reply.status(200).send(checkoutSession);
     } catch (error) {
       new TriggersError(error, reply);
     }

@@ -90,21 +90,34 @@ export class PrismaPurchasesRepository implements PurchasesRepository {
       }),
     );
 
-    session.data.map(
-      async (product) =>
-        await prisma.purchase.create({
-          data: {
-            // @ts-ignore
-            productId: product.hygraphId,
-            quantity: product.quantity?.toString()!,
-            consumerId: consumer_id,
-          },
-        }),
-    );
+    const findSession = await prisma.purchase.findFirst({
+      where: {
+        sessionId: session_id,
+      },
+    });
+
+    if (!findSession) {
+      session.data.map(
+        async (product) =>
+          await prisma.purchase.create({
+            data: {
+              // @ts-ignore
+              productId: product.hygraphId,
+              quantity: product.quantity?.toString()!,
+              consumerId: consumer_id,
+              sessionId: session_id,
+            },
+          }),
+      );
+      return {
+        status: true,
+        session: session.data,
+        message: "Purchase made successfully.",
+      };
+    }
     return {
-      status: true,
-      session: session.data,
-      message: "Purchase made successfully.",
+      status: false,
+      message: "There was an error acquiring information about this session.",
     };
   }
 }

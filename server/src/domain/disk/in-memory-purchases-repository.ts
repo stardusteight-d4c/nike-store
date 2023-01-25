@@ -174,8 +174,6 @@ export class InMemoryPurchasesRepository implements PurchasesRepository {
       return { session, status: true };
     }
 
-    
-
     return {
       status: false,
       message: "There was an error acquiring information about this session.",
