@@ -2,8 +2,8 @@ import {
   ConsumersRepository,
   LoginConsumerRequest,
   LoginConsumerResponse,
-} from "../repositories/consumers-repository";
-import { consumerMapperToHttp } from "../../infra/http/mappers";
+} from "../../repositories/consumers-repository";
+import { consumerMapperToHttp } from "../../../infra/http/mappers";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 

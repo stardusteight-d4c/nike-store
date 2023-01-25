@@ -1,6 +1,8 @@
 import brcypt from "bcrypt";
+import Stripe from "stripe";
 import { Address } from "../../../domain/entities/Address";
 import { Consumer } from "../../../domain/entities/Consumer";
+import { stringPriceToNumber } from "../../../utils/stringPriceToNumber";
 
 export async function consumerMapperToDomain(
   data: Consumer,
@@ -58,14 +60,16 @@ export function toCheckoutMapper(items: []) {
     return {
       price_data: {
         currency: "BRL",
-        description: item.id,
         product_data: {
           name: item.title,
           images: [item.img.url],
+          metadata: {
+            hygraphId: item.id,
+          },
         },
-        unit_amount: item.price * 100,
+        unit_amount: Number(stringPriceToNumber(item.price)) * 100,
       },
-      quantity: item.qty,
+      quantity: item.quantity,
     };
   });
 

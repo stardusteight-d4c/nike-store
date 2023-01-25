@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { InMemoryConsumersRepository } from "../disk/in-memory-consumers-repository";
+import { InMemoryConsumersRepository } from "../../disk/in-memory-consumers-repository";
 import { ValidateSession } from "./validate-session";
 
 describe("Validate a consumer session", () => {

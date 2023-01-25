@@ -1,6 +1,6 @@
 import {
   ConsumersRepository, FindAddressRequest, FindAddressResponse,
-} from "../repositories/consumers-repository";
+} from "../../repositories/consumers-repository";
 
 export class FindConsumerAddress {
   constructor(private consumersRepository: ConsumersRepository) {}

@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { InMemoryPurchasesRepository } from "../disk/in-memory-purchases-repository";
+import { InMemoryPurchasesRepository } from "../../disk/in-memory-purchases-repository";
 import {
   CreateCheckoutSessionRequest,
   CreateCheckoutSessionResponse,
-} from "../repositories/purchases-repository";
+} from "../../repositories/purchases-repository";
 import { CreateCheckoutSession } from "./create-checkout-session";
 
 describe("Create a checkout session", async () => {

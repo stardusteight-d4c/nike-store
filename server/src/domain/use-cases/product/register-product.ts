@@ -1,5 +1,5 @@
-import { Product } from "../entities/Product";
-import { ProductsRepository, RegisterProductResponse } from "../repositories/products-repository";
+import { Product } from "../../entities/Product";
+import { ProductsRepository, RegisterProductResponse } from "../../repositories/products-repository";
 
 export class RegisterProduct {
   constructor(private productsRepository: ProductsRepository) {}

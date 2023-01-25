@@ -2,7 +2,7 @@ import {
   ConsumersRepository,
   NewAddressRequest,
   NewAddressResponse,
-} from "../repositories/consumers-repository";
+} from "../../repositories/consumers-repository";
 
 export class ChangeConsumerAddress {
   constructor(private consumersRepository: ConsumersRepository) {}

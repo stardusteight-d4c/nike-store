@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { InMemoryConsumersRepository } from "../disk/in-memory-consumers-repository";
-import { Consumer } from "../entities/Consumer";
+import { InMemoryConsumersRepository } from "../../disk/in-memory-consumers-repository";
+import { Consumer } from "../../entities/Consumer";
 import { LoginConsumer } from "./login-consumer";
 
 describe("Login a consumer", () => {

@@ -17,7 +17,7 @@ export type Session = {
 
 export interface CreateCheckoutSessionResponse {
   proceedToCheckout: boolean;
-  checkoutSession?: Session;
+  checkoutSession?: Session | any;
   message?: string;
 }
 

@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { makeProduct } from "../factories/products-factory";
-import { InMemoryProductsRepository } from "../disk/in-memory-products-repository";
-import { Product } from "../entities/Product";
-import { RegisterProductResponse } from "../repositories/products-repository";
+import { makeProduct } from "../../factories/products-factory";
+import { InMemoryProductsRepository } from "../../disk/in-memory-products-repository";
+import { Product } from "../../entities/Product";
+import { RegisterProductResponse } from "../../repositories/products-repository";
 import { RegisterProduct } from "./register-product";
 
 describe("Register a product", () => {

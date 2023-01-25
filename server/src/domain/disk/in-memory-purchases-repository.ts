@@ -3,7 +3,6 @@ import {
   CreateCheckoutSessionResponse,
   MakePurchaseResponse,
   PurchasesRepository,
-  Session,
 } from "../../domain/repositories/purchases-repository";
 import { makeProduct } from "../factories/products-factory";
 import { mergeArrayOfObjectsByIdProperty } from "../../utils/mergeArrayOfObjectsByIdProperty";
@@ -86,7 +85,7 @@ export class InMemoryPurchasesRepository implements PurchasesRepository {
         }
 
         const totalPrice =
-          stringPriceToNumber(product.props.price) * product.quantity;
+          Number(stringPriceToNumber(product.props.price)) * product.quantity;
         const toPurchaseInfo = {
           productId: product.props.id,
           title: product.props.title,

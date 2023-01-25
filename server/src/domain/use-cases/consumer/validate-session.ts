@@ -2,7 +2,7 @@ import {
   ConsumersRepository,
   ValidateSessionRequest,
   ValidateSessionResponse,
-} from "../repositories/consumers-repository";
+} from "../../repositories/consumers-repository";
 import dotenv from "dotenv";
 
 dotenv.config();

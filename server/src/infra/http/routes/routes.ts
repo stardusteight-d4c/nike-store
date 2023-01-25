@@ -3,6 +3,7 @@ import { CheckoutController } from "../controllers/checkout-controller";
 import { ConsumerController } from "../controllers/consumer-controller";
 
 const consumerController = new ConsumerController();
+const checkoutController = new CheckoutController();
 
 async function consumerRoutes(fastify: FastifyInstance) {
   fastify.post("/register", consumerController.register);
@@ -13,7 +14,7 @@ async function consumerRoutes(fastify: FastifyInstance) {
 }
 
 async function checkoutRoutes(fastify: FastifyInstance) {
-  // fastify.post("/checkout", checkoutController.checkoutSession);
-  // fastify.get("/getSession", checkoutController.getSession);
+  fastify.post("/checkout", checkoutController.checkoutSession);
+  fastify.post("/make", checkoutController.makePurchase);
 }
 export { checkoutRoutes, consumerRoutes };

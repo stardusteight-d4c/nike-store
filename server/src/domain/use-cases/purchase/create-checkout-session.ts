@@ -2,7 +2,7 @@ import {
   CreateCheckoutSessionRequest,
   CreateCheckoutSessionResponse,
   PurchasesRepository,
-} from "../repositories/purchases-repository";
+} from "../../repositories/purchases-repository";
 
 export class CreateCheckoutSession {
   constructor(private purchasesRepository: PurchasesRepository) {}

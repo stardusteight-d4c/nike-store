@@ -1,16 +1,16 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { TriggersError } from "../../../utils/TriggersError";
 import dotenv from "dotenv";
-import { RegisterConsumer } from "../../../domain/use-cases/register-consumer";
+import { RegisterConsumer } from "../../../domain/use-cases/consumer/register-consumer";
 import { PrismaConsumersRepository } from "../../database/repositories/prisma-consumers-repository";
 import { Address, AddressProps } from "../../../domain/entities/Address";
 import { Consumer, ConsumerProps } from "../../../domain/entities/Consumer";
 import { addressMapperToHttp, consumerMapperToHttp } from "../mappers";
 import { LoginConsumerRequest } from "../../../domain/repositories/consumers-repository";
-import { LoginConsumer } from "../../../domain/use-cases/login-consumer";
-import { ValidateSession } from "../../../domain/use-cases/validate-session";
-import { FindConsumerAddress } from "../../../domain/use-cases/find-consumer-address";
-import { ChangeConsumerAddress } from "../../../domain/use-cases/change-consumer-address";
+import { LoginConsumer } from "../../../domain/use-cases/consumer/login-consumer";
+import { ValidateSession } from "../../../domain/use-cases/consumer/validate-session";
+import { FindConsumerAddress } from "../../../domain/use-cases/consumer/find-consumer-address";
+import { ChangeConsumerAddress } from "../../../domain/use-cases/consumer/change-consumer-address";
 
 dotenv.config();
 

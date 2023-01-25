@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const getProductById = async (ids: []) => {
+export const getProductById = async (ids: string[]) => {
   const products = await fetch(process.env.CMS_API_URL!, {
     method: "POST",
     headers: {

@@ -1,3 +1,3 @@
 export function stringPriceToNumber(price: string) {
-  return Number(price.replace(',', '.'))
+  return parseFloat(String(price)).toFixed(2).toString().replace(",", ".");
 }

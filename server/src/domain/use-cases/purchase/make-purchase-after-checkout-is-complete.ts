@@ -1,7 +1,7 @@
 import {
   MakePurchaseResponse,
   PurchasesRepository,
-} from "../repositories/purchases-repository";
+} from "../../repositories/purchases-repository";
 
 export class MakePurchaseAfterCheckoutIsComplete {
   constructor(private purchasesRepository: PurchasesRepository) {}
