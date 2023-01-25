@@ -10,7 +10,7 @@ import { RegisterConsumer } from "./register-consumer";
 describe("Search the address of the consumer", () => {
   it("should be possible to get the consumer's address by its id.", async () => {
     const consumersRepository = new InMemoryConsumersRepository();
-    const getConsumerAddress = new FindConsumerAddress(consumersRepository);
+    const findConsumerAddress = new FindConsumerAddress(consumersRepository);
 
     const registerConsumer = new RegisterConsumer(consumersRepository);
 
@@ -22,13 +22,13 @@ describe("Search the address of the consumer", () => {
     registerConsumer.execute({ consumer, address });
 
     expect(
-      getConsumerAddress
+      findConsumerAddress
         .execute({ consumer_id: "68318b586d475d66093cc3dfe4229079" })
         .then((data) => data),
     ).resolves.toBeTruthy();
 
     expect(
-      getConsumerAddress
+      findConsumerAddress
         .execute({ consumer_id: "68318b586d475d66093cc3dfe4229079" })
         .then((data) => data.address),
     ).resolves.toBeInstanceOf(Address);
@@ -36,7 +36,7 @@ describe("Search the address of the consumer", () => {
 
   it("should return an error if you enter an invalid id.", async () => {
     const consumersRepository = new InMemoryConsumersRepository();
-    const getConsumerAddress = new FindConsumerAddress(consumersRepository);
+    const findConsumerAddress = new FindConsumerAddress(consumersRepository);
 
     const registerConsumer = new RegisterConsumer(consumersRepository);
 
@@ -48,7 +48,7 @@ describe("Search the address of the consumer", () => {
     registerConsumer.execute({ consumer, address });
 
     expect(
-      getConsumerAddress
+      findConsumerAddress
         .execute({ consumer_id: "68318b586d475d66-invalid" })
         .then((data) => data),
     ).rejects.toThrow("Could not find address.");

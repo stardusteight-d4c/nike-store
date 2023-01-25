@@ -8,8 +8,8 @@ async function consumerRoutes(fastify: FastifyInstance) {
   fastify.post("/register", consumerController.register);
   fastify.post("/login", consumerController.login);
   fastify.post("/validateSession", consumerController.validateSession);
-  fastify.get("/address", consumerController.address);
-  // fastify.put("/newAddress", consumerController.newAddress);
+  fastify.get("/address", consumerController.findAddress);
+  fastify.put("/address", consumerController.newAddress);
 }
 
 async function checkoutRoutes(fastify: FastifyInstance) {

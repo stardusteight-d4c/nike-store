@@ -1,10 +1,12 @@
 import { Consumer } from "../../../domain/entities/Consumer";
 import {
-  AddressRequest,
-  AddressResponse,
   ConsumersRepository,
+  FindAddressRequest,
+  FindAddressResponse,
   LoginConsumerRequest,
   LoginConsumerResponse,
+  NewAddressRequest,
+  NewAddressResponse,
   RegisterConsumerRequest,
   RegisterConsumerResponse,
   ValidateSessionRequest,
@@ -123,7 +125,7 @@ export class PrismaConsumersRepository implements ConsumersRepository {
     }
   }
 
-  async address(data: AddressRequest): Promise<AddressResponse> {
+  async findAddress(data: FindAddressRequest): Promise<FindAddressResponse> {
     const consumer_id = data.consumer_id;
 
     const address = await prisma.address.findFirst({
@@ -138,5 +140,33 @@ export class PrismaConsumersRepository implements ConsumersRepository {
     }
 
     return { status: false, message: "Could not find address." };
+  }
+
+  async newAddress(data: NewAddressRequest): Promise<NewAddressResponse> {
+    const { address, consumerId } = data;
+    try {
+      const newAddress = await prisma.address.update({
+        where: {
+          consumerId,
+        },
+        data: {
+          ...address,
+          number: address.number,
+        },
+      });
+
+      if (newAddress) {
+        return {
+          status: true,
+          message: "Successfully updated address.",
+        };
+      }
+      return {
+        status: false,
+        message: "An error occurred while trying to update the address.",
+      };
+    } catch (error: any) {
+      return { status: false, message: error };
+    }
   }
 }

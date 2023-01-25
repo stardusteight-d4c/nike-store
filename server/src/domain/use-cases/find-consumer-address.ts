@@ -1,17 +1,12 @@
 import {
-  AddressRequest,
-  AddressResponse,
-  ConsumersRepository,
+  ConsumersRepository, FindAddressRequest, FindAddressResponse,
 } from "../repositories/consumers-repository";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 export class FindConsumerAddress {
   constructor(private consumersRepository: ConsumersRepository) {}
 
-  async execute(request: AddressRequest): Promise<AddressResponse> {
-    const { address, status, message } = await this.consumersRepository.address(
+  async execute(request: FindAddressRequest): Promise<FindAddressResponse> {
+    const { address, status, message } = await this.consumersRepository.findAddress(
       request,
     );
 

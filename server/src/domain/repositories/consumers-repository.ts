@@ -36,12 +36,22 @@ export interface ValidateSessionResponse {
   message?: string;
 }
 
-export interface AddressRequest {
+export interface FindAddressRequest {
   consumer_id: string;
 }
 
-export interface AddressResponse {
+export interface FindAddressResponse {
   address?: Address;
+  status?: boolean;
+  message?: string;
+}
+
+export interface NewAddressRequest {
+  address: Address;
+  consumerId: string;
+}
+
+export interface NewAddressResponse {
   status?: boolean;
   message?: string;
 }
@@ -57,5 +67,7 @@ export abstract class ConsumersRepository {
     data: ValidateSessionRequest,
   ): Promise<ValidateSessionResponse>;
 
-  abstract address(data: AddressRequest): Promise<AddressResponse>;
+  abstract findAddress(data: FindAddressRequest): Promise<FindAddressResponse>;
+  
+  abstract newAddress(data: NewAddressRequest): Promise<NewAddressResponse>;
 }

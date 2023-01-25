@@ -10,6 +10,7 @@ import { LoginConsumerRequest } from "../../../domain/repositories/consumers-rep
 import { LoginConsumer } from "../../../domain/use-cases/login-consumer";
 import { ValidateSession } from "../../../domain/use-cases/validate-session";
 import { FindConsumerAddress } from "../../../domain/use-cases/find-consumer-address";
+import { ChangeConsumerAddress } from "../../../domain/use-cases/change-consumer-address";
 
 dotenv.config();
 
@@ -95,7 +96,7 @@ export class ConsumerController {
     }
   }
 
-  async address(
+  async findAddress(
     request: FastifyRequest<{ Querystring: { consumer_id: string } }>,
     reply: FastifyReply,
   ) {
@@ -116,27 +117,25 @@ export class ConsumerController {
       new TriggersError(error, reply);
     }
   }
+
+  async newAddress(
+    request: FastifyRequest<{ Body: { address: Address; consumerId: string } }>,
+    reply: FastifyReply,
+  ) {
+    const prismaConsumersRepository = new PrismaConsumersRepository();
+    const service = new ChangeConsumerAddress(prismaConsumersRepository);
+
+    try {
+      const { address, consumerId } = request.body;
+
+      const result = await service.execute({
+        address,
+        consumerId,
+      });
+
+      return reply.status(200).send({ status: true, result: result.message });
+    } catch (error) {
+      new TriggersError(error, reply);
+    }
+  }
 }
-
-// async newAddress(
-//   request: FastifyRequest<{ Body: { address: Address; consumerId: string } }>,
-//   reply: FastifyReply,
-// ) {
-//   try {
-//     const { address, consumerId } = request.body;
-
-//     await prisma.address.update({
-//       where: {
-//         consumerId,
-//       },
-//       data: {
-//         ...address,
-//         number: address.number,
-//       },
-//     });
-
-//     return reply.status(200).send({ message: "Address updated!" });
-//   } catch (error) {
-//     new TriggersError(error, reply);
-//   }
-// }

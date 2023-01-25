@@ -1,4 +1,4 @@
-import { ProductProps } from "../domain/entities/Product";
+import { ProductProps } from "../entities/Product";
 
 export function makeProduct(product?: {
   id?: string;

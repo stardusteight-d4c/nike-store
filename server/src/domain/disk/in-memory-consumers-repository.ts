@@ -2,11 +2,13 @@ import { Address } from "../entities/Address";
 import { Consumer } from "../entities/Consumer";
 import { makeConsumer } from "../factories/consumers-factory";
 import {
-  AddressRequest,
-  AddressResponse,
   ConsumersRepository,
+  FindAddressRequest,
+  FindAddressResponse,
   LoginConsumerRequest,
   LoginConsumerResponse,
+  NewAddressRequest,
+  NewAddressResponse,
   RegisterConsumerRequest,
   ValidateSessionRequest,
   ValidateSessionResponse,
@@ -111,7 +113,7 @@ export class InMemoryConsumersRepository implements ConsumersRepository {
     return { status: false, message: "Invalid or expired token." };
   }
 
-  async address(data: AddressRequest): Promise<AddressResponse> {
+  async findAddress(data: FindAddressRequest): Promise<FindAddressResponse> {
     const { consumer_id } = data;
 
     const address = this.addresses.find(
@@ -123,5 +125,30 @@ export class InMemoryConsumersRepository implements ConsumersRepository {
     }
 
     return { status: false, message: "Could not find address." };
+  }
+
+  async newAddress(data: NewAddressRequest): Promise<NewAddressResponse> {
+    const { address, consumerId } = data;
+
+    const consumerAddress = this.addresses.find(
+      (address) => address.consumerId === consumerId,
+    );
+
+    if (consumerAddress) {
+      const index = this.addresses.indexOf(consumerAddress);
+      const newAddress = new Address(address);
+      if (index > -1) {
+        this.addresses[index] = newAddress;
+      }
+      return {
+        status: true,
+        message: "Successfully updated address.",
+      };
+    }
+
+    return {
+      status: false,
+      message: "An error occurred while trying to update the address.",
+    };
   }
 }
