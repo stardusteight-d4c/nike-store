@@ -51,7 +51,7 @@ export class PrismaPurchasesRepository implements PurchasesRepository {
       };
     }
 
-    // Create checkout sessions from body params
+    // Create checkout session
     const params: Stripe.Checkout.SessionCreateParams = {
       payment_method_types: ["card"],
       line_items: transformedItems,
