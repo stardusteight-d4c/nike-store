@@ -292,7 +292,62 @@ However, we expect changes to the application's operation to affect the use case
 
 *<i>Clean Architecture - A Craftsman's Guide to Software Structure and Design</i> <br />
 
+<br />
 
+## Absolute imports 
+
+When files are exported to other modules or imported by modules that are far away, it is common to have a very extensive relative navigation until finding the appropriate files. To solve this there are `Absolute Imports`. Which can be configured in the `configuration files` of the languages ​​or frameworks being used in the project.
+
+```ts
+
+// With Absolute Imports
+
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { openCart, selectCartTotalQuantity } from '@/store/slices/CartSlice'
+import { selectCurrentConsumer } from '@/store/slices/ConsumerSlice'
+
+// Without Absolute Imports
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
+import { openCart, selectCartTotalQuantity } from '../../../../store/slices/CartSlice'
+import { selectCurrentConsumer } from '../../../../store/slices/ConsumerSlice'
+```
+
+This application uses Vite + Typescript, so to add the desired absolute paths you need to add the `paths` property in the `tsconfig.json` file:
+
+```json
+// web/tsconfig.json
+
+{
+  "compilerOptions": {
+    // ...
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@store/*": ["src/store/*"],
+      "@core/*": ["src/core/*"],
+      "@assets/*": ["src/assets/*"]
+    },
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
+```
+
+Vite, however, will not understand imports, so we can install a plugin called `vite-tsconfig-paths` to give vite the ability to resolve imports using TypeScript path mapping.
+
+```ts
+// web/vite.config.ts
+
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react-swc'
+import tsconfigPaths from 'vite-tsconfig-paths'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react(), tsconfigPaths()],
+})
+```
 
 
 
