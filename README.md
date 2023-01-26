@@ -104,3 +104,113 @@ export const getProductById = async (ids: string[]) => {
   return products;
 };
 ```
+
+<br />
+
+## Stripe API 
+
+Código completo e funcional de `uma integração com o Stripe Checkout`. O código do lado do cliente e do servidor redireciona para uma página de pagamento pré-criada hospedada pela Stripe.
+
+### Prebuilt Checkout page
+
+#### Install the Stripe Node library
+
+Install the package and import it in your code. Alternatively, if you’re starting from scratch and need a package.json file, download the project files using the Download link in the code editor.
+
+ - `npm install --save stripe`
+
+#### Create a Checkout Session
+
+`Add an endpoint on your server that creates a Checkout Session. A Checkout Session controls what your customer sees on the payment page such as line items, the order amount and currency, and acceptable payment methods`. We enable cards and other common payment methods for you by default, and you can enable or disable payment methods directly in the Stripe Dashboard.
+
+#### Define a product to sell
+
+`Always keep sensitive information about your product inventory, such as price and availability, on your server to prevent customer manipulation from the client`. Define product information when you create the Checkout Session using predefined price IDs or on the fly with `price_data`.
+
+```ts
+// src/infra/http/mappers/index.ts
+export function toCheckoutMapper(items: []) {
+  const newObject = items.map((item: any) => {
+    return {
+      price_data: {
+        currency: "BRL",
+        product_data: {
+          name: item.title,
+          images: [item.img.url],
+          metadata: {
+            hygraphId: item.id,
+          },
+        },
+        unit_amount: Number(stringPriceToNumber(item.price)) * 100,
+      },
+      quantity: item.quantity,
+    };
+  });
+
+  return newObject;
+}
+```
+
+ - <strong>Metadata with stripe-node</strong> - *Metadata `is useful for storing additional`, structured information on an object. As an example, you could store your user's full name and corresponding unique identifier from your system on a Stripe Customer object. Metadata is not used by Stripe, for example, not used to authorize or decline a charge, and won't be seen by your users unless you choose to show it to them. In this video you'll learn how to work with metadata from the Stripe API.
+
+#### Choose the mode
+
+Checkout has three modes: `payment, subscription, or setup`. Use payment mode for one-time purchases. Learn more about subscription and setup modes in the docs.
+
+#### Supply success and cancel URLs
+
+`Specify URLs for success and cancel pages—make sure they’re publicly accessible so Stripe can redirect customers to them`. You can also handle both the success and canceled states with the same URL.
+
+#### Redirect to Checkout
+
+After creating the session, `redirect your customer to the URL for the Checkout page returned in the response`.
+
+*<i>stripe.com/docs/checkout/quickstart</i> <br />
+
+```ts
+// src/infra/database/repositories/prisma-purchases-repository.ts
+
+// Product price information must be handled only by the application server
+// This is the shape in which stripe expects the data to be
+const transformedItems = toCheckoutMapper(mergeArray);
+
+// Create checkout session
+const params: Stripe.Checkout.SessionCreateParams = {
+  payment_method_types: ["card"],
+  line_items: transformedItems,
+  mode: "payment",
+  success_url: `${process.env.ORIGIN}?session_id={CHECKOUT_SESSION_ID}`,
+  cancel_url: `${process.env.ORIGIN}/`,
+};
+
+
+const checkoutSession: Stripe.Checkout.Session =
+  await stripe.checkout.sessions.create(params);
+
+return { proceedToCheckout: true, checkoutSession };
+
+// src/infra/http/controllers/checkout-controller.ts
+async checkoutSession(
+  request: FastifyRequest<{ Body: CreateCheckoutSessionRequest }>,
+  reply: FastifyReply,
+) {
+  const prismaPurchasesRepository = new PrismaPurchasesRepository();
+  const service = new CreateCheckoutSession(prismaPurchasesRepository);
+
+  try {
+    const products = request.body;
+
+    const result = await service.execute({
+      data: products,
+    });
+
+    const checkoutSession: Stripe.Checkout.Session = result.checkoutSession;
+
+    reply.status(200).send(checkoutSession);
+  } catch (error) {
+    new TriggersError(error, reply);
+  }
+}
+```
+
+
