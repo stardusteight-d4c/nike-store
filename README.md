@@ -348,7 +348,70 @@ export default defineConfig({
   plugins: [react(), tsconfigPaths()],
 })
 ```
+<br />
 
+## TailwindCSS - Styling Functions in the Style Object
+
+One way to dynamically style JSX components using TailwindCSS is to use conditionals in the `className` attribute definition itself through the `templates strings`. However, I don't really like inline styling, especially when the component has a lot of logic, such as styling, treatment or manipulation of the data stream for rendering, which ends up taking the focus away from the component's rendering logic.
+
+That's why I like to use TailwindCSS in `Javascript Objects` and define styling properties in `property and value` structures. As Javascript objects accept numerous types of data and even functions, in this application I tried to move the conditional logic of styles to this object through functions, and the final result was incredible, the component is completely clean of styles, but the styles are very close to the component if any modifications need to be made. This is too much for even more complex stylings, you can create functions completely decoupled from the component and the `Styling Object`, and then just assign it to a property of this object.
+
+```tsx
+import { useEffect, useState } from 'react'
+import logo from '@/assets/logo.png'
+import { NavItems } from './integrate/NavItems'
+
+interface Props {}
+
+export const Navbar = (props: Props) => {
+  const [scrollingPage, setScrollingPage] = useState(false)
+
+  useEffect(() => {
+    window.addEventListener('scroll', onNavPageScroll)
+    return () => {
+      window.removeEventListener('scroll', onNavPageScroll)
+    }
+  }, [])
+
+  const onNavPageScroll = () => {
+    if (window.scrollY > 30) {
+      setScrollingPage(true)
+    } else {
+      setScrollingPage(false)
+    }
+  }
+
+  return (
+    <header className={style.handleWrapper(scrollingPage)}>
+      <nav className={style.navContainer}>
+        <div className={style.logoContainer}>
+          <img
+            src={logo}
+            alt="nike/logo"
+            className={style.handleLogo(scrollingPage)}
+          />
+        </div>
+        <NavItems scrollingPage={scrollingPage} />
+      </nav>
+    </header>
+  )
+}
+
+const style = {
+  handleWrapper: (scrolling: boolean) => {
+    return scrolling
+      ? 'bg-[#f7f7f7] pt-[18px] fixed inset-x-0 h-[60px] opacity-100 z-[500]'
+      : 'absolute top-7 inset-x-0 opacity-100 z-50'
+  },
+  navContainer: `max-w-7xl px-4 mx-auto flex items-center justify-between`,
+  logoContainer: `flex items-center`,
+  handleLogo: (scrolling: boolean) => {
+    return scrolling === true
+      ? 'filter brightness-0 w-16 h-auto'
+      : ' w-16 h-auto'
+  },
+}
+```
 
 
 
