@@ -22,8 +22,7 @@
     "fastify": "^4.11.0",
     "http": "^0.0.1-security",
     "jsonwebtoken": "^9.0.0",
-    "stripe": "^11.6.0",
-    "zod": "^3.20.2"
+    "stripe": "^11.6.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
