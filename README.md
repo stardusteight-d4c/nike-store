@@ -109,7 +109,7 @@ export const getProductById = async (ids: string[]) => {
 
 ## Stripe API 
 
-Código completo e funcional de `uma integração com o Stripe Checkout`. O código do lado do cliente e do servidor redireciona para uma página de pagamento pré-criada hospedada pela Stripe.
+Complete and functional code of an integration with Stripe Checkout. Client and server side code redirects to a pre-built payment page hosted by Stripe.
 
 ### Prebuilt Checkout page
 
