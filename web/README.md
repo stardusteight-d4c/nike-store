@@ -1,6 +1,6 @@
 # Security Factors for E-Commerce and Product Sales on the Web:
 
-1. `NEVER` store product information or process the purchase on your fron-end.
+1. `NEVER` store product information or process the purchase on your front-end.
 
  - If you want to cache the product data through localStorage for example, it's possible, but before purchasing `all product information as well as the price must be stored in the backend of the application`, i.e. , you can send a request with the `ID` of the product and its `QUANTITY` and then the `BACKEND WILL BE RESPONSIBLE FOR ACQUIRING THE PRODUCT INFORMATION AND PROCESSING THE PURCHASE (the front end cannot be an intermediary and send sensitive product data (such as PRICE) to the back-end, the front-end is just an interface).`
 
