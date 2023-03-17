@@ -135,7 +135,7 @@ import { openCart, selectCartTotalQuantity } from '../../../../store/slices/Cart
 import { selectCurrentConsumer } from '../../../../store/slices/ConsumerSlice'
 ```
 
-This application uses Vite + Typescript, so to add the desired absolute paths you need to add the `paths` property in the `tsconfig.json` file:
+This application uses Vite + Typescript, so to add the desired absolute paths you need to add the paths property in the tsconfig.json file:
 
 ```json
 {
@@ -154,7 +154,7 @@ This application uses Vite + Typescript, so to add the desired absolute paths yo
 }
 ```
 
-Vite, however, will not understand imports, so we can install a plugin called `vite-tsconfig-paths` to give vite the ability to resolve imports using TypeScript path mapping.
+Vite, however, will not understand imports, so we can install a plugin called vite-tsconfig-paths to give vite the ability to resolve imports using TypeScript path mapping.
 
 ```ts
 // web/vite.config.ts
