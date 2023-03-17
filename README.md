@@ -1,71 +1,79 @@
-# Nike Store | Clean Architecture, Stripe API & Redux
-
-![banner](banner.png)
-
-> Project developed with the aim of practicing the `integration of a payments API` with the application, in addition to `processing
-> payment via backend to improve application security`. Product data such as pricing, images, and inventory information is
-> stored, but can also be managed on the `Hygraph Headless CMS platform`. So the flow of this application is to register a consumer with
-> an address associated with it, it can see the available products and buy as many as it wants (as long as it does not exceed the stock limit),
-> when proceeding to `checkout`, the consumer must confirm the shipping address of the purchase, and request the checkout session, in which the data
-> are processed by the backend, finally after successfully completing the purchase, a valid session is created containing the purchase information and by
-> order are added to a database, where we use the Hygraph product id to identify the product, it is sent as `metadata`, for the `Stripe API`.
-
-:arrow_right: GraphQL, Hygraph and E-Commerce Security <br /> 
-:arrow_right: Stripe API <br /> 
-:arrow_right: Clean Architecture <br /> 
-:arrow_right: Absolute imports <br />
-:arrow_right: TailwindCSS - Styling Functions in the Style Object <br />
-
-<br />
-
-## GraphQL, Hygraph and E-Commerce Security
-
-GraphQL is a `query language for APIs` and a runtime for fulfilling those queries with your existing data. GraphQL provides a complete and understandable description of the data in your API, `gives clients the power to ask for exactly what they need and nothing more`, makes it easier to evolve APIs over time, and enables powerful developer tools.
-
- - <strong>Ask for what you need, get exactly that</strong>
-
-Send a GraphQL query to your API and get exactly what you need, nothing more and nothing less. `GraphQL queries always return predictable results`. Apps using GraphQL are fast and stable because they control the data they get, not the server.
-
- - <strong>Get many resources in a single request</strong>
-
-GraphQL queries access not just the properties of one resource but also smoothly follow references between them. While typical REST APIs require loading from multiple URLs, `GraphQL APIs get all the data your app needs in a single request`. Apps using GraphQL can be quick even on slow mobile network connections.
-
-```graphql
-query getProductsByCategory($category: String) {
-  products(where: { category: $category }) {
-    id
-    category
-    title
-    subtitle
-    stock
-    img {
-      url
-    }
-    price
-    offer
-    oldPrice
-  }
-}
-```
-
-*<i>graphql.org</i> <br />
-
-### Hygraph and E-Commerce Security
-
-The server through which the page is processed, as well as the customer acquire the product information through a common source, in this case I chose to use `Hygraph which is a Headless CMS` (Content Management System), which is a great option for manage the content of a website if you don't want to waste time implementing the entire interface, backend, as well as the database.
-
 <div align="center">
-<img src="hygraph.png" width="850" />
+  <img src="logo.svg" width="250" />
 </div>
 
- - <strong>Process and acquire data entirely through the backend, rely as little as possible on information coming from the client side</strong>
- 
-In common applications we are used to sending all the data that the backend needs to do the proper processing, as we already process this information on the client side to show the consumer the purchase/checkout information and the product itself, we could think of sending these information for the backend to process properly, however `the client, the web page must behave only as an interface`, an intermediary that sends the information of operations that the user wants to carry out. `Otherwise sensitive information can be intercepted and even altered by the front-end`, and thus the data that would arrive at the backend would no longer maintain an integrity, or a reliability factor.
+<h1 align="center">
+   Nike Store, E-Commerce
+</h1>
 
-So `the solution to avoid manipulation of purchase data and avoid fraud` was to make the customer send only the `ID and Quantity` of the product to the backend, that is, the backend now only depends on this information to process all the data purchase, acquiring the product data from a reliable source, from Hygraph itself, the application's Headless CMS.
+Landing page design using techniques such as Intersection Observer API, Parallax, Sticky, Accordion and Marquee, an example of modern web development, where the goal is to create an engaging and interactive user experience.
+
+The Intersection Observer API is used to detect when certain page elements enter or leave the user's view and trigger animations and other interactions in response. For example, when an image enters the view, the API can be used to trigger a smooth entry animation.
+
+The result is a highly interactive and engaging page that uses a combination of modern techniques to create a rich and enjoyable user experience.
+
+## :hammer_and_wrench: Tools
+
+### Frontend
+
+* TypeScript
+* GraphQL
+* React
+* Redux
+* Vite
+* TailwindCSS
+
+### Backend
+
+* Node.js
+* TypeScript
+* Fastify
+* Prisma
+* Stripe
+* Json Web Tokens
+
+## :mailbox_with_mail: Utilities
+ 
+ - <strong>Clean Architecture</strong>
+ 
+Clean Architecture is a software architecture pattern that proposes a source code structure in layers, with the objective of separating responsibilities and making the software more testable, scalable and easy to maintain.
+
+The core idea of Clean Architecture is that the business rules (core) of the software must be independent of any external technology (such as frameworks, databases, user interfaces, etc.), to ensure their integrity and reuse in different contexts.
+
+For this, the architecture proposes the definition of well-defined layers, which are:
+
+1. <strong>Entity Layer (Domain)</strong>: represents the domain entities, that is, the system's business rules;
+2. <strong>Layer of Use Cases (Application)</strong>: implements the use cases of the system, which are specific actions of the software that manipulate the entities of the domain;
+3. <strong>Infrastructure Layer</strong>: This is responsible for handling communication with the outside world, such as databases, file systems, networks, etc.
+
+In addition, the architecture proposes the use of SOLID and DDD (Domain Driven Design) principles to ensure that the code is cohesive, properly coupled and easy to maintain.
+
+Clean Architecture is a concept that can be applied in different programming languages ​​and frameworks, and is widely used in software projects that require high quality, scalability and maintenance.
+
+ - <strong>Domain-Driven Design</strong>
+ 
+Domain-driven design (DDD) is a software development approach that places the business domain at the core of system modeling. It was proposed by Eric Evans in 2003 and aims to help create systems that are more flexible and adaptable to business changes.
+
+DDD suggests creating a rich domain model that clearly reflects business rules and domain expert knowledge. This is done through collaboration between developers and domain experts so that the domain model is created together to ensure it reflects the needs of the business.
+
+On the other hand, clean architecture is a software architecture approach that values ​​the separation of responsibilities in well-defined layers, ensuring greater modularity, testability and code reuse. Clean architecture proposes that business rules should be the heart of the system and should be isolated from technical concerns such as infrastructure and framework.
+
+Thus, there is a relationship between DDD and clean architecture, as both approaches emphasize the importance of business rules in software development. DDD emphasizes creating a rich domain model, while clean architecture proposes a modular architecture that prioritizes separation of responsibilities and technology independence.
+
+In this way, clean architecture can be used as a framework for implementing DDD, as it provides a way to organize code to reflect the structure of the business domain. The clean architecture allows business rules to be implemented in a layer separate and independent of other technical layers, which helps ensure that the domain model is clear and maintainable.
+
+- <strong>Hygraph and E-Commerce Security</strong>
+
+The server through which the page is processed, as well as the customer acquire the product information through a common source, in this case I chose to use Hygraph which is a Headless CMS (Content Management System), which is a great option for manage the content of a website if you don't want to waste time implementing the entire interface, backend, as well as the database.
+
+*Process and acquire data entirely through the backend, rely as little as possible on information coming from the client side*
+ 
+In common applications we are used to sending all the data that the backend needs to do the proper processing, as we already process this information on the client side to show the consumer the purchase/checkout information and the product itself, we could think of sending these information for the backend to process properly, however the client, the web page must behave only as an interface, an intermediary that sends the information of operations that the user wants to carry out. Otherwise sensitive information can be intercepted and even altered by the front-end, and thus the data that would arrive at the backend would no longer maintain an integrity, or a reliability factor.
+
+So the solution to avoid manipulation of purchase data and avoid fraud was to make the customer send only the ID and Quantity of the product to the backend, that is, the backend now only depends on this information to process all the data purchase, acquiring the product data from a reliable source, from Hygraph itself, the application's Headless CMS.
 
 ```ts
-// src/infra/http/graphql/queries.ts
+// server/src/infra/http/graphql/queries.ts
 
 import dotenv from "dotenv";
 
@@ -105,203 +113,18 @@ export const getProductById = async (ids: string[]) => {
 };
 ```
 
-<br />
+- <strong>Absolute Imports</strong>
 
-## Stripe API 
+Absolute Imports is a technique for importing modules into a project that allows you to reference the files from the root of the project directory, rather than using a path relative to the file being imported.
 
-Complete and functional code of an integration with Stripe Checkout. Client and server side code redirects to a pre-built payment page hosted by Stripe.
+For example, instead of using import foo from '../../../components/foo' to import a component "foo" that is located in a directory 3 levels up, we can use import foo from '@/components /foo', where "@" is an alias representing the root of the project directory.
 
-### Prebuilt Checkout page
+This makes imports simpler and less error-prone, as the absolute path doesn't change no matter where the source file is located. In addition, it also facilitates project refactoring as it is not necessary to manually update all imports of a given file when it is moved to a new folder.
 
-#### Install the Stripe Node library
-
-Install the package and import it in your code. Alternatively, if you’re starting from scratch and need a package.json file, download the project files using the Download link in the code editor.
-
- - `npm install --save stripe`
-
-#### Create a Checkout Session
-
-`Add an endpoint on your server that creates a Checkout Session. A Checkout Session controls what your customer sees on the payment page such as line items, the order amount and currency, and acceptable payment methods`. We enable cards and other common payment methods for you by default, and you can enable or disable payment methods directly in the Stripe Dashboard.
-
-#### Define a product to sell
-
-`Always keep sensitive information about your product inventory, such as price and availability, on your server to prevent customer manipulation from the client`. Define product information when you create the Checkout Session using predefined price IDs or on the fly with `price_data`.
+Absolute Imports are common in larger projects and can be configured in different build tools and module systems such as Webpack and TypeScript.
 
 ```ts
-// src/infra/http/mappers/index.ts
-export function toCheckoutMapper(items: []) {
-  const newObject = items.map((item: any) => {
-    return {
-      price_data: {
-        currency: "BRL",
-        product_data: {
-          name: item.title,
-          images: [item.img.url],
-          metadata: {
-            hygraphId: item.id,
-          },
-        },
-        unit_amount: Number(stringPriceToNumber(item.price)) * 100,
-      },
-      quantity: item.quantity,
-    };
-  });
-
-  return newObject;
-}
-```
-
- - <strong>Metadata with stripe-node</strong> - *Metadata `is useful for storing additional`, structured information on an object. As an example, you could store your user's full name and corresponding unique identifier from your system on a Stripe Customer object. Metadata is not used by Stripe, for example, not used to authorize or decline a charge, and won't be seen by your users unless you choose to show it to them. In this video you'll learn how to work with metadata from the Stripe API.
-
-#### Choose the mode
-
-Checkout has three modes: `payment, subscription, or setup`. Use payment mode for one-time purchases. Learn more about subscription and setup modes in the docs.
-
-#### Supply success and cancel URLs
-
-`Specify URLs for success and cancel pages—make sure they’re publicly accessible so Stripe can redirect customers to them`. You can also handle both the success and canceled states with the same URL.
-
-#### Redirect to Checkout
-
-After creating the session, `redirect your customer to the URL for the Checkout page returned in the response`.
-
-*<i>stripe.com/docs/checkout/quickstart</i> <br />
-
-```ts
-// src/infra/database/repositories/prisma-purchases-repository.ts
-
-// Product price information must be handled only by the application server
-// This is the shape in which stripe expects the data to be
-const transformedItems = toCheckoutMapper(mergeArray);
-
-// Create checkout session
-const params: Stripe.Checkout.SessionCreateParams = {
-  payment_method_types: ["card"],
-  line_items: transformedItems,
-  mode: "payment",
-  success_url: `${process.env.ORIGIN}?session_id={CHECKOUT_SESSION_ID}`,
-  cancel_url: `${process.env.ORIGIN}/`,
-};
-
-
-const checkoutSession: Stripe.Checkout.Session =
-  await stripe.checkout.sessions.create(params);
-
-return { proceedToCheckout: true, checkoutSession };
-
-// src/infra/http/controllers/checkout-controller.ts
-async checkoutSession(
-  request: FastifyRequest<{ Body: CreateCheckoutSessionRequest }>,
-  reply: FastifyReply,
-) {
-  const prismaPurchasesRepository = new PrismaPurchasesRepository();
-  const service = new CreateCheckoutSession(prismaPurchasesRepository);
-
-  try {
-    const products = request.body;
-
-    const result = await service.execute({
-      data: products,
-    });
-
-    const checkoutSession: Stripe.Checkout.Session = result.checkoutSession;
-
-    reply.status(200).send(checkoutSession);
-  } catch (error) {
-    new TriggersError(error, reply);
-  }
-}
-```
-
-<br />
-
-## Clean Architecture 
-
-To get serious about software architecture, you need to know what good software architecture looks like. To build a system with a design and architecture that minimizes effort and maximizes productivity, you need to know which attributes of the system's architecture can accomplish these goals.
-
- - <strong>What is software architecture? What does a software architect do?</strong>
- 
-First, a software architect is and remains a programmer. Never fall for the lie that a software architect must abandon code to address higher-level issues. Software architects are the best programmers, and they continue to take on programming tasks while guiding the rest of the team towards a design that maximizes productivity.
-
-`The architecture of a software system is the form given to that system by its creators. That shape lies in the division of that system into components, the organization of those components, and the ways in which those components communicate with each other.`
-
-The purpose of this form is to facilitate the development, deployment, operation and maintenance of the software system contained therein.
-
- - <strong>Development</strong>
- 
-A software system that is difficult to develop is unlikely to have a long, healthy lifespan. Therefore, the architecture should facilitate the development of this system by the development teams.
-
-### The Clean Architecture
-
-In recent decades, we have seen a whole range of ideas related to systems architecture, such as `Hexagonal Architecture` (also known as Ports and Adpters) developed by Alistar Cockburn, `DCI` by James Complien and Trygve Reenskaug, or the `ECB` introduced by Ivar Jacobson in his book `Object Oriented Software Engineering: A Use-Case Driven Approach`.
-
-Although all of these architectures vary somewhat in their details, they are very similar. Tofas have the same objective: `separation of responsibilities`. All accomplish this separation by `dividing the software into layers`. `Each has at least one layer for business rules and one layer for user and system interfaces`.
-
-Each of these architectures produces systems with the following characteristics:
-
-- <strong>`Framework Independence`.</strong> The architecture does not depend on the existence of any feature-laden software library. This allows you to use these frameworks as tools rather than having to adapt your system to the frameworks' limited constraints.
- 
- - <strong>`Testability`.</strong> Business rules can be tested without the UI, database, web server or any other external elements.
-  
- - <strong>`UI independence`.</strong> The UI can change easily, without changing the rest of the system. A web UI can be replaced by a console UI, for example, without changing the business rules.
- 
- - <strong>`Database independence`.</strong> You can exchange Oracle or SQL Server for a MongoDB, BibTable or CouchDB, among others, as your business rules are not linked to the database.
- 
- - <strong>`Independence from any external agent`.</strong> In fact, your business rules don't know anything about the interfaces of the external world.
- 
-*<i>The following diagram is an attempt to integrate all architectures into a single actionable idea.</i> <br />
-
-<div align="center">
-<img src="clean-architecture.jpg" width="500" />
-</div>
-
-### The Dependency Rule
-
-The concentric circles represent the different layers of the software. In general, the more internal, the higher the software level. The outermost circles are mechanism. The innermost circles are politics.
-
-The primordial rule for the operation of this architecture is the `Dependency Rule`:
-
- - <i>Source code dependencies should only point inwards, towards higher level policies.</i>
- 
-The elements of an inner circle cannot know anything about the elements of an outer circle. In particular, the name of something declared in an outer circle must not be mentioned by code in an inner circle. This includes functions, classes, variables, and any other named software entities.
-
-For the same reason, data formats declared in an outer layer should not be used in an inner layer, especially if those formats are generated by a framework in an outer layer. We don't want any elements of an outer circle to impact inner circles.
-
-<div align="center">
-<img src="data-layers.png" width="700" />
-</div>
-
-### Entities
-
-Entities bring together the 'Crucial Rules of Business' for the entire company. An entity can be an object with methods or a set of data structures or functions. It doesn't matter as long as the entities can be used by many different applications in the enterprise.
-
-If you don't have a company and you are only writing a single application, these entities are the application's business objects. `They concentrate the most general and highest level rules`.
-
-### Use cases
-
-The use-case layer code `contains the application-specific business rules, pulls together and implements all the system's use cases`. These use cases orchestrate the flow of data to and from the entities and guide those entities in applying the Crucial Business Rules to achieve the goals of the use case.
-
-We don't want changes to this layer to affect entities. We also don't want this layer to be affected by changes in externalities like the database, the UI or any common framework. The use case layer must be insulated from these concerns.
-
-However, we expect changes to the application's operation to affect the use cases and therefore the software in that layer. If the details of a use case change, a piece of code in that layer will certainly be affected.
-
-
-<div align="center">
-<img src="domain-infrastructure.png" width="300" />
-</div>
-
-*<i>Clean Architecture - A Craftsman's Guide to Software Structure and Design</i> <br />
-
-<br />
-
-## Absolute imports 
-
-When files are exported to other modules or imported by modules that are far away, it is common to have a very extensive relative navigation until finding the appropriate files. To solve this there are `Absolute Imports`. Which can be configured in the `configuration files` of the languages ​​or frameworks being used in the project.
-
-```ts
-
 // With Absolute Imports
-
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { openCart, selectCartTotalQuantity } from '@/store/slices/CartSlice'
 import { selectCurrentConsumer } from '@/store/slices/ConsumerSlice'
@@ -315,11 +138,8 @@ import { selectCurrentConsumer } from '../../../../store/slices/ConsumerSlice'
 This application uses Vite + Typescript, so to add the desired absolute paths you need to add the `paths` property in the `tsconfig.json` file:
 
 ```json
-// web/tsconfig.json
-
 {
   "compilerOptions": {
-    // ...
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"],
@@ -348,70 +168,5 @@ export default defineConfig({
   plugins: [react(), tsconfigPaths()],
 })
 ```
-<br />
 
-## TailwindCSS - Styling Functions in the Style Object
-
-One way to dynamically style JSX components using TailwindCSS is to use conditionals in the `className` attribute definition itself through the `templates strings`. However, I don't really like inline styling, especially when the component has a lot of logic, such as styling, treatment or manipulation of the data stream for rendering, which ends up taking the focus away from the component's rendering logic.
-
-That's why I like to use TailwindCSS in `Javascript Objects` and define styling properties in `property and value` structures. As Javascript objects accept numerous types of data and even functions, in this application I tried to move the conditional logic of styles to this object through functions, and the final result was incredible, the component is completely clean of styles, but the styles are very close to the component if any modifications need to be made. This is too much for even more complex stylings, you can create functions completely decoupled from the component and the `Styling Object`, and then just assign it to a property of this object.
-
-```tsx
-import { useEffect, useState } from 'react'
-import logo from '@/assets/logo.png'
-import { NavItems } from './integrate/NavItems'
-
-interface Props {}
-
-export const Navbar = (props: Props) => {
-  const [scrollingPage, setScrollingPage] = useState(false)
-
-  useEffect(() => {
-    window.addEventListener('scroll', onNavPageScroll)
-    return () => {
-      window.removeEventListener('scroll', onNavPageScroll)
-    }
-  }, [])
-
-  const onNavPageScroll = () => {
-    if (window.scrollY > 30) {
-      setScrollingPage(true)
-    } else {
-      setScrollingPage(false)
-    }
-  }
-
-  return (
-    <header className={style.handleWrapper(scrollingPage)}>
-      <nav className={style.navContainer}>
-        <div className={style.logoContainer}>
-          <img
-            src={logo}
-            alt="nike/logo"
-            className={style.handleLogo(scrollingPage)}
-          />
-        </div>
-        <NavItems scrollingPage={scrollingPage} />
-      </nav>
-    </header>
-  )
-}
-
-const style = {
-  handleWrapper: (scrolling: boolean) => {
-    return scrolling
-      ? 'bg-[#f7f7f7] pt-[18px] fixed inset-x-0 h-[60px] opacity-100 z-[500]'
-      : 'absolute top-7 inset-x-0 opacity-100 z-50'
-  },
-  navContainer: `max-w-7xl px-4 mx-auto flex items-center justify-between`,
-  logoContainer: `flex items-center`,
-  handleLogo: (scrolling: boolean) => {
-    return scrolling === true
-      ? 'filter brightness-0 w-16 h-auto'
-      : ' w-16 h-auto'
-  },
-}
-```
-
-![screen](screen.png)
-
+![screen](/screens/screen-desktop.png)
