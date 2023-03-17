@@ -66,7 +66,7 @@ In this way, clean architecture can be used as a framework for implementing DDD,
 
 The server through which the page is processed, as well as the customer acquire the product information through a common source, in this case I chose to use Hygraph which is a Headless CMS (Content Management System), which is a great option for manage the content of a website if you don't want to waste time implementing the entire interface, backend, as well as the database.
 
-*Process and acquire data entirely through the backend, rely as little as possible on information coming from the client side*
+> *Process and acquire data entirely through the backend, rely as little as possible on information coming from the client side*
  
 In common applications we are used to sending all the data that the backend needs to do the proper processing, as we already process this information on the client side to show the consumer the purchase/checkout information and the product itself, we could think of sending these information for the backend to process properly, however the client, the web page must behave only as an interface, an intermediary that sends the information of operations that the user wants to carry out. Otherwise sensitive information can be intercepted and even altered by the front-end, and thus the data that would arrive at the backend would no longer maintain an integrity, or a reliability factor.
 
