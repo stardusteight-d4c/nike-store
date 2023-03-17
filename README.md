@@ -18,6 +18,7 @@ Together, these technologies allow the e-commerce project to offer users a smoot
 
 * TypeScript
 * GraphQL
+* Hygraph (Headless CMS) 
 * React
 * Redux
 * Vite
