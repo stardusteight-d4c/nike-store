@@ -34,7 +34,7 @@ Together, these technologies allow the e-commerce project to offer users a smoot
 
 ## :mailbox_with_mail: Utilities
  
- - <strong>Clean Architecture</strong>
+### <strong>Clean Architecture</strong>
  
 Clean Architecture is a software architecture pattern that proposes a source code structure in layers, with the objective of separating responsibilities and making the software more testable, scalable and easy to maintain.
 
@@ -50,7 +50,7 @@ In addition, the architecture proposes the use of SOLID and DDD (Domain Driven D
 
 Clean Architecture is a concept that can be applied in different programming languages ​​and frameworks, and is widely used in software projects that require high quality, scalability and maintenance.
 
- - <strong>Domain-Driven Design</strong>
+### <strong>Domain-Driven Design</strong>
  
 Domain-driven design (DDD) is a software development approach that places the business domain at the core of system modeling. It was proposed by Eric Evans in 2003 and aims to help create systems that are more flexible and adaptable to business changes.
 
@@ -62,7 +62,7 @@ Thus, there is a relationship between DDD and clean architecture, as both approa
 
 In this way, clean architecture can be used as a framework for implementing DDD, as it provides a way to organize code to reflect the structure of the business domain. The clean architecture allows business rules to be implemented in a layer separate and independent of other technical layers, which helps ensure that the domain model is clear and maintainable.
 
-- <strong>Hygraph and E-Commerce Security</strong>
+### <strong>Hygraph and E-Commerce Security</strong>
 
 The server through which the page is processed, as well as the customer acquire the product information through a common source, in this case I chose to use Hygraph which is a Headless CMS (Content Management System), which is a great option for manage the content of a website if you don't want to waste time implementing the entire interface, backend, as well as the database.
 
@@ -113,7 +113,7 @@ export const getProductById = async (ids: string[]) => {
 };
 ```
 
-- <strong>Absolute Imports</strong>
+### <strong>Absolute Imports</strong>
 
 Absolute Imports is a technique for importing modules into a project that allows you to reference the files from the root of the project directory, rather than using a path relative to the file being imported.
 
