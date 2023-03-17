@@ -6,11 +6,11 @@
    Nike Store, E-Commerce
 </h1>
 
-Landing page design using techniques such as Intersection Observer API, Parallax, Sticky, Accordion and Marquee, an example of modern web development, where the goal is to create an engaging and interactive user experience.
+The e-commerce project uses a set of frontend and backend technologies to create a fully functional online store. The frontend is built with TypeScript, React, GraphQL, Redux, Vite and TailwindCSS. TypeScript is a programming language that provides static typing for JavaScript, which helps prevent errors and increases code security. React is a JavaScript library for building reactive and scalable user interfaces. GraphQL is a query and data manipulation language that allows for more efficient communication between the frontend and the backend. Redux is a library for managing state in complex JavaScript applications. Vite is a JavaScript project compilation tool that offers faster compilation times. TailwindCSS is a CSS framework that allows you to easily style your project with predefined classes.
 
-The Intersection Observer API is used to detect when certain page elements enter or leave the user's view and trigger animations and other interactions in response. For example, when an image enters the view, the API can be used to trigger a smooth entry animation.
+The backend is built with Node.js, TypeScript, Fastify, Prisma, Stripe and Json Web Tokens. Node.js is a JavaScript-based server application development platform. TypeScript is used again to provide statically typed code. Fastify is a lightweight and efficient web framework for Node.js. Prisma is an ORM (Object-Relational Mapping) for databases, which facilitates the application's interaction with the database. Stripe is an online payment platform for businesses. Json Web Tokens is an access token pattern that allows the application to pass authentication and authorization information between the frontend and the backend.
 
-The result is a highly interactive and engaging page that uses a combination of modern techniques to create a rich and enjoyable user experience.
+Together, these technologies allow the e-commerce project to offer users a smooth and efficient shopping experience, from browsing the product catalog to final payment.
 
 ## :hammer_and_wrench: Tools
 
