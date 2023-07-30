@@ -170,7 +170,7 @@ export default defineConfig({
 })
 ```
 
-![screen](/screens/screen-desktop.png)
+![screen](./screenshots/screen-desktop.png)
 
 <p align="center">Project made with :blue_heart: by <a href="https://github.com/stardusteight-d4c">Gabriel Sena</a></p>
 
